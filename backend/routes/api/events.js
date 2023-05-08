@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
-
+const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validation/events');
 
 const { isProduction } = require('../../config/keys');
@@ -58,7 +58,7 @@ router.get('/:eventId', async (req, res) => {
 });
 
 // POST create a new event
-router.post('/', validateEventInput, async (req, res) => {
+router.post('/', requireUser, validateEventInput, async (req, res) => {
     try {
         const { author, description, title, address, location } = req.body;
 
@@ -82,7 +82,7 @@ router.post('/', validateEventInput, async (req, res) => {
 });
 
 // PUT update an existing event
-router.put('/:eventId', validateEventInput, async (req, res) => {
+router.put('/:eventId', requireUser, validateEventInput, async (req, res) => {
     const { eventId } = req.params;
     try {
         const { author, description, title, address, location} = req.body;

@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
-
+const { requireUser } = require('../../config/passport');
 const validateReviewInput = require('../../validation/reviews');
 
 const { isProduction } = require('../../config/keys');
@@ -36,7 +36,7 @@ router.get('/:reviewId', async (req, res) => {
 });
 
 // POST create a new review
-router.post('/', validateReviewInput, async (req, res) => {
+router.post('/', requireUser, validateReviewInput, async (req, res) => {
     try {
         const { text, title, rating, price, time, author, event } = req.body;
 
@@ -62,7 +62,7 @@ router.post('/', validateReviewInput, async (req, res) => {
 });
 
 // PUT update a review
-router.put('/:reviewId', validateReviewInput, async (req, res) => {
+router.put('/:reviewId', requireUser, validateReviewInput, async (req, res) => {
     const { reviewId } = req.params;
     try {
         const review = await Review.findById(reviewId);

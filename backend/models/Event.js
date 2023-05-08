@@ -80,6 +80,10 @@ const eventSchema = new Schema({
             }
             return 0;
         }
+    },
+    imageUrls: {
+        type: [String],
+        required: false
     }
 }, {
     timestamps: true
