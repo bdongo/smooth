@@ -39,7 +39,7 @@ mongoose
     /**
      * Listen on provided port, on all network interfaces.
      */
-    console.log(server, "server1")
+    //console.log(server, "server1")
     server.listen(port);
     //console.log(server, "server2")
   })
