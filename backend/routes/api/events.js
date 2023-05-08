@@ -20,6 +20,10 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET all events by price, time
+
+
+
 // GET a specific event by ID
 router.get('/:eventId', async (req, res) => {
     const { eventId } = req.params;

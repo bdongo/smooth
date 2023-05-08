@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+const getAverage = (array) => {
+    let sum = 0;
+    array.forEach(el => {
+        sum += el;
+    });
+    return sum / array.length;
+
+}
+
 const eventSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
@@ -40,10 +50,12 @@ const eventSchema = new Schema({
             type: Number
         }
     },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    avgprice: getAverage(Event.reviews.price),
+    avgtime: getAverage(Event.reviews.time)
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('Tweet', eventSchema);
+module.exports = mongoose.model('Event', eventSchema);
 
