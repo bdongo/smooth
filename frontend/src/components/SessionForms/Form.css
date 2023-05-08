@@ -1,0 +1,76 @@
+.login-container {
+    height: 100vh;
+    width: 100vw;
+    background: #1D00D3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    background: white;
+    height: 55vh;
+    width: 40vw;
+    border-radius: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.session-form {
+    height: 90%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: NHaas55;
+}
+
+.session-form img {
+    height: 5em;
+    width: 15em;
+}
+
+.session-form h2 {
+    font-family: 'NHaas65';
+    font-size: 2em;
+    margin-bottom: 1em;
+
+}
+
+.session-form input {
+    text-align: center;
+    letter-spacing: 0.03em;
+    border-radius: 0.5em;
+    margin-bottom: 1.5vh;
+    font-size: 1em;
+    border: 1px solid black;
+    padding: 0.5em 0;
+    width: 100%;
+}
+
+#demo-login-button {
+    text-align: center;
+    letter-spacing: 0.03em;
+    border-radius: 0.5em;
+    margin-bottom: 1.5vh;
+    font-size: 1em;
+    border: 1px solid black;
+    padding: 0.5em 0;
+    width: 100%;
+}
+
+#login-button, #demo-login-button {
+    background: #1D00D3;
+    color: white;
+    font-family: NHaas65;
+    font-size: 1em;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+}
+
+#login-button:hover, #demo-login-button:hover {
+    cursor: pointer;
+    background: white;
+    color: black;
+}
