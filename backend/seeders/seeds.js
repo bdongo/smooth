@@ -50,7 +50,10 @@ events.push(
         state: "CA",
         zipcode: "94108" 
     },
-    location: { lat: 37.788088, lng: -122.407534 }
+    location: { lat: 37.788088, lng: -122.407534 },
+    imageUrls: ["https://smooth-mern.s3.us-west-1.amazonaws.com/union1.jpeg",
+    "https://smooth-mern.s3.us-west-1.amazonaws.com/union2.jpeg"
+    ]
 }))
 
 events.push(
@@ -64,7 +67,10 @@ events.push(
         state: "CA",
         zipcode: "94103"
     },
-    location: { lat: 37.784083, lng: -122.406317 }
+    location: { lat: 37.784083, lng: -122.406317 },
+    imageUrls: [ "https://smooth-mern.s3.us-west-1.amazonaws.com/westfield1.jpeg",
+    "https://smooth-mern.s3.us-west-1.amazonaws.com/westfield2.jpeg"
+    ]
 }))
 
 
@@ -79,7 +85,10 @@ events.push(
         state: "CA",
         zipcode: "94108"
     },
-    location: { lat: 37.7897213, lng: -122.4105696 }
+    location: { lat: 37.7897213, lng: -122.4105696 },
+    imageUrls: ["https://smooth-mern.s3.us-west-1.amazonaws.com/tacorea1.jpeg",
+    "https://smooth-mern.s3.us-west-1.amazonaws.com/tacorea2.jpeg"
+    ]
 }))
 
 events.push(
@@ -93,7 +102,9 @@ events.push(
         state: "CA",
         zipcode: "94108"
     },
-    location: { lat: 37.787235, lng: -122.407097 }
+    location: { lat: 37.787235, lng: -122.407097 },
+    imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/aa1.jpeg',
+     'https://smooth-mern.s3.us-west-1.amazonaws.com/aa2.png']
 }))
 
 events.push(
@@ -107,7 +118,10 @@ events.push(
         state: "CA",
         zipcode: "94104"
     },
-    location: { lat: 37.7904474, lng: -122.4027516 }
+    location: { lat: 37.7904474, lng: -122.4027516 },
+    imageUrls: ["https://smooth-mern.s3.us-west-1.amazonaws.com/pagan-1.jpeg",
+    "https://smooth-mern.s3.us-west-1.amazonaws.com/pagan2.jpeg"
+    ]
 }))
 
 events.push(
@@ -121,7 +135,10 @@ events.push(
         state: "CA",
         zipcode: "94133"
     },
-    location: { lat: 37.800425, lng: -122.410740 }
+    location: { lat: 37.800425, lng: -122.410740 },
+    imageUrls: ["https://smooth-mern.s3.us-west-1.amazonaws.com/sushi1.jpeg",
+    "https://smooth-mern.s3.us-west-1.amazonaws.com/sushi2.jpeg"
+    ]
 }))
 
 events.push(
@@ -135,7 +152,9 @@ events.push(
         state: "CA",
         zipcode: "94133"
     },
-    location: { lat: 37.797394, lng: -122.407822 }
+    location: { lat: 37.797394, lng: -122.407822 },
+    imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/devils1.jpeg',
+     "https://smooth-mern.s3.us-west-1.amazonaws.com/devils2.jpeg"]
 }))
 
 events.push(
@@ -152,7 +171,9 @@ events.push(
     location: {
         lat: 37.797971,
         lng: -122.407057
-    }
+    },
+    imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/sams1.jpeg',
+     "https://smooth-mern.s3.us-west-1.amazonaws.com/sams2.jpeg"]
 }))
 
 
