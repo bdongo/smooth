@@ -9,19 +9,37 @@ const validateEventInput = require('../../validation/events');
 
 const { isProduction } = require('../../config/keys');
 
-// GET all events
+
+
+// GET all events by price, time
 router.get('/', async (req, res) => {
     try {
-        const events = await Event.find();
+        const { rating, price, time } = req.query;
+        const filter = {};
+
+        if (rating) {
+            // Filter events by average rating
+            filter.avgRating = { $gte: parseFloat(rating) };
+        }
+
+        if (price) {
+            // Filter events by average price
+            filter.avgPrice = { $lte: parseFloat(price) };
+        }
+
+        if (time) {
+            // Filter events by average time
+            filter.avgTime = { $gte: parseInt(time) };
+        }
+
+        const events = await Event.find(filter);
+
         return res.json(events);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-// GET all events by price, time
-
 
 
 // GET a specific event by ID

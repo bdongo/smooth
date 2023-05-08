@@ -51,8 +51,36 @@ const eventSchema = new Schema({
         }
     },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
-    avgprice: getAverage(Event.reviews.price),
-    avgtime: getAverage(Event.reviews.time)
+    avgPrice: {
+        type: Number,
+        default: function () {
+            if (this.reviews && this.reviews.length > 0) {
+                const prices = this.reviews.map(review => review.price);
+                return getAverage(prices);
+            }
+            return 0;
+        }
+    },
+    avgTime: {
+        type: Number,
+        default: function () {
+            if (this.reviews && this.reviews.length > 0) {
+                const times = this.reviews.map(review => review.time);
+                return getAverage(times);
+            }
+            return 0;
+        }
+    }, 
+    avgRating: {
+        type: Number,
+        default: function () {
+            if (this.reviews && this.reviews.length > 0) {
+                const ratings = this.reviews.map(review => review.rating);
+                return getAverage(ratings);
+            }
+            return 0;
+        }
+    }
 }, {
     timestamps: true
 });
