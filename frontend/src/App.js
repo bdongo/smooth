@@ -1,12 +1,21 @@
 import { Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
-
+import { useDispatch } from 'react-redux';
+import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage/SplashPage';
 import LoginForm from './components/SessionForms/LoginForm';
 import NavBar from './components/NavBar/NavBar';
+import { useEffect, useState } from 'react';
 
 function App() {
-  return (
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser()).then(() => setLoaded(true));
+  }, [dispatch]);
+
+  return loaded && (
     <>
     <NavBar />
     <Switch>
