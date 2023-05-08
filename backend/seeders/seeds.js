@@ -110,6 +110,35 @@ new Event({
     location: { lat: 37.800425, lng: -122.410740 }
 })
 
+new Event({
+    title: "The Devil's Acre",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    description: "Apothecary style cocktails featuring house-revived extinct ingredients",
+    address: {
+        street: "256 Columbus Ave",
+        city: "San Francisco",
+        state: "CA",
+        zipcode: "94133"
+    },
+    location: { lat: 37.797394, lng: -122.407822 }
+})
+
+new Event({
+    title: "Sam's",
+    author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+    description: "Anthony Bourdain has been here",
+    address: {
+        street: "618 Broadway",
+        city: "San Francisco",
+        state: "CA",
+        zipcode: "94133"
+    },
+    location: {
+        lat: 37.797971,
+        lng: -122.407057
+    }
+})
+
 
 
 
