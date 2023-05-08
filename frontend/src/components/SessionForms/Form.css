@@ -1,24 +1,56 @@
-.login-container {
+.login-container, .signup-container {
     height: 100vh;
     width: 100vw;
-    background: #1D00D3;
+    background: rgb(195, 177, 225);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-form {
+.login-form, .signup-form {
     background: white;
     height: 55vh;
     width: 40vw;
     border-radius: 1em;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    animation: scale 0.6s ease-in-out;
 }
 
+.signup-form { 
+    height: 61vh;
+}
+
+
+
+#signup-link, #login-link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease-in-out;
+    text-transform: uppercase;
+    font-family: NHaas65;
+    font-size: 1em;
+}
+
+#signup-link:hover, #login-link:hover {
+    color: rgb(195, 177, 225);
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
 .session-form {
-    height: 90%;
+    height: 100%;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -26,9 +58,14 @@
     font-family: NHaas55;
 }
 
+#session-signup {
+    height: 99%;
+}
+
 .session-form img {
     height: 5em;
     width: 15em;
+    margin-bottom: 2em;
 }
 
 .session-form h2 {
@@ -60,8 +97,8 @@
     width: 100%;
 }
 
-#login-button, #demo-login-button {
-    background: #1D00D3;
+#login-button, #demo-login-button, #signup-button {
+    background: black;
     color: white;
     font-family: NHaas65;
     font-size: 1em;
@@ -69,7 +106,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-#login-button:hover, #demo-login-button:hover {
+#login-button:hover, #demo-login-button:hover, #signup-button:hover {
     cursor: pointer;
     background: white;
     color: black;

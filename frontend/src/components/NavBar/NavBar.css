@@ -11,6 +11,10 @@
     height: 5em;
 }
 
+.nav-bar-left img:hover {
+    cursor: pointer;
+}
+
 .nav-bar-right {
     display: flex;
     justify-content: space-around;
@@ -27,5 +31,28 @@
 }
 
 .nav-bar-right a:hover {
-    color: #1D00D3;
+    color: rgb(195, 177, 225);
 }
+
+.nav-bar-right a{
+    position: relative;
+}
+
+.nav-bar-right a:after{
+    position: absolute;
+    bottom: -40%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: rgb(195, 177, 225);
+    height: 3px;
+    transition: all 0.5s ease-in-out;
+}
+
+.nav-bar-right a:hover:after {
+    width: 100%;
+}
+

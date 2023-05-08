@@ -7,10 +7,12 @@ function NavBar() {
     return (
         <div className="nav-bar">
             <div className="nav-bar-left">
-                <img src={logo} alt="logo" />
+                <Link to='/'>
+                    <img src={logo} alt="logo" />
+                </Link>
             </div>
             <div className="nav-bar-right">
-                <Link to='/expore'>Explore</Link>
+                <Link to='/explore'>Explore</Link>
                 <Link to="/login">Log In</Link>
                 <Link to="/signup">Sign Up</Link>
             </div>
