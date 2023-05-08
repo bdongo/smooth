@@ -41,7 +41,7 @@ app.use(
     })
 );
 
-// app.get("/", (req, res) => res.send("Hello World!!"));
+app.get("/", (req, res) => res.send("Hello World!!"));
 
 // Attach Express routers
 const usersRouter = require('./routes/api/users');
