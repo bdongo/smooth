@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import "./Form.css"; 
 import logo from "../../assets/logo.png";
+import { Link } from 'react-router-dom';
 
 import { login, clearSessionErrors } from '../../store/session';
 
@@ -54,7 +55,7 @@ function LoginForm() {
                     <button id='demo-login-button'>
                         LOGIN AS DEMO USER
                     </button>
-                        
+                <Link to='/signup' id='signup-link'>Need to create an account?</Link>
                 </form>
             </div>
         </div>
