@@ -1,1 +1,10 @@
 /* TODO Add site wide styles */
+@font-face {
+    font-family: NHaas55;
+    src: url(../src/fonts/NHaasGroteskTXPro-55Rg.ttf);
+}
+
+@font-face {
+    font-family: NHaas65;
+    src: url(../src/fonts/NHaasGroteskTXPro-65Md.ttf);
+}

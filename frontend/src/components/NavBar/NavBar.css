@@ -1,0 +1,31 @@
+.nav-bar {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    background: white;
+    justify-content: space-between;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nav-bar-left img {
+    height: 5em;
+}
+
+.nav-bar-right {
+    display: flex;
+    justify-content: space-around;
+    width: 25%;
+    align-items: center;
+    font-family: NHaas65;
+}
+
+.nav-bar-right a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.nav-bar-right a:hover {
+    color: #1D00D3;
+}
