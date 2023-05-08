@@ -5,7 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
 
-const validateReviewInput = require('../../validation/reviews');
+const validateReviewInput = require('../../validation/review');
 
 const { isProduction } = require('../../config/keys');
 

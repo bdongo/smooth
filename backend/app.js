@@ -6,6 +6,8 @@ const cors = require('cors');
 const csurf = require('csurf');
 /* --- Need to import these to load the models into mongoose --- */
 require('./models/User');
+require('./models/Event');
+require('./models/Review');
 /* ------------------------------------------------------------- */
 require('./config/passport'); // Need to import to configure passport module
 const passport = require('passport');
@@ -46,8 +48,12 @@ app.get("/", (req, res) => res.send("Hello World!!"));
 // Attach Express routers
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
+const eventsRouter = require('./routes/api/events');
+const reviewsRouter = require('./routes/api/reviews')
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
+app.use('/api/events', eventsRouter);
+app.use('/api/reviews', reviewsRouter);
 
 // Serve static React build files statically in production
 if (isProduction) {

@@ -30,3 +30,11 @@ const reviewSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Review', reviewSchema);
+
+review1 = {
+    "rating": 5,
+    "price": 100,
+    "time": 0,
+    "author": "64593c4d4546c8781f6fa9aa",
+    "event": "64597e34c7b180355bd14a18"
+}

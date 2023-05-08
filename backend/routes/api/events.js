@@ -5,7 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
 
-const validateEventInput = require('../../validation/events');
+const validateEventInput = require('../../validation/event');
 
 const { isProduction } = require('../../config/keys');
 

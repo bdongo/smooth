@@ -51,11 +51,23 @@ const eventSchema = new Schema({
         }
     },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
-    avgprice: getAverage(Event.reviews.price),
-    avgtime: getAverage(Event.reviews.time)
+    // avgprice: getAverage(Event.reviews.price),
+    // avgtime: getAverage(Event.reviews.time)
 }, {
     timestamps: true
 });
 
 module.exports = mongoose.model('Event', eventSchema);
 
+
+coachella = {
+    "author": "64593c4d4546c8781f6fa9aa",
+    "title": "Coachella",
+    "description": "Coachella",
+    "address": {
+        "street": "81800 51st Ave",
+        "city": "Indio",
+        "state": "California",
+        "zipcode": "92201",
+    },
+}
