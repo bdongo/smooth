@@ -53,6 +53,7 @@ router.post('/', validateReviewInput, async (req, res) => {
 
         // Save the review to the database
         const review = await newReview.save();
+       
 
         
         const eventToUpdate = await Event.findById(event);
@@ -64,7 +65,10 @@ router.post('/', validateReviewInput, async (req, res) => {
         eventToUpdate.updateAverages()
         await eventToUpdate.save();
 
-        return res.status(201).json(review);
+        const payload = {
+            review, event: eventToUpdate
+        }
+        return res.status(201).json(payload);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

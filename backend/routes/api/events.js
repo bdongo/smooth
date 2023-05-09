@@ -32,6 +32,7 @@ router.get('/', async (req, res) => {
             search.avgTime = { $lte: parseFloat(time) };
         }
 
+
         if(query) {
             // searchbar query
             const regex = new RegExp(`\\b${query}\\b`, "i")
@@ -44,7 +45,12 @@ router.get('/', async (req, res) => {
 
         const events = await Event.find(search);
 
-        return res.json(events);
+        
+        const eventObj = {}
+        events.forEach(event => eventObj[event._id] = event)
+
+
+        return res.json(eventObj);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

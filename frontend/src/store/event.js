@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt";
+import { ADD_REVIEW } from "./reviews";
 
 export const RECEIVE_EVENTS = "events/RECEIVE_EVENTS";
 export const RECEIVE_EVENT = "events/RECEIVE_EVENT";
@@ -50,7 +51,9 @@ const eventsReducer = (state = {}, action) => {
         case RECEIVE_EVENTS:
             return {...action.events};
         case RECEIVE_EVENT:
-            return {...state, [action.event.id]: action.event}
+            return {...state, [action.event._id]: action.event}
+        case ADD_REVIEW:
+            return {...state, [action.payload.event.id]: action.payload.event}
         default:
             return state;
     }
