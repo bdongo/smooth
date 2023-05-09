@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
-
+const { requireUser } = require('../../config/passport');
 const validateReviewInput = require('../../validation/review');
 
 const { isProduction } = require('../../config/keys');
@@ -51,6 +51,14 @@ router.post('/', validateReviewInput, async (req, res) => {
             event 
         });
 
+        // const eventToUpdate = await Event.findById(event);
+        // if (!eventToUpdate) {
+        //     return res.status(404).json({ error: 'Event not found' });
+        // }
+
+        // eventToUpdate.reviews.push(review._id);
+        // await eventToUpdate.save();
+
         // Save the review to the database
         const review = await newReview.save();
 
@@ -62,7 +70,7 @@ router.post('/', validateReviewInput, async (req, res) => {
 });
 
 // PUT update a review
-router.put('/:reviewId', validateReviewInput, async (req, res) => {
+router.put('/:reviewId', requireUser, validateReviewInput, async (req, res) => {
     const { reviewId } = req.params;
     try {
         const review = await Review.findById(reviewId);

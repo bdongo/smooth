@@ -13,12 +13,12 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    time: {
+    time: { //number of hours
         type: Number,
         required: true
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
     event: { 
@@ -32,9 +32,9 @@ const reviewSchema = new mongoose.Schema({
 module.exports = mongoose.model('Review', reviewSchema);
 
 review1 = {
-    "rating": 5,
-    "price": 100,
-    "time": 0,
-    "author": "64593c4d4546c8781f6fa9aa",
-    "event": "64597e34c7b180355bd14a18"
+    "rating": 4,
+    "price": 90,
+    "time": 5,
+    "author": "64598c6c44e8168a933010ca",
+    "event": "64598c7844e8168a93301106"
 }
