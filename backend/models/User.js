@@ -14,7 +14,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
 }, {
     // tells mongoose to add and maintain `createdAt` and `updatedAt` fields with
     // datetime timestamps
