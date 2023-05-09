@@ -59,31 +59,35 @@ function SignupForm() {
                 <form className="session-form" id='session-signup' onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
                     <h2>Sign Up</h2>
-                    <div className="errors">{errors?.email}</div>
+                    {/* <div className="errors">{errors?.email}</div> */}
                         <input type="text"
                             value={email}
                             onChange={update('email')}
                             placeholder="Email"
+                            required
                         />
-                    <div className="errors">{errors?.username}</div>
+                    {/* <div className="errors">{errors?.username}</div> */}
                         <input type="text"
                             value={username}
                             onChange={update('username')}
                             placeholder="Username"
+                            required
                         />
-                    <div className="errors">{errors?.password}</div>        
+                    {/* <div className="errors">{errors?.password}</div>         */}
                         <input type="password"
                             value={password}
                             onChange={update('password')}
                             placeholder="Password"
+                            required
                         />
-                    <div className="errors">
-                        {password !== password2 && 'Confirm Password field must match'}
-                    </div>
+                    {/* <div className="errors" id='error-messages'>
+                        {password !== password2 && 'Confirm password field must match'}
+                    </div> */}
                         <input type="password"
                             value={password2}
                             onChange={update('password2')}
                             placeholder="Confirm Password"
+                            required
                         />
                     <input
                         type="submit"
@@ -93,6 +97,14 @@ function SignupForm() {
                     />
                     <Link to='/login' id='login-link'>Already have an account?</Link>
                 </form>
+                <div className='errors'>
+                    <ul> 
+                        <li>{errors?.email}</li>
+                        <li>{errors?.username} </li>
+                        <li>{errors?.password} </li>
+                        <li>{password !== password2 && 'Confirm password field must match'} </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );

@@ -11,6 +11,11 @@
     height: 5em;
 }
 
+.nav-bar-left {
+    display: flex;
+    align-items: center;
+}   
+
 .nav-bar-left img:hover {
     cursor: pointer;
 }
@@ -23,22 +28,30 @@
     font-family: NHaas65;
 }
 
-.nav-bar-right a {
+#left-explore {
+    font-family: NHaas65;
+}
+
+.nav-bar-right a, 
+#left-explore {
     text-decoration: none;
     color: black;
     transition: color 0.3s ease-in-out;
     text-transform: uppercase;
 }
 
-.nav-bar-right a:hover {
+.nav-bar-right a:hover, 
+#left-explore:hover {
     color: rgb(195, 177, 225);
 }
 
-.nav-bar-right a{
+.nav-bar-right a, 
+#left-explore{
     position: relative;
 }
 
-.nav-bar-right a:after{
+.nav-bar-right a:after,
+#left-explore:after{
     position: absolute;
     bottom: -40%;
     left: 0;
@@ -52,7 +65,8 @@
     transition: all 0.5s ease-in-out;
 }
 
-.nav-bar-right a:hover:after {
+.nav-bar-right a:hover:after,
+#left-explore:hover:after {
     width: 100%;
 }
 

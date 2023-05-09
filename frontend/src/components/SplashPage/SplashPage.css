@@ -1,0 +1,18 @@
+.splash-page { 
+    height: 100vh;
+    width: 100vw;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+}
+
+.splash-1-text {
+    font-size: 5em;
+    font-family: 'NHAAS55';
+    margin-left: 2em;
+    text-align: center;
+}
+
+.splash-1-text p {
+    color: blue;
+}

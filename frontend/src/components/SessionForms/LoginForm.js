@@ -28,6 +28,12 @@ function LoginForm() {
         dispatch(login({ email, password }));
     }
 
+    const handleDemo = (e) => {
+        e.preventDefault();
+        dispatch(login({email: 'demo@email.com',password: 'password'}));
+    }
+
+
     return (
         <div className='login-container'>
             <div className='login-form'> 
@@ -52,7 +58,7 @@ function LoginForm() {
                         disabled={!email || !password}
                         id='login-button'
                     />
-                    <button id='demo-login-button'>
+                    <button id='demo-login-button' onClick={handleDemo}>
                         LOGIN AS DEMO USER
                     </button>
                 <Link to='/signup' id='signup-link'>Need to create an account?</Link>
