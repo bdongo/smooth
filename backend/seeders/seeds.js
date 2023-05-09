@@ -331,6 +331,8 @@ const insertSeeds = () => {
             .then((insertedEvents) => {
                 const reviews = [];
 
+                console.log("Users and Events done. Seeding Reviews....");
+
                 insertedEvents.forEach((event) => {
                     // create three reviews for each event
                     for (let i = 0; i < 5; i++) {
