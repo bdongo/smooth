@@ -1,0 +1,64 @@
+.explore-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background: rgb(255, 253, 146);
+}
+
+.explore-page-header {
+    position: relative;
+}
+
+#search-icon {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.explore-page-header input {
+    width: 41em;
+    height: 3em;
+    border-radius: 2em;
+    border: 1px solid black;
+    font-family: 'NHAAS65';
+    padding-left: 1em;
+}
+
+.featured-experiences {
+    height: 31em;
+    width: 80%;
+    text-align: center;
+}
+
+.featured-experiences h2 {
+    margin-top: 0.6em;
+    font-size: 4em;
+    font-family: 'NHaas65';
+    margin-bottom: 0.4em;
+    color: rgb(195, 25, 82);
+}
+
+.featured-experiences-container {
+    display: flex;
+}
+
+.featured-experiences-container img {
+    width: 12em;
+    border-radius: 2.5em;
+    padding: 1em;
+    max-height: 17em;
+    transition: all 0.4s ease-in-out;
+}
+
+.featured-experiences-container img:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+}
+
+.featured-experiences-container :nth-child(even) {
+    margin-top: 3em;
+}
