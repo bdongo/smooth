@@ -38,6 +38,7 @@ const events = [];
 events.push(
     new Event({
     title: "Union Square",
+    category: "historic",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Union Square is a public plaza located in the heart of San Francisco, California. It is a popular tourist destination and a hub of shopping, dining, and cultural activity in the city. The square is bordered by several major shopping streets, including Powell Street, Stockton Street, and Geary Street, which are lined with high-end department stores, boutiques, and specialty shops.",
     address: {
@@ -56,6 +57,7 @@ events.push(
 events.push(
     new Event({
     title: "Westfield San Francisco Centre",
+    category: "shopping",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Located just two blocks from famed Union Square, Westfield San Francisco Centre has emerged as one of the most enticing downtown retail venues in the United States. Featuring the West Coast flagship Bloomingdale's and the second largest Nordstrom in the nation, this 1.5 million square foot shopping center is the largest urban shopping venue west of the Mississippi River encompassing over 200 shops and restaurants, a Burke Williams day spa and Century Theatres.",
     address: {
@@ -74,6 +76,7 @@ events.push(
 events.push(
     new Event({
     title: "Tacorea",
+    category: "food",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Home of the original Tater Tot California Burrito",
     address: {
@@ -91,6 +94,7 @@ events.push(
 events.push(
     new Event({
     title: "App Academy",
+    category: "learning",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "App Academy is an immersive web development and job placement program offered in San Francisco, New York, and Online. 90% of our graduates have offers or are working in tech jobs. In SF, graduates receive an average salary of $100,000; in NY, graduates receive an average salary of $84,000.",
     address: {
@@ -107,6 +111,7 @@ events.push(
 events.push(
     new Event({
     title: "Pagan Idol",
+    category: "drinks",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Pagan Idol is a Tiki bar located in the Financial District of San Francisco housed in a historical space that was once home to the infamous Tiki Bob's Mainland Rendezvous. As you enter Pagan Idol you find yourself in the belly of a wooden ship that will transport you off the streets of San Francisco and deliver you to an exotic escape. Enter the back room at your own risk and encounter the sounds and sights of a tropical island, complete with starry night sky and erupting volcano. Come to Pagan Idol to suspend reality and experience unparalleled hospitality while enjoying an extensive menu of modern Tiki cocktails and an almost limitless selection of fine rums.",
     address: {
@@ -124,6 +129,7 @@ events.push(
 events.push(
     new Event({
     title: "Sushi On North Beach - Katsu",
+    category: "food",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Japanese food with a few ounces of love",
      address: {
