@@ -22,8 +22,14 @@ export const getEvent = eventId => state => {
     return state?.events ? state.events[eventId] : null;
 };
 
-export const fetchEvents = () => async (dispatch) => {
-    const res = await jwtFetch(`/api/events/`)
+export const fetchEvents = (rating, price, time, query) => async (dispatch) => {
+    const params = new URLSearchParams();
+    if(rating) params.append('rating', rating);
+    if(price) params.append('price', price);
+    if(time) params.append('time', time);
+    if(query) params.append('query', query);
+
+    const res = await jwtFetch(`/api/events/?${params.toString()}`);
 
     if(res.ok){
         const events = await res.json()
