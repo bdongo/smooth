@@ -5,7 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
 const { requireUser } = require('../../config/passport');
-const validateReviewInput = require('../../validation/reviews');
+const validateReviewInput = require('../../validation/review');
 
 const { isProduction } = require('../../config/keys');
 
@@ -36,7 +36,7 @@ router.get('/:reviewId', async (req, res) => {
 });
 
 // POST create a new review
-router.post('/', requireUser, validateReviewInput, async (req, res) => {
+router.post('/', validateReviewInput, async (req, res) => {
     try {
         const { text, title, rating, price, time, author, event } = req.body;
 
@@ -50,6 +50,14 @@ router.post('/', requireUser, validateReviewInput, async (req, res) => {
             author,
             event 
         });
+
+        // const eventToUpdate = await Event.findById(event);
+        // if (!eventToUpdate) {
+        //     return res.status(404).json({ error: 'Event not found' });
+        // }
+
+        // eventToUpdate.reviews.push(review._id);
+        // await eventToUpdate.save();
 
         // Save the review to the database
         const review = await newReview.save();

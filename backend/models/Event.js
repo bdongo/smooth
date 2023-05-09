@@ -91,3 +91,15 @@ const eventSchema = new Schema({
 
 module.exports = mongoose.model('Event', eventSchema);
 
+
+coachellatwo = {
+    "author": "64593c4d4546c8781f6fa9aa",
+    "title": "Coachella2",
+    "description": "Coachella2",
+    "address": {
+        "street": "81800 51st Ave",
+        "city": "Indio",
+        "state": "California",
+        "zipcode": "92201",
+    },
+}

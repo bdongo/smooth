@@ -5,7 +5,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
 const { requireUser } = require('../../config/passport');
-const validateEventInput = require('../../validation/events');
+const validateEventInput = require('../../validation/event');
 
 const { isProduction } = require('../../config/keys');
 const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
@@ -58,7 +58,7 @@ router.get('/:eventId', async (req, res) => {
 });
 
 // POST create a new event
-router.post('/', multipleMulterUpload("images"), requireUser, validateEventInput, async (req, res) => {
+router.post('/', multipleMulterUpload("images"), validateEventInput, async (req, res) => {
     const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
     try {
         const { author, description, title, address, location } = req.body;
