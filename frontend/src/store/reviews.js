@@ -8,9 +8,9 @@ export const getReviews = (reviews) => ({
     reviews
 });
 
-export const addReview = (review) => ({
+export const addReview = (payload) => ({
     type: ADD_REVIEW,
-    review
+    payload
 });
 
 export const updateReview = (review) => ({
@@ -23,16 +23,16 @@ export const deleteReview = (reviewId) => ({
     reviewId
 });
 
-export const fetchReviews = (eventId) => async (dispatch) => {
-    const res = await fetch(`/api/events/${eventId}/reviews`);
-    if (res.ok) {
-        const reviews = await res.json();
-        dispatch(getReviews(reviews));
-    }
-}
+// export const fetchReviews = (eventId) => async (dispatch) => {
+//     const res = await fetch(`/api/events/${eventId}/reviews`);
+//     if (res.ok) {
+//         const reviews = await res.json();
+//         dispatch(getReviews(reviews));
+//     }
+// }
 
 export const createReview = (review) => async (dispatch) => {
-    const res = await fetch(`/api/events/${review.eventId}/reviews`, {
+    const res = await fetch(`/api/reviews`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export const createReview = (review) => async (dispatch) => {
 }
 
 export const editReview = (review) => async (dispatch) => {
-    const res = await fetch(`/api/events/${review.eventId}/reviews/${review._id}`, {
+    const res = await fetch(`/api/reviews/${review._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -54,13 +54,13 @@ export const editReview = (review) => async (dispatch) => {
         body: JSON.stringify(review)
     });
     if (res.ok) {
-        const updatedReview = await res.json();
-        dispatch(updateReview(updatedReview));
+        const payload = await res.json();
+        dispatch(addReview(payload));
     }
 }
 
 export const removeReview = (reviewId) => async (dispatch) => {
-    const res = await fetch(`/api/events/${reviewId}/reviews/${reviewId}`, {
+    const res = await fetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
     if (res.ok) {
@@ -70,22 +70,22 @@ export const removeReview = (reviewId) => async (dispatch) => {
 
 export default function reviewsReducer(state = {}, action) {
     switch (action.type) {
-        case GET_REVIEWS:
-            const newState = {};
-            action.reviews.forEach(review => {
-                newState[review._id] = review;
-            });
-            return newState;
+        // case GET_REVIEWS:
+        //     const newState = {};
+        //     action.reviews.forEach(review => {
+        //         newState[review._id] = review;
+        //     });
+        //     return newState;
         case ADD_REVIEW:
             return {
                 ...state,
-                [action.review._id]: action.review
+                [action.payload.review.id]: action.payload.review
             };
-        case UPDATE_REVIEW:
-            return {
-                ...state,
-                [action.review._id]: action.review
-            };
+        // case UPDATE_REVIEW:
+        //     return {
+        //         ...state,
+        //         [action.review.id]: action.review
+        //     };
         case DELETE_REVIEW:
             const updatedState = { ...state };
             delete updatedState[action.reviewId];
