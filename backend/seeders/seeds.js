@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Event = require('../models/Event');
+const Review = require('../models/Review.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -55,6 +56,7 @@ events.push(
     "https://smooth-mern.s3.us-west-1.amazonaws.com/union2.jpeg"
     ]
 }))
+
 
 events.push(
     new Event({
@@ -176,6 +178,29 @@ events.push(
      "https://smooth-mern.s3.us-west-1.amazonaws.com/sams2.jpeg"]
 }))
 
+const sampleReviews = ["This event was amazing! The atmosphere was great and the staff were really friendly.",
+    "I had a great time at this event. The performers were really talented and the venue was beautiful.",
+    "I would highly recommend this event to anyone looking for a fun night out. The music was great and the drinks were delicious.",
+    "The food at this event was absolutely delicious. I couldn't stop eating!",
+    "I had a lot of fun at this event. The activities were engaging and the staff were helpful.", 
+    "The drinks at this event were really good. I especially liked the cocktails.", 
+    "The performers at this event were really talented and put on a great show.", 
+    "The staff at this event were really friendly and welcoming. I felt right at home.", 
+    "This event was a great way to spend the weekend. I had a lot of fun and met some really cool people.", 
+    "The venue for this event was really nice. I loved the decor and the ambiance.", 
+    "I would definitely come back to this event again. It was so much fun!", 
+    "The food at this event was some of the best I've ever had. I highly recommend it!", 
+    "The music at this event was really good. I couldn't stop dancing!", 
+    "The activities at this event were really fun. I especially enjoyed the photo booth.", 
+    "The staff at this event went above and beyond to make sure everyone was having a good time. I really appreciated it.", 
+    "I had a great time at this event. The company was great and the atmosphere was perfect.", 
+    "This event was a great way to experience the local culture. I learned so much!", 
+    "The drinks at this event were really unique and tasty. I loved trying something new.", 
+    "I had a lot of fun at this event. The entertainment was great and the food was delicious.", 
+    "The performers at this event were really entertaining. I couldn't take my eyes off the stage!"
+]
+
+
 
 mongoose
     .connect(db, { useNewUrlParser: true })
@@ -193,11 +218,44 @@ const insertSeeds = () => {
     console.log("Resetting db and seeding users...");
 
     User.collection.drop()
+        .then(() => Review.collection.drop())
         .then(() => Event.collection.drop())
         .then(() => User.insertMany(users))
-        .then(() => Event.insertMany(events))
+        .then((insertedUsers) => Event.insertMany(events)
+            .then((insertedEvents) => {
+                const reviews = [];
+
+                insertedEvents.forEach((event) => {
+                    // create three reviews for each event
+                    for (let i = 0; i < 5; i++) {
+                        const review = {
+                            author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+                            event: event._id,
+                            rating: Math.floor(Math.random() * 3) + 3,
+                            price: Math.floor(Math.random() * 4) + 1,
+                            time: Math.floor(Math.random() * 4) + 1,
+                            body: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
+                        };
+                        reviews.push(review);
+                    }
+                });
+
+                for (let i = 0; i < 2; i++) {
+                    const review = {
+                        author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+                        event: insertedEvents[Math.floor(Math.random() * insertedEvents.length)]._id,
+                        rating: Math.floor(Math.random() * 2) + 1,
+                        price: Math.floor(Math.random() * 4) + 1,
+                        time: Math.floor(Math.random() * 4) + 1,
+                        body: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
+                    };
+                    reviews.push(review);
+                }
+
+                return Review.insertMany(reviews);
+            }))
         .then(() => {
-            console.log("Done!");
+            console.log('Done!');
             mongoose.disconnect();
         })
         .catch(err => {
