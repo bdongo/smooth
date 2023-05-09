@@ -1,7 +1,7 @@
 .show-page {
 
     width: 100vw;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -70,4 +70,12 @@
     border-left: 1px solid rgba(0, 0, 0, 0.2);
     width: 70%;
     line-height: 1.5;
+}
+
+#map{
+    width: 40vw;
+    height: 40vh;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    position: relative;
 }
