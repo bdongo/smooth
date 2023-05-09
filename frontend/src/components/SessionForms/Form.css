@@ -9,7 +9,7 @@
 
 .login-form, .signup-form {
     background: white;
-    height: 55vh;
+    height: 60vh;
     width: 40vw;
     border-radius: 1em;
     display: flex;
@@ -25,6 +25,7 @@
 
 
 
+
 #signup-link, #login-link {
     text-decoration: none;
     color: black;
@@ -32,6 +33,10 @@
     text-transform: uppercase;
     font-family: NHaas65;
     font-size: 1em;
+}
+
+#signup-link {
+    margin-bottom: 1em;
 }
 
 #signup-link:hover, #login-link:hover {
@@ -52,6 +57,7 @@
     font-size: 0.9em;
     font-family: 'NHaas55';
     color: red;
+    text-align: center;
 }
 
 .errors li:last-child {
@@ -119,4 +125,17 @@
     cursor: pointer;
     background: white;
     color: black;
+}
+
+@media all and (max-width: 930px) {
+    .login-form, .signup-form {
+        width: 70vw;
+    }
+    
+}
+
+@media all and (max-width: 500px) {
+    .login-form, .signup-form {
+        width: 90vw;
+    }
 }

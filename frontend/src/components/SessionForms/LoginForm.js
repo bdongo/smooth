@@ -40,13 +40,11 @@ function LoginForm() {
                 <form className="session-form" onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
                     <h2>LOGIN</h2>
-                    <div className="errors">{errors?.email}</div>
                         <input type="text"
                             value={email}
                             onChange={update('email')}
                             placeholder="Email"
                         />
-                    <div className="errors">{errors?.password}</div>
                         <input type="password"
                             value={password}
                             onChange={update('password')}
@@ -62,6 +60,10 @@ function LoginForm() {
                         LOGIN AS DEMO USER
                     </button>
                 <Link to='/signup' id='signup-link'>Need to create an account?</Link>
+                    <div className="errors">
+                        <ul>{errors?.email} </ul>
+                        <ul>{errors?.password}</ul>
+                    </div>
                 </form>
             </div>
         </div>
