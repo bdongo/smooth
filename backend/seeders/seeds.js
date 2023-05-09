@@ -6,11 +6,6 @@ const Review = require('../models/Review.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log(`Error connecting to MongoDB: ${err}`));
-
-
 const NUM_SEED_USERS = 60;
 
 // Create users
@@ -351,7 +346,7 @@ const insertSeeds = () => {
                     }
                 });
 
-                for (let i = 0; i < 2; i++) {
+                for (let i = 0; i < 3; i++) {
                     const review = {
                         author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
                         event: insertedEvents[Math.floor(Math.random() * insertedEvents.length)]._id,
