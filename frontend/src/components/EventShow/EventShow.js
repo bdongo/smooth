@@ -11,8 +11,8 @@ const EventShow = () => {
     const event = useSelector(getEvent(id))
 
     useEffect(()=> {
-        dispatch(fetchEvent(id))
-        // dispatch(fetchEvents())
+        // dispatch(fetchEvent(id))
+        dispatch(fetchEvents())
     }, [dispatch, id])
 
 
@@ -20,21 +20,20 @@ const EventShow = () => {
         <div className="show-page">
 
             <div className="show-page-img-container">
-                {   event?.imageUrls.map((image, idx) => (
-                    <img key={idx} src={image} />
-                ))
-                }
+                    <img src={event?.imageUrls[0]} />
+                    <div className="set-title">
+                        <h2 className="show-page-text">{event?.title}</h2>
+                    </div>
+                    <img src={event?.imageUrls[1]} />
             </div>
-            <div className="set-title">
-                <h2 className="show-page-text">{event?.title}</h2>
+            <div className="show-page-info-container">
+                <ul className="show-page-text address">
+                    <li className="bold">{event?.address.street}</li>
+                    <li>{event?.address.city}, {event?.address.state}</li>
+                    <li>{event?.address.zipcode}</li>
+                </ul>
+                <p className="show-page-text about">{event?.description}</p>
             </div>
-            <ul className="show-page-text">
-                <li>{event?.address.street}</li>
-                <li>{event?.address.city}</li>
-                <li>{event?.address.state}</li>
-                <li>{event?.address.zipcode}</li>
-            </ul>
-            <p>{event?.description}</p>
 
         </div>
     )
