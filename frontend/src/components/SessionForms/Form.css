@@ -20,7 +20,7 @@
 }
 
 .signup-form { 
-    height: 61vh;
+    height: 64vh;
 }
 
 
@@ -47,7 +47,16 @@
     }
 }
 
+.errors {
+    /* margin-bottom: 0.5em; */
+    font-size: 0.9em;
+    font-family: 'NHaas55';
+    color: red;
+}
 
+.errors li:last-child {
+    margin-bottom: 0.5em;
+}
 
 .session-form {
     height: 100%;
