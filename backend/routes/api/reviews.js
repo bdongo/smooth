@@ -54,12 +54,14 @@ router.post('/', validateReviewInput, async (req, res) => {
         // Save the review to the database
         const review = await newReview.save();
 
+        
         const eventToUpdate = await Event.findById(event);
         if (!eventToUpdate) {
             return res.status(404).json({ error: 'Event not found' });
         }
 
-        eventToUpdate.reviews.push(review._id);
+        eventToUpdate.reviews.push(review);
+        eventToUpdate.updateAverages()
         await eventToUpdate.save();
 
         return res.status(201).json(review);
