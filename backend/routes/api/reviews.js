@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
 const { requireUser } = require('../../config/passport');
 const validateReviewInput = require('../../validation/review');
 const Event = mongoose.model('Event');
-const User = mongoose.model('User');
 
 const { isProduction } = require('../../config/keys');
 
@@ -64,14 +61,6 @@ router.post('/', validateReviewInput, async (req, res) => {
 
         eventToUpdate.reviews.push(review._id);
         await eventToUpdate.save();
-
-        const authorToUpdate = await User.findById(author);
-        if (!authorToUpdate) {
-            return res.status(404).json({ error: 'Author not found' });
-        }
-
-        authorToUpdate.reviews.push(review._id);
-        await authorToUpdate.save();
 
         return res.status(201).json(review);
     } catch (error) {
