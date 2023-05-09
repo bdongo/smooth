@@ -1,0 +1,39 @@
+.show-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 2em;
+}
+
+.show-page-text {
+    color: black;
+    font-family: 'NHAAS55';
+}
+.set-title {
+    
+}
+.set-title > h2 {
+    font-weight: bold;
+    font-size: 5em;
+}
+.show-page-img-container {
+    margin-top: 45px;
+    display: flex;
+    width: 100%;
+}
+.show-page-img-container > img {
+   height: 500px;
+
+}
+
+.show-page-img-container>img:first-child {
+    border-radius: 8px 0 0 8px;
+    margin-right: 10px;
+}
+
+.show-page-img-container>img:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
