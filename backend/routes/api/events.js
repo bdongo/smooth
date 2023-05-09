@@ -4,24 +4,42 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
-
+const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validation/events');
 
 const { isProduction } = require('../../config/keys');
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 
-// GET all events
+
+// GET all events by price, time
 router.get('/', async (req, res) => {
     try {
-        const events = await Event.find();
+        const { rating, price, time } = req.query;
+        const filter = {};
+
+        if (rating) {
+            // Filter events by average rating
+            filter.avgRating = { $gte: parseFloat(rating) };
+        }
+
+        if (price) {
+            // Filter events by average price
+            filter.avgPrice = { $lte: parseFloat(price) };
+        }
+
+        if (time) {
+            // Filter events by average time
+            filter.avgTime = { $gte: parseInt(time) };
+        }
+
+        const events = await Event.find(filter);
+
         return res.json(events);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-// GET all events by price, time
-
 
 
 // GET a specific event by ID
@@ -40,7 +58,8 @@ router.get('/:eventId', async (req, res) => {
 });
 
 // POST create a new event
-router.post('/', validateEventInput, async (req, res) => {
+router.post('/', multipleMulterUpload("images"), requireUser, validateEventInput, async (req, res) => {
+    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
     try {
         const { author, description, title, address, location } = req.body;
 
@@ -50,7 +69,8 @@ router.post('/', validateEventInput, async (req, res) => {
             description,
             title,
             address, 
-            location
+            location,
+            imageUrls
         });
 
         // Save the event to the database
@@ -64,7 +84,7 @@ router.post('/', validateEventInput, async (req, res) => {
 });
 
 // PUT update an existing event
-router.put('/:eventId', validateEventInput, async (req, res) => {
+router.put('/:eventId', requireUser, validateEventInput, async (req, res) => {
     const { eventId } = req.params;
     try {
         const { author, description, title, address, location} = req.body;
