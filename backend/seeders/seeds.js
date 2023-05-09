@@ -178,6 +178,97 @@ events.push(
      "https://smooth-mern.s3.us-west-1.amazonaws.com/sams2.jpeg"]
 }))
 
+events.push(
+    new Event({
+        title: "Lombard Street",
+        author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        description: "Lombard Street is an east–west street in San Francisco, California that is famous for a steep, one-block section with eight hairpin turns. Stretching from The Presidio east to The Embarcadero, most of the street's western segment is a major thoroughfare designated as part of U.S. Route 101.",
+        address: {
+            street: "1000-1099 Lombard St",
+            city: "San Francisco",
+            state: "CA",
+            zipcode: "94133"
+        },
+        location: {
+            lat: 37.8024852,
+            lng: -122.4183064
+        },
+        imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/lombard1.jpeg',
+            "https://smooth-mern.s3.us-west-1.amazonaws.com/lombard2.jpeg"]
+    }))
+
+events.push(
+    new Event({
+        title: "Umbrella Alley San Francisco",
+        author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        description: "Hey there! If you're looking for a fun and Insta-worthy spot in Fisherman's Wharf, we've got just the place for you. Come check out Umbrella Alley and its interactive murals - it's like a rainbow exploded and made a permanent home there. And the best part? You can be a part of the art by leaving a little something for the talented mural artists. ",
+        address: {
+            street: "757 Beach St",
+            city: "San Francisco",
+            state: "CA",
+            zipcode: "94108"
+        },
+        location: { lat: 37.807389, lng: -122.417601 },
+        imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/umbrella1.jpeg',
+            "https://smooth-mern.s3.us-west-1.amazonaws.com/umbrella2.jpeg"]
+    }))
+
+events.push(
+    new Event({
+        title: "Andy Goldsworthy's Wood Line",
+        author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        description: "A 1,200-ft. winding line of recycled eucalyptus trunks in the forest, created by Andy Goldsworthy.",
+        address: {
+           street: "103 Montgomery St",
+            city: "San Francisco",
+            state: "CA",
+            zipcode: "94129"
+        },
+        location: { lat: 37.799144, lng: -122.462874 },
+        imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/andy1.jpeg',
+            "https://smooth-mern.s3.us-west-1.amazonaws.com/andy2.jpeg"]
+    }))
+
+events.push(
+    new Event({
+        title: "Maiden Lane",
+        author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        description: "Maiden Lane is a pedestrian mall located in San Francisco, California, United States. A former section of the city's red light district, Maiden Lane is now home to high-end boutiques and art galleries. The street also serves as the location of San Francisco's only Frank Lloyd Wright designed building",
+        address: {
+            street: "Maiden Ln",
+            city: "San Francisco",
+            state: "CA",
+            zipcode: "94108"
+        },
+        location: {
+            lat: 37.7883649,
+            lng: -122.4059232
+        }
+,
+        imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/maiden1.jpeg',
+            "https://smooth-mern.s3.us-west-1.amazonaws.com/maiden2.jpeg"]
+    }))
+
+events.push(
+    new Event({
+        title: "Coit Tower",
+        author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        description: "Coit Tower is a 210-foot tower in the Telegraph Hill neighborhood of San Francisco, California, offering panoramic views over the city and the bay. The tower, in the city's Pioneer Park, was built between 1932 and 1933 using Lillie Hitchcock Coit's bequest to beautify the city of San Francisco.",
+        address: {
+            street: "1 Telegraph Hill Blvd",
+            city: "San Francisco",
+            state: "CA",
+            zipcode: "94133"
+        },
+        location: {
+            lat: 37.8026,
+            lng: -122.4053
+        }
+        ,
+        imageUrls: ['https://smooth-mern.s3.us-west-1.amazonaws.com/coit1.jpeg',
+            "https://smooth-mern.s3.us-west-1.amazonaws.com/coit2.jpeg"]
+    }))
+
 const sampleReviews = ["This event was amazing! The atmosphere was great and the staff were really friendly.",
     "I had a great time at this event. The performers were really talented and the venue was beautiful.",
     "I would highly recommend this event to anyone looking for a fun night out. The music was great and the drinks were delicious.",
@@ -197,7 +288,27 @@ const sampleReviews = ["This event was amazing! The atmosphere was great and the
     "This event was a great way to experience the local culture. I learned so much!", 
     "The drinks at this event were really unique and tasty. I loved trying something new.", 
     "I had a lot of fun at this event. The entertainment was great and the food was delicious.", 
-    "The performers at this event were really entertaining. I couldn't take my eyes off the stage!"
+    "The performers at this event were really entertaining. I couldn't take my eyes off the stage!",
+    "I had a great experience at this hair salon. The staff were friendly and knowledgeable, and I left feeling really happy with my haircut.",
+    "I recently went to this concert venue to see one of my favorite bands play, and it was an amazing experience. The sound quality was great and the atmosphere was electric.",
+    "I booked a tour with this travel company and it was such a fun and informative experience. Our guide was knowledgeable and engaging, and the itinerary was well-planned.",
+    "I went to this gym for the first time and was impressed with the variety of equipment and classes they offer. The staff were friendly and helpful, and the facilities were clean and well-maintained.",
+    "I've been a customer of this online retailer for a few years now, and I'm always impressed with their fast shipping and great customer service. The quality of their products is also top-notch.",
+    "I recently visited this art museum and was blown away by the quality and variety of the exhibits. It's definitely worth a visit if you're a fan of contemporary art.",
+    "I had a great experience at this car dealership. The salesperson I worked with was friendly and helpful, and they had a great selection of cars to choose from.",
+    "I stayed at this hotel on a recent business trip and was impressed with the level of service and amenities they offered. The room was clean and comfortable, and the staff were attentive to my needs.",
+    "I attended a yoga class at this studio and was really impressed with the quality of instruction. The teacher was knowledgeable and supportive, and the atmosphere was calming and relaxing.",
+    "I've been a member of this book club for a few months now, and I'm really enjoying it. The selections are diverse and interesting, and the discussions are thought-provoking.",
+    "I recently visited this historical site and was blown away by the rich history and architecture. The staff were knowledgeable and friendly, and the exhibits were well-presented.",
+    "I took my kids to this amusement park and we all had a blast. The rides were thrilling and the food was delicious. We can't wait to go back!",
+    "I visited this nature preserve on a recent hike and was amazed by the beautiful scenery and wildlife. It's definitely worth a visit if you're a fan of the outdoors.",
+    "I recently saw a play at this theater and was blown away by the talent of the actors and the quality of the production. It's a great venue for live performances.",
+    "I went to this dance club with some friends and had a great time. The music was fantastic and the atmosphere was lively and energetic.",
+    "I visited this science museum and was impressed with the variety of exhibits and interactive displays. It's a great place for kids and adults alike.",
+    "I took a cooking class at this culinary school and learned so much. The instructor was knowledgeable and patient, and the food we made was delicious.",
+    "I attended a stand-up comedy show at this club and laughed so hard my sides hurt. The comedians were hilarious and the drinks were good.",
+    "I went to this escape room with a group of friends and we had a blast. The puzzles were challenging but not too difficult, and the theme was really fun.",
+    "I recently visited this botanical garden and was blown away by the beauty of the plants and flowers. It's a great place to relax and appreciate nature."
 ]
 
 
