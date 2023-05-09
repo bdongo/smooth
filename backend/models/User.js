@@ -13,7 +13,8 @@ const userSchema = new Schema({
     hashedPassword: {
         type: String,
         required: true
-    }
+    },
+    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 }, {
     // tells mongoose to add and maintain `createdAt` and `updatedAt` fields with
     // datetime timestamps
