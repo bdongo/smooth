@@ -6,6 +6,7 @@ import { fetchEvents } from "../../store/event";
 import { useParams } from 'react-router-dom'
 
 const Search = () => {
+  const queryInput = useParams();
   const [query, setQuery] = useState('')
   const [avgRating, setAvgRating] = useState('');
   const [avgPrice, setAvgPrice] = useState('');
@@ -16,9 +17,16 @@ const Search = () => {
   const searchResultsRef = useRef(null);
   const dispatch = useDispatch();
 
+  useEffect(()=> {
+    if (queryInput) {
+      setQuery(queryInput)
+    }
+  }, [queryInput])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // /search?query=${}?avgRating=${}
     dispatch(fetchEvents(avgRating,avgPrice,avgTime, query))
   }
 
