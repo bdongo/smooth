@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-const Map = ({
+const Map = ({ data:{
     mapOptions = {},
     businesses = [],
     markerEventHandlers = {},
-    handleRating
-}) => {
+    handleRating 
+}}) => {
     const [map, setMap] = useState(null);
     const markers = useRef({})
     const mapRef = useRef(null);
@@ -26,7 +26,7 @@ const Map = ({
                 ...mapOptions,
             }));
         }
-
+        console.log(mapOptions)
         const marker = new window.google.maps.Marker({
             position: mapOptions.center,
             map: map
@@ -116,7 +116,7 @@ const WrappedMap = (mapOptions) => {
 
     return (
         <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY}>
-            <Map mapOptions={mapOptions} />
+            <Map data={mapOptions} />
         </Wrapper>
     )
 }

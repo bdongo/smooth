@@ -5,6 +5,7 @@ import { fetchEvent, fetchEvents, getEvent } from "../../store/event";
 import { useEffect, useState } from "react";
 import WrappedMap from "../Map/Map";
 import RatingVisualizer from "../RatingVisualizer/RatingVisualizer";
+import PieChart from "../PieChart/PieChart";
 
 const EventShow = () => {
     const dispatch = useDispatch();
@@ -15,65 +16,66 @@ const EventShow = () => {
     const [map, setMap] = useState(null);
     // console.log(location)
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     useEffect(()=> {
         // dispatch(fetchEvent(id))
         dispatch(fetchEvents())
     }, [dispatch, id])
 
+
     useEffect(() => {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjrBYUMZ1OmEPxs7ElpcNPPZ_HqC0vc60`;
-        script.onload = () => {
-            if (location) {
-                const map = new window.google.maps.Map(document.getElementById("map"), {
-                    center: location,
-                    zoom: 13,
-                });
-                const marker = new window.google.maps.Marker({
-                    position: location,
-                    map: map,
-                    title: `${event?.title}`,
-                });
-                setMap(map);
-            }
-        };
-        document.body.appendChild(script);
-    }, [location]);
+        if (event) {
+            document.title = `Smooth - ${event.title}`;
+        }
+    }, [event]);
 
     return (
         <div className="show-page">
-
-            <div className="show-page-img-container">
-                    <img src={event?.imageUrls[0]} />
-                    <div className="set-title">
-                        <h2 className="show-page-text">{event?.title}</h2>
+            <div className="show-page-top">
+                <div className="show-page-img-container">
+                        <img src={event?.imageUrls[0]} />
+                        <div className="set-title">
+                            <h2 className="show-page-text">{event?.title}</h2>
+                        </div>
+                        <img src={event?.imageUrls[1]} />
+                </div>
+                <div className="ratings-container">
+                    <div id="map">
+                        <WrappedMap mapOptions={{ center: event?.location }} />
                     </div>
-                    <img src={event?.imageUrls[1]} />
-            </div>
-            <div className="ratings-container">
-                <div>{event?.avgPrice} 
-                    <RatingVisualizer score={event?.avgPrice}/>
-                </div>
-                <div>{event?.avgRating} 
-                    <RatingVisualizer score={event?.avgRating} />
-                </div>
-                
-                <div>{event?.avgTime} 
-                    <RatingVisualizer score={event?.avgTime} />
+                    <div>
+                        
+                        <div className="rating">
+                            <p className="sub-header">Price: {event?.avgPrice}</p>
+                            <RatingVisualizer score={event?.avgPrice}/>
+                        </div>
+
+                        
+                        <div className="rating">
+                            <p className="sub-header">Rating: {event?.avgRating}</p>
+                            <RatingVisualizer score={event?.avgRating} />
+                        </div>
+                    </div>
+                    
+                    <div className="chart">
+                        <p className="sub-header">Time: {event?.avgTime} hours</p>
+                        <PieChart value={event?.avgTime} />
+                    </div>
                 </div>
             </div>
             <div className="show-page-info-container">
                 <ul className="show-page-text address">
-                    <li className="bold">{event?.address.street}</li>
+                    <li className="sub-header">{event?.address.street}</li>
                     <li>{event?.address.city}, {event?.address.state}</li>
                     <li>{event?.address.zipcode}</li>
                 </ul>
                 
                 <p className="show-page-text about">{event?.description}</p>
             </div>
-                <div id="map"></div>
-
-                {/* <WrappedMap mapOptions={{ center: location }} /> */}
+                
 
             <div className="review-container">
                 {event?.reviews?.map((review, idx) => (
