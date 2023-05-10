@@ -1,0 +1,11 @@
+.itinerary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.time-frame {
+    height: 60%;
+    width: 60%;
+    background-color: grey;
+    border-radius: 5px;
+}
