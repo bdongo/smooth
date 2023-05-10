@@ -9,7 +9,7 @@ const receiveAgendas = agendas => ({
     agendas
 });
 
-const receiveAgenda = payload => ({
+const receiveAgenda = agenda => ({
     type: RECEIVE_AGENDA,
     agenda
 });
