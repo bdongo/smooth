@@ -1,11 +1,10 @@
 import './SplashPage.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import { Autoplay } from 'swiper';
 import Scroll2 from './Scroll2';
 import Scroll3 from './Scroll3';
 import 'swiper/css';
 import 'swiper/css/autoplay'
-import { BsChevronDoubleDown } from 'react-icons/bs';
 import { FiChevronsDown } from 'react-icons/fi';
 
 function SplashPage() {
