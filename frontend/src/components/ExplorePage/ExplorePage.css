@@ -10,11 +10,12 @@
 
 .explore-page-header {
     position: relative;
+    margin-top: 1em;
 }
 
 #search-icon {
     position: absolute;
-    right: 2%;
+    left: 3%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
@@ -25,7 +26,7 @@
     border-radius: 2em;
     border: 1px solid black;
     font-family: 'NHAAS65';
-    padding-left: 1em;
+    padding-left: 2.5em;
 }
 
 .featured-experiences {
@@ -40,10 +41,12 @@
     font-family: 'NHaas65';
     margin-bottom: 0.4em;
     color: rgb(195, 25, 82);
+    animation: fadeIn 1s ease-in-out;
 }
 
 .featured-experiences-container {
     display: flex;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .featured-experiences-container img {
@@ -52,6 +55,7 @@
     padding: 1em;
     max-height: 17em;
     transition: all 0.4s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .featured-experiences-container img:hover {
@@ -61,4 +65,16 @@
 
 .featured-experiences-container :nth-child(even) {
     margin-top: 3em;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(1em);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
