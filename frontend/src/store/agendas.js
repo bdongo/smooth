@@ -9,7 +9,7 @@ const receiveAgendas = agendas => ({
     agendas
 });
 
-const receiveAgenda = agenda => ({
+const receiveAgenda = payload => ({
     type: RECEIVE_AGENDA,
     agenda
 });
@@ -27,8 +27,11 @@ export const getAgenda = agendaId => state => {
     return state?.agendas ? state.agendas[agendaId] : null;
 };
 
-export const fetchAgendas = () => async(dispatch) => {
-    const res = await jwtFetch(`/api/agendas`);
+export const fetchAgendas = ( userId ) => async(dispatch) => {
+    const params = new URLSearchParams();
+    if(userId) params.append('user', userId)
+
+    const res = await jwtFetch(`/api/agendas/?${params.toString()}`);
 
     if(res.ok){
         const agendas = await res.json();

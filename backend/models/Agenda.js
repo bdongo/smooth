@@ -7,14 +7,10 @@ const agendaSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    event: {
+    events: [{
         type: Schema.Types.ObjectId,
         ref: 'Event'
-    },
-    time: {
-        type: Number,
-        required: true
-    }
+    }]
 }, {
     timestamps: true
 });

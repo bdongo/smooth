@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const agendaSchema = require('./Agenda').schema
+// const agendaSchema = require('./Agenda').schema
 
 const userSchema = new Schema({
     username: {
@@ -15,7 +15,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    agendas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'}],
+    agenda: {type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'},
     // events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     // agendas: [agendaSchema]
 }, {

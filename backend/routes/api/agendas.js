@@ -8,8 +8,9 @@ const User = mongoose.model('User');
 
 router.get('/', async (req, res) => {
     try {
-        const agendas = await Agenda.find();
-        return res.json(agendas);
+        const { userId } = req.query
+        const agenda = await Agenda.find({user: userId}).populate('events');
+        return res.json(agenda);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -18,33 +19,39 @@ router.get('/', async (req, res) => {
 
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
-        const { user, event, time } = req.body;
+        const { user, events } = req.body;
 
         const newAgenda = new Agenda({
             user,
-            event,
-            time
+            events
         });
 
-        await newAgenda.populate('event')
         await newAgenda.save();
-        // await agenda.populate('event').execPopulate();
 
-        const userToUpdate = await User.findById(user).populate({
-            path: 'agendas',
-            populate: { path: 'event' }
-        });
+        const userToUpdate = await User.findById(user);
 
         if (!userToUpdate) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        userToUpdate.agendas.push(newAgenda._id);
-        await userToUpdate.populate('agendas');
+        userToUpdate.agenda = newAgenda._id;
+        // await userToUpdate.populate('agenda');
         await userToUpdate.save();
+
+        // const eventToUpdate = await Event.findById(events);
+
+        // if(!eventToUpdate) {
+        //     return res.status(404).json({ error: 'Event not found'});
+        // }
+
+        // eventToUpdate.agendas.push(newAgenda._id);
+        // await eventToUpdate.populate('agendas');
+        // await eventToUpdate.save();
         
         const payload = {
-            agenda: newAgenda, user: userToUpdate
+            agenda: newAgenda, 
+            user: userToUpdate, 
+            // event: eventToUpdate
         }
 
         return res.status(201).json(payload);
@@ -74,7 +81,6 @@ router.delete('/:agendaId', async (req, res) => {
 module.exports = router
 
 testAgenda = {
-    "user": "645bcae8c26f2be356ffbf3e",
-    "event": "645af79634cd12e0ff7ad1bd",
-    "time": 12
+    "user": "645c05ed8a4a9d541a0f4ed2",
+    "events": ["645af79634cd12e0ff7ad1bd", "645af79634cd12e0ff7ad1c0"]
 }
