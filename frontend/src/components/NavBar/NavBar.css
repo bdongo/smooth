@@ -108,6 +108,36 @@
     margin-top: 2em;
 }
 
+.itinerary {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 100vh;
+    z-index: 1;
+    translate: 100% 0;
+    transition: all 0.4s ease-in-out;
+    overflow: scroll;
+}
+
+#close-it {
+    position: absolute;
+    left: 5%;
+    top: 2%;
+    font-size: 3.6em;
+    transition: all 0.4s ease-in-out;
+}
+
+#close-it:hover {
+    cursor: pointer;
+    color: #FF5F1F;
+}
+
 @media all and (max-width: 930px) {
     .right-nav-buttons, 
     #itinerary-button {
@@ -177,6 +207,16 @@
         z-index: 1;
         opacity: 0.4;
         display: none;
+    }
+
+    .itinerary {
+        width: 45%;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .itinerary {
+        width: 100%;
     }
 }
 
