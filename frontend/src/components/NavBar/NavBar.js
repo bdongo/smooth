@@ -81,7 +81,7 @@ function NavBar() {
                     <button id='itinerary-button' onClick={openItinerary}>ITINERARY</button>
                     <Link to="/login" className='right-nav-buttons'>Log In</Link>
                     <Link to="/signup" className='right-nav-buttons'>Sign Up</Link>
-                    <FaRoute id='it-icon' />
+                    <FaRoute id='it-icon' onClick={openItinerary} />
                 </>
                 }
             </div>
