@@ -2,7 +2,7 @@
     display: flex;
     position: fixed;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
     background: white;
     justify-content: space-between;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -132,7 +132,7 @@
     .hamburger-menu {
         display: flex;
         font-size: 2em;
-        margin-right: 1em;
+        margin-right: 0em;
         align-items: center;
         margin-left: 1em;
     }

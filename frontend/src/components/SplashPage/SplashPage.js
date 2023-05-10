@@ -9,16 +9,18 @@ import { BsChevronDoubleDown } from 'react-icons/bs';
 import { FiChevronsDown } from 'react-icons/fi';
 
 function SplashPage() {
-
+    
     return (
         <>
         <div id='all-scrolls'>
             <div className="splash-page">
+                <div className='splash-1-overlay'></div>
                 <div className='splash-1-text-wrapper'> 
                     <div className='splash-1-text'>
                         Find your next 
                     </div>
                     <Swiper
+                        id='splash-1-text-swiper'
                         modules={[Autoplay]}
                         spaceBetween={0}
                         slidesPerView={1}
@@ -34,9 +36,6 @@ function SplashPage() {
                         <SwiperSlide>destination</SwiperSlide>
                         <SwiperSlide>vacation</SwiperSlide>
                     </Swiper>
-                </div>
-                <div className='splash-1-image'>
-                    
                 </div>
                 <FiChevronsDown id='down-arrow'/>
             </div>
