@@ -2,9 +2,11 @@
     display: flex;
     position: fixed;
     width: 100%;
+    z-index: 3;
     background: white;
     justify-content: space-between;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
 .hamburger-menu {
@@ -54,7 +56,7 @@
 #itinerary-button:hover,
 #logout-button:hover,
 .burger-buttons:hover {
-    color: rgb(195, 177, 225);
+    color: #FF5F1F;
     cursor: pointer;
 }
 
@@ -77,7 +79,7 @@
     width: 0%;
     content: '.';
     color: transparent;
-    background: rgb(195, 177, 225);
+    background: #FF5F1F;
     height: 3px;
     transition: all 0.5s ease-in-out;
 }
@@ -107,6 +109,36 @@
     margin-top: 2em;
 }
 
+.itinerary {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 100vh;
+    z-index: 1;
+    translate: 100% 0;
+    transition: all 0.4s ease-in-out;
+    overflow: scroll;
+}
+
+#close-it {
+    position: absolute;
+    left: 5%;
+    top: 2%;
+    font-size: 3.6em;
+    transition: all 0.4s ease-in-out;
+}
+
+#close-it:hover {
+    cursor: pointer;
+    color: #FF5F1F;
+}
+
 @media all and (max-width: 930px) {
     .right-nav-buttons, 
     #itinerary-button {
@@ -131,7 +163,7 @@
     .hamburger-menu {
         display: flex;
         font-size: 2em;
-        margin-right: 1em;
+        margin-right: 0em;
         align-items: center;
         margin-left: 1em;
     }
@@ -148,7 +180,7 @@
     #it-icon:hover,
     #close-icon:hover {
         cursor: pointer;
-        color:rgb(195, 177, 225);
+        color:#FF5F1F;
     }
 
     .side-nav {
@@ -176,6 +208,16 @@
         z-index: 1;
         opacity: 0.4;
         display: none;
+    }
+
+    .itinerary {
+        width: 45%;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .itinerary {
+        width: 100%;
     }
 }
 
