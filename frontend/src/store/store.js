@@ -4,12 +4,14 @@ import session from './session';
 import errors from './errors';
 import events from './event';
 import reviews from './reviews';
+import agendas from './agendas';
 
 const rootReducer = combineReducers({
     session,
     errors,
     events,
-    reviews
+    reviews,
+    agendas
 });
 
 let enhancer;

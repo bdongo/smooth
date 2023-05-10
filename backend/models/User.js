@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const agendaSchema = require('./Agenda').schema
 
 const userSchema = new Schema({
     username: {
@@ -14,7 +15,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    agendas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'}],
+    // events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    // agendas: [agendaSchema]
 }, {
     // tells mongoose to add and maintain `createdAt` and `updatedAt` fields with
     // datetime timestamps
