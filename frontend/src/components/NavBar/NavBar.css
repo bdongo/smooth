@@ -55,7 +55,7 @@
 #itinerary-button:hover,
 #logout-button:hover,
 .burger-buttons:hover {
-    color: rgb(195, 177, 225);
+    color: #FF5F1F;
     cursor: pointer;
 }
 
@@ -78,7 +78,7 @@
     width: 0%;
     content: '.';
     color: transparent;
-    background: rgb(195, 177, 225);
+    background: #FF5F1F;
     height: 3px;
     transition: all 0.5s ease-in-out;
 }
@@ -149,7 +149,7 @@
     #it-icon:hover,
     #close-icon:hover {
         cursor: pointer;
-        color:rgb(195, 177, 225);
+        color:#FF5F1F;
     }
 
     .side-nav {

@@ -26,6 +26,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: fadeInNoFloat 1s ease-in-out;
+}
+
+@keyframes fadeInNoFloat {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #down-arrow {
@@ -56,6 +66,7 @@
     font-size: 5em;
     z-index: 2;
     font-family: 'NHAAS55';
+    opacity: 1;
     text-align: center;
 }
 

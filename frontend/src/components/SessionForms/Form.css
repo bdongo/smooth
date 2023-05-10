@@ -90,7 +90,7 @@
 .session-form input {
     text-align: center;
     letter-spacing: 0.03em;
-    border-radius: 0.5em;
+    border-radius: 2em;
     margin-bottom: 1.5vh;
     font-size: 1em;
     border: 1px solid black;
@@ -101,7 +101,7 @@
 #demo-login-button {
     text-align: center;
     letter-spacing: 0.03em;
-    border-radius: 0.5em;
+    border-radius: 2em;
     margin-bottom: 1.5vh;
     font-size: 1em;
     border: 1px solid black;
