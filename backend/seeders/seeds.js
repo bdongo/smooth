@@ -326,54 +326,85 @@ mongoose
     });
 
 // Reset and seed db
-const insertSeeds = () => {
+const insertSeeds = async () => {
     console.log("Resetting db and seeding users...");
 
-    User.collection.drop()
-        .then(() => Review.collection.drop())
-        .then(() => Event.collection.drop())
-        .then(() => User.insertMany(users))
-        .then((insertedUsers) => Event.insertMany(events)
-            .then((insertedEvents) => {
-                const reviews = [];
+    try {
+        // drop collections to start fresh
+        await User.collection.drop();
+        await Review.collection.drop();
+        await Event.collection.drop();
 
-                console.log("Users and Events done. Seeding Reviews....");
+        // insert seed users
+        const insertedUsers = await User.insertMany(users);
 
-                insertedEvents.forEach((event) => {
-                    // create three reviews for each event
-                    for (let i = 0; i < 5; i++) {
-                        const review = {
-                            author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
-                            event: event._id,
-                            rating: Math.floor(Math.random() * 3) + 3,
-                            price: Math.floor(Math.random() * 4) + 1,
-                            time: Math.floor(Math.random() * 4) + 1,
-                            body: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
-                        };
-                        reviews.push(review);
-                    }
-                });
+        // insert seed events
+        const insertedEvents = await Event.insertMany(events);
 
-                for (let i = 0; i < 3; i++) {
-                    const review = {
-                        author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
-                        event: insertedEvents[Math.floor(Math.random() * insertedEvents.length)]._id,
-                        rating: Math.floor(Math.random() * 2) + 1,
-                        price: Math.floor(Math.random() * 4) + 1,
-                        time: Math.floor(Math.random() * 4) + 1,
-                        body: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
-                    };
-                    reviews.push(review);
-                }
+        console.log("Users and Events done. Seeding Reviews....");
 
-                return Review.insertMany(reviews);
-            }))
-        .then(() => {
-            console.log('Done!');
-            mongoose.disconnect();
-        })
-        .catch(err => {
-            console.error(err.stack);
-            process.exit(1);
-        });
+        // create reviews for each event
+        const reviews = [];
+        for (let i = 0; i < insertedEvents.length; i++) {
+            const event = insertedEvents[i];
+            for (let j = 0; j < 5; j++) {
+                const review = {
+                    author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+                    event: event._id,
+                    rating: Math.floor(Math.random() * 3) + 3,
+                    price: Math.floor(Math.random() * 4) + 1,
+                    time: Math.floor(Math.random() * 4) + 1,
+                    text: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
+                };
+                reviews.push(review);
+                event.reviews.push(review);
+            }
+            
+            await event.save();
+        }
+
+        // create additional reviews for random events
+        for (let i = 0; i < 3; i++) {
+            const event = insertedEvents[Math.floor(Math.random() * insertedEvents.length)];
+            const review = {
+                author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+                event: event._id,
+                rating: Math.floor(Math.random() * 2) + 1,
+                price: Math.floor(Math.random() * 4) + 1,
+                time: Math.floor(Math.random() * 4) + 1,
+                text: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
+            };
+            event.reviews.push(review);
+            await event.save();
+            reviews.push(review);
+        }
+
+        // insert all reviews to the database
+        await Review.insertMany(reviews);
+
+        for (let i = 0; i < insertedEvents.length; i++) {
+            const event = insertedEvents[i];
+            let totalPrice = 0
+            let totalTime = 0
+            let totalRating = 0
+            const length = event.reviews.length
+            event.reviews.map(review => {
+                totalPrice += review.price
+                totalTime += review.time
+                totalRating += review.rating
+            });
+
+            event.avgPrice = totalPrice / length
+            event.avgTime = totalTime / length
+            event.avgRating = totalRating / length
+            // event.updateAverages();
+            await event.save();
+        }
+
+        console.log('Done!');
+        mongoose.disconnect();
+    } catch (err) {
+        console.error(err.stack);
+        process.exit(1);
+    }
 }
