@@ -9,3 +9,30 @@
     background-color: grey;
     border-radius: 5px;
 }
+
+.itinerary-event {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    margin-right: auto;
+    /* Aligns the title to the left */
+}
+
+.details {
+    display: flex;
+    justify-content: flex-end;
+    /* Aligns the details to the right */
+    align-items: center;
+    /* Centers the content vertically */
+    height: 40%;
+    /* Sets the height to 100% to occupy the entire space */
+    margin-left: auto;
+    margin-bottom: 0.5em;
+    /* Pushes the details to the right */
+}

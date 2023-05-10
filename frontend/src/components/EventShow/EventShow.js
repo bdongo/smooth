@@ -20,6 +20,7 @@ const EventShow = () => {
 
     useEffect(() => {
         const script = document.createElement("script");
+        const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCjrBYUMZ1OmEPxs7ElpcNPPZ_HqC0vc60`;
         script.onload = () => {
             if (location) {
