@@ -1,0 +1,82 @@
+.show-page {
+
+    width: 100vw;
+    /* height: 100vh; */
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 2em;
+}
+
+.show-page-text {
+    color: black;
+    font-family: 'NHAAS55';
+}
+.set-title {
+    margin-left: 2em;
+    margin-top: 2em;
+    position: absolute;
+    /* top: 15em; */
+    width: 50%;
+}
+.set-title > h2 {
+    color: white;
+    font-weight: bold;
+    font-size: 5em;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.show-page-img-container {
+    margin-top: 7em;
+    display: flex;
+    width: 100%;
+}
+.show-page-img-container > img {
+   height: 450px;
+   min-width: 400px;
+
+}
+
+.show-page-img-container>img:first-child {
+    border-radius: 10px 0 0 10px;
+    margin-right: 10px;
+}
+
+.show-page-img-container>img:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.bold {
+ font-weight: bold;
+}
+
+.show-page-info-container {
+    margin-top: 1em;
+    display: flex;
+    width: 80%;
+}
+
+.address {
+    /* margin-left: 10px; */
+    line-height: 1.5;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 4%;
+}
+
+.about {
+    padding-left: 4%;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    width: 70%;
+    line-height: 1.5;
+}
+
+#map{
+    width: 40vw;
+    height: 40vh;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    position: relative;
+    border-radius: 3%;
+}

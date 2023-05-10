@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-const reviewSchema = new mongoose.Schema({
+const reviewSchema = new Schema({
     text: String,
     title: String,
     rating: {
@@ -31,10 +30,5 @@ const reviewSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Review', reviewSchema);
 
-review1 = {
-    "rating": 4,
-    "price": 90,
-    "time": 5,
-    "author": "64598c6c44e8168a933010ca",
-    "event": "64598c7844e8168a93301106"
-}
+// const Review = mongoose.model('Review', reviewSchema);
+// module.exports = Review

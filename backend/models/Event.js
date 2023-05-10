@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+// const Review = mongoose.model('Review');
+// const reviewSchema = require('./Review')
+const reviewSchema = require('./Review').schema
 
 const getAverage = (array) => {
     let sum = 0;
@@ -8,7 +10,6 @@ const getAverage = (array) => {
         sum += el;
     });
     return sum / array.length;
-
 }
 
 const eventSchema = new Schema({
@@ -23,6 +24,9 @@ const eventSchema = new Schema({
     title: {
         type: String,
         required: true
+    },
+    category: {
+        type: String,
     },
     address: {
         street: {
@@ -50,7 +54,8 @@ const eventSchema = new Schema({
             type: Number
         }
     },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    reviews: [reviewSchema],
     avgPrice: {
         type: Number,
         default: function () {
@@ -89,17 +94,37 @@ const eventSchema = new Schema({
     timestamps: true
 });
 
+eventSchema.methods.updateAverages = function(){
+    if(!this.reviews.length) return;
+
+    let totalPrice = 0
+    let totalTime = 0
+    let totalRating = 0
+    const length = this.reviews.length
+    this.reviews.map(review => {
+        totalPrice += review.price
+        totalTime += review.time
+        totalRating += review.rating
+    });
+
+    this.avgPrice = totalPrice / length
+    this.avgTime = totalTime / length
+    this.avgRating = totalRating / length
+}
+
 module.exports = mongoose.model('Event', eventSchema);
 
-
-coachellatwo = {
-    "author": "64593c4d4546c8781f6fa9aa",
-    "title": "Coachella2",
-    "description": "Coachella2",
+test = {
+    "author": "645a7bf9c64b62d6212c5179",
+    "title": "test",
+    "description": "test",
+    "category": "test",
     "address": {
-        "street": "81800 51st Ave",
-        "city": "Indio",
-        "state": "California",
-        "zipcode": "92201",
-    },
+        "street": "test",
+        "city": "test",
+        "state": "test",
+        "zipcode": "test"
+    }
 }
+
+testId = "645aa6f6c77b2ff7bb6cdc88"

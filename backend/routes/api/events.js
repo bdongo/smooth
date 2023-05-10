@@ -14,26 +14,80 @@ const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 // GET all events by price, time
 router.get('/', async (req, res) => {
     try {
-        const { rating, price, time } = req.query;
-        const filter = {};
+        const { rating, price, time, query } = req.query;
+        const search = {};
 
-        if (rating) {
+        if(rating) {
             // Filter events by average rating
-            filter.avgRating = { $gte: parseFloat(rating) };
+            search.avgRating = { $gte: parseFloat(rating) };
         }
 
-        if (price) {
+        if(price) {
             // Filter events by average price
-            filter.avgPrice = { $lte: parseFloat(price) };
+            search.avgPrice = { $lte: parseFloat(price) };
         }
 
-        if (time) {
+        if(time) {
             // Filter events by average time
-            filter.avgTime = { $gte: parseInt(time) };
+            search.avgTime = { $lte: parseFloat(time) };
         }
 
-        const events = await Event.find(filter);
 
+        if(query) {
+            // searchbar query
+            const regex = new RegExp(`\\b${query}\\b`, "i")
+            search.$or = [
+                {"address.city": regex},
+                {"title": regex },
+                {"category": regex}
+            ]
+        }
+
+        const events = await Event.find(search);
+
+        
+        const eventObj = {}
+        events.forEach(event => eventObj[event._id] = event)
+
+
+        return res.json(eventObj);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/highestrating', async (req, res) => {
+    try {
+        const events = await Event.find().sort({avgRating: -1});
+        return res.json(events);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+router.get('/lowestprice', async (req, res) => {
+    try {
+        const events = await Event.find().sort({avgPrice: 1});
+        return res.json(events);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+router.get('/search', async (req, res) => {
+    try {
+        const { query } = req.query
+        const regex = new RegExp(`\\b${query}\\b`, "i")
+        const events = await Event.find({ 
+            $or: [
+                {"address.city": regex},
+                {"title": regex },
+                {"category": regex}
+            ]
+        });
         return res.json(events);
     } catch (error) {
         console.error(error);
@@ -41,6 +95,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+//title, city, category
 
 // GET a specific event by ID
 router.get('/:eventId', async (req, res) => {
