@@ -9,13 +9,27 @@ const User = mongoose.model('User');
 router.get('/', async (req, res) => {
     try {
         const { userId } = req.query
-        const agenda = await Agenda.find({user: userId}).populate('events');
-        return res.json(agenda);
+        const agendas = await Agenda.find({user: userId}).populate('events');
+        return res.json(agendas);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+router.get('/:agendaId', async(req, res) => {
+    const { agendaId } = req.params
+    try {
+        const agenda = await Agenda.findById(agendaId).populate('events');
+        if(!agenda) {
+            return res.status(404).json({ error: 'No Agenda found'})
+        }
+        return res.json(agenda);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error'});
+    }
+})
 
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
@@ -82,5 +96,5 @@ module.exports = router
 
 testAgenda = {
     "user": "645c05ed8a4a9d541a0f4ed2",
-    "events": ["645af79634cd12e0ff7ad1bd", "645af79634cd12e0ff7ad1c0"]
+    "events": ["645af79634cd12e0ff7ad1c1", "645af79634cd12e0ff7ad1c2", "645af79634cd12e0ff7ad1c3"]
 }
