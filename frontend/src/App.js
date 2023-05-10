@@ -9,7 +9,8 @@ import SignupForm from './components/SessionForms/SignupForm';
 import EventShow from './components/EventShow/EventShow';
 import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
-
+import SearchBar from './components/Search/SearchBar';
+import SearchResults from './components/Search/SearchResults';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,7 +27,10 @@ function App() {
       <Route exact path="/" component={SplashPage} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
-
+      <Route exact path = "/search">
+        <SearchBar></SearchBar>
+        <SearchResults></SearchResults>
+      </Route>
       <Route exact path="/event/:id" component={EventShow} />
     </Switch>
     </>
