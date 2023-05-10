@@ -6,7 +6,9 @@ import SplashPage from './components/SplashPage/SplashPage';
 import LoginForm from './components/SessionForms/LoginForm';
 import NavBar from './components/NavBar/NavBar';
 import SignupForm from './components/SessionForms/SignupForm';  
+import ExplorePage from './components/ExplorePage/ExplorePage';
 import EventShow from './components/EventShow/EventShow';
+
 import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 
@@ -26,8 +28,9 @@ function App() {
       <Route exact path="/" component={SplashPage} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
-
+      <Route exact path="/explore" component={ExplorePage} />
       <Route exact path="/event/:id" component={EventShow} />
+
     </Switch>
     </>
   );

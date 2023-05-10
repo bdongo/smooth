@@ -9,6 +9,16 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaRoute } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
 
+export const openItinerary = () => {
+    const itinerary = document.querySelector('.itinerary');
+    itinerary.style.translate = '0%';
+}
+
+export const closeItinerary = () => {
+    const itinerary = document.querySelector('.itinerary');
+    itinerary.style.translate = '100%';
+}
+
 function NavBar() {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -57,9 +67,6 @@ function NavBar() {
                 <Link to='/'>
                     <img src={logo} alt="logo" />
                 </Link>
-                {/* { user ? 
-                    <Link to='/explore' id='left-explore'>Explore</Link> : null
-                } */}
             </div>
             <div className="nav-bar-right">
                 { user ? 
@@ -71,12 +78,16 @@ function NavBar() {
                 </> : 
                 <>
                     <Link to='/explore' className='right-nav-buttons'>Explore</Link>
-                    <button id='itinerary-button'>ITINERARY</button>
+                    <button id='itinerary-button' onClick={openItinerary}>ITINERARY</button>
                     <Link to="/login" className='right-nav-buttons'>Log In</Link>
                     <Link to="/signup" className='right-nav-buttons'>Sign Up</Link>
-                    <FaRoute id='it-icon' />
+                    <FaRoute id='it-icon' onClick={openItinerary} />
                 </>
                 }
+            </div>
+            <div className='itinerary'>
+                <IoCloseSharp id='close-it' onClick={closeItinerary} />
+
             </div>
         </div>
     )
