@@ -48,6 +48,7 @@ const Itinerary = () => {
                 events: itinerary
             } 
             dispatch(createAgenda(agenda));
+            alert("Your itinerary has been saved!")
         }
         else {
             alert("Please log in to save your itinerary");
@@ -81,6 +82,23 @@ const Itinerary = () => {
                 <input type='number' value={cost} onChange={(e) => setCost(e.target.value)} />
             </div>
             <div className='time-frame' >
+                <div className="instruction-message">
+                   {itinerary.length === 0 && (
+                    <p>
+                        1. Search for events to add to your itinerary 
+                        <br />
+                        <br />
+                        2. Set your time frame and budget
+                        <br />
+                        <br />
+                        3. Drag and Drop here
+                        <br />
+                        <br />
+                        4. Save when you're done!
+                    </p>
+                )} 
+                </div>
+                
                     {itinerary.map((eventID, idx) => (
 
                         <div key={idx} className='itinerary-event'>
