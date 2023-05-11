@@ -26,9 +26,9 @@ const EventShow = () => {
     }, [])
 
     useEffect(()=> {
-         dispatch(fetchEvent(id))
-       // dispatch(fetchEvents())
-    }, [dispatch, id, event.reviews.length])
+        dispatch(fetchEvent(id))
+    }, [dispatch, id])
+
 
 
     useEffect(() => {
@@ -92,15 +92,15 @@ const EventShow = () => {
                     <div key={idx} className="review show-page-text">
                         <p className="show-page-text">{review.text}</p>
                         <div>
-                        <p className="sub-header">
+                        <div className="sub-header">
                             Rating: <RatingVisualizer score={review.rating} />
-                        </p>
-                        <p className="sub-header">
+                        </div>
+                        <div className="sub-header">
                             Price: <PricingVisualizer score={review.price} />
-                        </p>
-                        <p className="sub-header">
+                        </div>
+                        <div className="sub-header">
                             Time: <PieChart value={review.time} />
-                        </p>
+                        </div>
                         </div>
                         {currentUser && (currentUser._id === review.author) && (
                             <button className="remove-icon" onClick={() => deleteReview(review._id)}>
