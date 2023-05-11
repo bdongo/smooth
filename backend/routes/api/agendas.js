@@ -46,7 +46,7 @@ router.post('/', validateCreateAgenda, async (req, res) => {
 
         if (!userToUpdate) {
             return res.status(404).json({ error: 'User not found' });
-        }
+        };
 
         userToUpdate.agendas.push(newAgenda._id);
         await userToUpdate.save();
@@ -56,7 +56,7 @@ router.post('/', validateCreateAgenda, async (req, res) => {
 
         // if(!eventToUpdate) {
         //     return res.status(404).json({ error: 'Event not found'});
-        // }
+        // };
 
         // eventToUpdate.agendas.push(newAgenda._id);
         // await eventToUpdate.save();
@@ -64,8 +64,8 @@ router.post('/', validateCreateAgenda, async (req, res) => {
         const payload = {
             agenda: newAgenda, 
             user: userToUpdate, 
-            // event: eventToUpdate
-        }
+            event: eventToUpdate
+        };
 
         return res.status(201).json(payload);
     } catch (error) {

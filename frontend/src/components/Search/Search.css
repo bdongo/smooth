@@ -209,6 +209,11 @@ input::-webkit-inner-spin-button {
     color: #FF5F1F;
 }
 
+
+.error-handling {
+    font-style: italic;
+}
+
 .search-results-header {
     padding-top: 10em;
     display: flex;
@@ -270,3 +275,4 @@ input::-webkit-inner-spin-button {
     font-size: 2em;
     color: #FF5F1F;
 }
+

@@ -45,10 +45,8 @@ router.get('/', async (req, res) => {
 
         const events = await Event.find(search);
 
-        
         const eventObj = {}
         events.forEach(event => eventObj[event._id] = event)
-
 
         return res.json(eventObj);
     } catch (error) {
