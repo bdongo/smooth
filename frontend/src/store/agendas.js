@@ -27,28 +27,30 @@ export const getAgenda = agendaId => state => {
     return state?.agendas ? state.agendas[agendaId] : null;
 };
 
-export const fetchAgendas = (userId) => async (dispatch) => {
+
+export const fetchAgendas = ( userId ) => async(dispatch) => {
     const params = new URLSearchParams();
-    if (userId) params.append('user', userId)
+    if(userId) params.append('user', userId)
 
     const res = await jwtFetch(`/api/agendas/?${params.toString()}`);
 
-    if (res.ok) {
+    if(res.ok){
         const agendas = await res.json();
         dispatch(receiveAgendas(agendas));
     };
 };
 
-export const fetchAgenda = agendaId => async (dispatch) => {
-    const res = await jwtFetch(`/api/agendas/${agendaId}`);
+export const fetchAgenda = agendaId => async(dispatch) => {
+    const res = await jwtFetch (`/api/agendas/${agendaId}`);
 
-    if (res.ok) {
+    if(res.ok) {
         const agenda = await res.json();
         dispatch(receiveAgenda(agenda))
     }
 };
 
-export const createAgenda = (agenda) => async (dispatch) => {
+
+export const createAgenda = (agenda) => async(dispatch) => {
     const res = await jwtFetch(`/api/agendas`, {
         method: 'POST',
         headers: {
@@ -56,7 +58,7 @@ export const createAgenda = (agenda) => async (dispatch) => {
         },
         body: JSON.stringify(agenda)
     });
-    if (res.ok) {
+    if(res.ok){
         const agenda = await res.json();
         dispatch(receiveAgenda(agenda))
     };
@@ -70,7 +72,7 @@ export const editAgenda = (agenda) => async (dispatch) => {
         },
         body: JSON.stringify(agenda)
     });
-    if (res.ok) {
+    if(res.ok){
         const agenda = await res.json();
         dispatch(receiveAgenda(agenda))
     };
@@ -91,6 +93,7 @@ const agendasReducer = (state = {}, action) => {
             return { ...action.agendas };
         case RECEIVE_AGENDA:
             return { ...state, [action.agenda._id]: action.agenda }
+
         case REMOVE_AGENDA:
             const newState = {}
             delete newState[action.agendas._id];
@@ -101,3 +104,4 @@ const agendasReducer = (state = {}, action) => {
 }
 
 export default agendasReducer;
+

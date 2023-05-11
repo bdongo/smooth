@@ -8,6 +8,7 @@ const csurf = require('csurf');
 require('./models/User');
 require('./models/Event');
 require('./models/Review');
+require('./models/Agenda')
 /* ------------------------------------------------------------- */
 require('./config/passport'); // Need to import to configure passport module
 const passport = require('passport');
@@ -48,11 +49,13 @@ app.use(
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
 const eventsRouter = require('./routes/api/events');
-const reviewsRouter = require('./routes/api/reviews')
+const reviewsRouter = require('./routes/api/reviews');
+const agendasRouter = require('./routes/api/agendas');
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/reviews', reviewsRouter);
+app.use('/api/agendas', agendasRouter);
 
 // Serve static React build files statically in production
 if (isProduction) {

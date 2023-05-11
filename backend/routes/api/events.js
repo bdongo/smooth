@@ -35,11 +35,11 @@ router.get('/', async (req, res) => {
 
         if(query) {
             // searchbar query
-            const regex = new RegExp(`\\b${query}\\b`, "i")
+            const regex = new RegExp(`.*${query}.*`, "i")
             search.$or = [
-                {"address.city": regex},
-                {"title": regex },
-                {"category": regex}
+                { "address.city": regex },
+                { "title": regex },
+                { "category": regex }
             ]
         }
 
@@ -80,7 +80,7 @@ router.get('/lowestprice', async (req, res) => {
 router.get('/search', async (req, res) => {
     try {
         const { query } = req.query
-        const regex = new RegExp(`\\b${query}\\b`, "i")
+        const regex = new RegExp(`.*${query}.*`, "i")
         const events = await Event.find({ 
             $or: [
                 {"address.city": regex},

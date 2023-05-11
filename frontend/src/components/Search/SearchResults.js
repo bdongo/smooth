@@ -1,13 +1,31 @@
 import './SearchBar';
 import './Search.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEvents } from "../../store/event";
+import { getEvents, fetchEvents } from "../../store/event";
 import { Link } from 'react-router-dom';
 import {useDrag} from 'react-dnd';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const SearchResults = () => {
     const events = useSelector(getEvents);
+    const dispatch = useDispatch();
+    const location = useLocation();
+    console.log(location);
+
+    const params = new URLSearchParams(location.search)
+    const query = params.get('query');
+    console.log(query);
+    const price = params.get('price');
+    const time = params.get('time');
+    const rating = params.get('rating');
+
+    useEffect(() => {
+        if (!query && !price && !time && !rating) return;
+        console.log('fetching events');
+        dispatch(fetchEvents(rating, price, time, query));
+    }, [query ,price, time, rating]);
 
     const handleDragStart = (e, eventId) => {
         e.stopPropagation();

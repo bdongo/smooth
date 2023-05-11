@@ -73,7 +73,7 @@ function NavBar() {
                 { user ? 
                 <>
                     <Link to='/explore' className='right-nav-buttons'>Explore</Link>
-                    <button id='itinerary-button'>ITINERARY</button>
+                    <button id='itinerary-button' onClick={openItinerary}>ITINERARY</button>
                     <button id='logout-button' onClick={handleLogout} className='right-nav-buttons'>LOG OUT</button> 
                     <FaRoute id='it-icon' />
                 </> : 
