@@ -52,7 +52,7 @@ const EventShow = () => {
                     </div>
                     <div>
                         <div className="rating">
-                            <p className="sub-header">Average rating: {event?.avgRating.toFixed(2)}</p>
+                            <p className="sub-header">Average rating: {event?.avgRating.toFixed(1)}</p>
                             <RatingVisualizer score={event?.avgRating} />
                         </div>
 
@@ -63,7 +63,7 @@ const EventShow = () => {
                     </div>
                     
                     <div className="chart">
-                        <p className="sub-header">Average time spent: {event?.avgTime.toFixed(2)} hours</p>
+                        <p className="sub-header">Average time spent: {event?.avgTime.toFixed(1)} hours</p>
                         <PieChart value={event?.avgTime} />
                     </div>
                 </div>

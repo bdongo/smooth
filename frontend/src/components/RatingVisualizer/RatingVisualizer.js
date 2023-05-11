@@ -10,11 +10,8 @@ const RatingVisualizer = ({score}) => {
 
     useEffect(() => {
         const wholeNum = Math.floor(score)
-      
         const leftOver = score - wholeNum;
-        console.log(leftOver, "left over")
         const width = leftOver * 60;
-        console.log(width, "width outside")
         if (wholeNum === 5) {
             setFill1('rating-bar-filled')
             setFill2('rating-bar-filled')
@@ -28,8 +25,6 @@ const RatingVisualizer = ({score}) => {
             setFill3('rating-bar-filled')
             setFill4('rating-bar-filled')
         } else if(wholeNum === 3) {
-            console.log("here")
-            console.log(width, "width in here")
             document.getElementById("four-bar").style.width = `${width}px`;
             setFill1('rating-bar-filled')
             setFill2('rating-bar-filled')
