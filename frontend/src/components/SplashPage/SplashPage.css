@@ -9,19 +9,18 @@
     height: 95vh;
     z-index: 1;
     width: 100vw;
-    background-color: rgb(0 0 0 / 65%);
+    background-color: rgb(0 0 0 / 55%);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* animation: fadeInNoFloat 1s ease-in-out; */
 }
 
 .splash-page { 
     scroll-snap-align: center;
     height: 95vh;
     width: 100vw;
-    background: url(../../assets/splashAlt.jpg);
+    background: white;
     background-position: center;
     background-size: cover;
     display: flex;
@@ -325,5 +324,11 @@
 
     #video {
         display: none;
+    }
+
+    .splash-page {
+        background: url(../../assets/splashAlt.jpg);
+        background-position: center;
+        background-size: cover;
     }
 }
