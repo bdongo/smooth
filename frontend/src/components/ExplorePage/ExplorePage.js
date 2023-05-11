@@ -26,6 +26,8 @@ function ExplorePage() {
         document.title = `Smooth - Explore`;
     }, []);
 
+    useEffect(() => () => document.title = `Smooth`, []);
+
     return (
         <> 
         <div className="explore-page">

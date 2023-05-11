@@ -37,6 +37,8 @@ const EventShow = () => {
         }
     }, [event]);
 
+    useEffect(() => () => document.title = `Smooth`, []);
+
 
     const deleteReview = (reviewID) => {
         dispatch(removeReview(reviewID))
