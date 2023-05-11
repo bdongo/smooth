@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams} from "react-router-dom/cjs/react-router-dom.min";
 import "./EventShow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, fetchEvents, getEvent } from "../../store/event";
@@ -8,31 +8,48 @@ import Map from '../Map/Map'
 import RatingVisualizer from "../RatingVisualizer/RatingVisualizer";
 import PieChart from "../PieChart/PieChart";
 import PricingVisualizer from "../RatingVisualizer/PriceVisualizer";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { removeReview } from "../../store/reviews";
 
 const EventShow = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     // obj id of union sq 645a7bffc64b62d6212c51b5 
     const event = useSelector(getEvent(id))
+    const currentUser = useSelector((state) => state.session.user)
     const location = event?.location;
     const [map, setMap] = useState(null);
+    const history = useHistory();
+    const [deleteHelper, setDeleteHelper] = useState(false);
     // console.log(location)
-
+    const reviews = event?.reviews;
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
     useEffect(()=> {
-        // dispatch(fetchEvent(id))
-        dispatch(fetchEvents())
-    }, [dispatch, id])
+         dispatch(fetchEvent(id))
+    }, [deleteHelper])
 
+    
 
     useEffect(() => {
         if (event) {
             document.title = `Smooth - ${event.title}`;
         }
     }, [event]);
+
+    useEffect(() => () => document.title = `Smooth`, []);
+
+
+    const deleteReview = (reviewID) => {
+        dispatch(removeReview(reviewID))
+        setDeleteHelper(!deleteHelper)
+    }
+
+    const updateReview = (reviewID) => {
+
+    }
 
     return (
         <div className="show-page">
@@ -84,20 +101,34 @@ const EventShow = () => {
                     <div key={idx} className="review show-page-text">
                         <p className="show-page-text">{review.text}</p>
                         <div>
-                        <p className="sub-header">
+                        <div className="sub-header">
                             Rating: <RatingVisualizer score={review.rating} />
-                        </p>
-                        <p className="sub-header">
-                            Price: <PricingVisualizer score={review.price} />
-                        </p>
-                        <p className="sub-header">
-                            Time: <PieChart value={review.time} />
-                        </p>
                         </div>
+                        <div className="sub-header">
+                            Price: <PricingVisualizer score={review.price} />
+                        </div>
+                        <div className="sub-header">
+                            Time: <PieChart value={review.time} />
+                        </div>
+                        </div>
+                        {currentUser && (currentUser._id === review.author) && (
+                            <div>
+                                <button className="remove" onClick={() => deleteReview(review._id)}>
+                                    Remove Review
+                                </button>
+                                <Link to={`/updateReview?id=${review._id}&eventid=${id}`}>
+                                    Update Review
+                                </Link>
+                            </div>
+                        )}
+                        
                     </div>
+                    
                 ))}
             </div>
-           
+            <Link to={`/newReview?id=${id}`}>
+                Make a Review
+            </Link>
         </div>
     )
 }

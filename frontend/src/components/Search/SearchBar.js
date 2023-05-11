@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FaSearch } from 'react-icons/fa';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useEffect } from 'react';
+import { AiOutlineMinusCircle } from 'react-icons/ai';
 
 const Search = () => {
   const [query, setQuery] = useState('')
@@ -126,6 +127,7 @@ const Search = () => {
             <div onClick={resetForm} id='reset-button'>RESET</div>
             <button type="submit">Search</button>
       </form>
+
     </div>
     </>
     );

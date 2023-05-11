@@ -8,39 +8,41 @@ const RatingVisualizer = ({score}) => {
     const [fill4, setFill4] = useState('rating-bar')
     const [fill5, setFill5] = useState('rating-bar')
 
+    const barArr = [
+        "one-bar",
+        "two-bar",
+        "three-bar",
+        "four-bar",
+        "five-bar"
+    ]
+
+    const fillArr = [
+        setFill1,
+        setFill2,
+        setFill3,
+        setFill4,
+        setFill5
+    ]
+
+
     useEffect(() => {
         const wholeNum = Math.floor(score)
         const leftOver = score - wholeNum;
         const width = leftOver * 60;
-        if (wholeNum === 5) {
-            setFill1('rating-bar-filled')
-            setFill2('rating-bar-filled')
-            setFill3('rating-bar-filled')
-            setFill4('rating-bar-filled')
-            setFill5('rating-bar-filled')
-        } else if (wholeNum === 4) {
-            document.getElementById("five-bar").style.width = `${width}px`;
-            setFill1('rating-bar-filled')
-            setFill2('rating-bar-filled')
-            setFill3('rating-bar-filled')
-            setFill4('rating-bar-filled')
-        } else if(wholeNum === 3) {
-            document.getElementById("four-bar").style.width = `${width}px`;
-            setFill1('rating-bar-filled')
-            setFill2('rating-bar-filled')
-            setFill3('rating-bar-filled')
-        } else if (wholeNum === 2) {
-            document.getElementById("three-bar").style.width = `${width}px`;
-            setFill1('rating-bar-filled')
-            setFill2('rating-bar-filled')
-        } else if (wholeNum === 1) {
-            document.getElementById("two-bar").style.width = `${width}px`;
-            setFill1('rating-bar-filled')
-        } else {
-            document.getElementById("one-bar").style.width = `${width}px`;
+        for (let i = 0; i < wholeNum - 1; i++) {
+            let currentElement = barArr[i]
+            document.getElementById(currentElement).style.width = `60px`;
+            fillArr[i]("rating-bar-filled");
+
+            if (leftOver !== 0) {
+                let currentElement = document.getElementById(barArr[wholeNum])
+                currentElement.style.width = `${width}px`;
+            }
+        }
+        if (wholeNum > 0) {
+            fillArr[wholeNum - 1]("rating-bar-filled");
         }
     }, [score]);
-
 
 
 

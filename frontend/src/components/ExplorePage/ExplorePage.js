@@ -7,13 +7,26 @@ import feature4 from '../../assets/feature4.jpg';
 import feature5 from '../../assets/feature5.jpg';
 import Search from '../Search/SearchBar';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSplashEvents, getEvents } from '../../store/event';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function ExplorePage() {
+    const dispatch = useDispatch();
+    const events = useSelector(getEvents)
+ 
 
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+
+    useEffect(()=> {
+        dispatch(fetchSplashEvents());
+        document.title = `Smooth - Explore`;
+    }, []);
+
+    useEffect(() => () => document.title = `Smooth`, []);
 
     return (
         <> 
@@ -28,11 +41,11 @@ function ExplorePage() {
             <div className='featured-experiences'>
                 <h2>Featured Experiences</h2>
                 <div className='featured-experiences-container'>
-                    <img src={feature1} alt='feature1' />
-                    <img src={feature2} alt='feature2' />
-                    <img src={feature3} alt='feature3' />
-                    <img src={feature4} alt='feature4' />
-                    <img src={feature5} alt='feature5' />
+                    {   events?.map((event, idx) => (
+                        <Link  className="event-link" to={`/event/${event._id}`} >
+                            <img key={idx} src={event?.imageUrls[0]} alt='feature1' />
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>

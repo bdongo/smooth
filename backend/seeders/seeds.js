@@ -16,7 +16,7 @@ users.push(
     new User({
         username: 'demo-user',
         email: 'demo-user@appacademy.io',
-        hashedPassword: bcrypt.hashSync('password', 10)
+        hashedPassword: bcrypt.hashSync('Password!', 10)
     })
 )
 
@@ -27,7 +27,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
         new User({
             username: faker.internet.userName(firstName, lastName),
             email: faker.internet.email(firstName, lastName),
-            hashedPassword: bcrypt.hashSync(faker.internet.password(), 10)
+            hashedPassword: bcrypt.hashSync("Password!", 10)
         })
     )
 }
@@ -148,6 +148,7 @@ events.push(
 events.push(
     new Event({
     title: "The Devil's Acre",
+    category: "drinks",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Apothecary style cocktails featuring house-revived extinct ingredients",
     address: {
@@ -164,6 +165,7 @@ events.push(
 events.push(
     new Event({
     title: "Sam's",
+    category: "food",
     author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
     description: "Anthony Bourdain has been here",
     address: {
@@ -183,6 +185,7 @@ events.push(
 events.push(
     new Event({
         title: "Lombard Street",
+        category: "historic",
         author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
         description: "Lombard Street is an east–west street in San Francisco, California that is famous for a steep, one-block section with eight hairpin turns. Stretching from The Presidio east to The Embarcadero, most of the street's western segment is a major thoroughfare designated as part of U.S. Route 101.",
         address: {
@@ -202,6 +205,7 @@ events.push(
 events.push(
     new Event({
         title: "Umbrella Alley San Francisco",
+        category: "photos",
         author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
         description: "Hey there! If you're looking for a fun and Insta-worthy spot in Fisherman's Wharf, we've got just the place for you. Come check out Umbrella Alley and its interactive murals - it's like a rainbow exploded and made a permanent home there. And the best part? You can be a part of the art by leaving a little something for the talented mural artists. ",
         address: {
@@ -218,6 +222,7 @@ events.push(
 events.push(
     new Event({
         title: "Andy Goldsworthy's Wood Line",
+        category: "hiking",
         author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
         description: "A 1,200-ft. winding line of recycled eucalyptus trunks in the forest, created by Andy Goldsworthy.",
         address: {
@@ -235,6 +240,7 @@ events.push(
     new Event({
         title: "Maiden Lane",
         author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        category: "historic",
         description: "Maiden Lane is a pedestrian mall located in San Francisco, California, United States. A former section of the city's red light district, Maiden Lane is now home to high-end boutiques and art galleries. The street also serves as the location of San Francisco's only Frank Lloyd Wright designed building",
         address: {
             street: "Maiden Ln",
@@ -255,6 +261,7 @@ events.push(
     new Event({
         title: "Coit Tower",
         author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
+        category: "historic",
         description: "Coit Tower is a 210-foot tower in the Telegraph Hill neighborhood of San Francisco, California, offering panoramic views over the city and the bay. The tower, in the city's Pioneer Park, was built between 1932 and 1933 using Lillie Hitchcock Coit's bequest to beautify the city of San Francisco.",
         address: {
             street: "1 Telegraph Hill Blvd",
@@ -353,8 +360,8 @@ const insertSeeds = async () => {
                     author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
                     event: event._id,
                     rating: Math.floor(Math.random() * 3) + 3,
-                    price: Math.floor(Math.random() * 80) + 1,
-                    time: Math.floor(Math.random() * 8) + 1,
+                    price: Math.floor(Math.random() * 30) + 1,
+                    time: Math.floor(Math.random() * 3) + 1,
                     text: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
                 });
                 // reviews.push(review);
@@ -375,7 +382,7 @@ const insertSeeds = async () => {
                 event: event._id,
                 rating: Math.floor(Math.random() * 2) + 1,
                 price: Math.floor(Math.random() * 100) + 1,
-                time: Math.floor(Math.random() * 12) + 1,
+                time: Math.floor(Math.random() * 6) + 1,
                 text: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
             });
             await review.save()
@@ -385,29 +392,12 @@ const insertSeeds = async () => {
             
         }
 
-        // insert all reviews to the database
-        // await Review.insertMany(reviews);
 
         for (let i = 0; i < insertedEvents.length; i++) {
             const event = insertedEvents[i];
             const populated = await event.populate('reviews');
             console.log("populated",populated )
             event.updateAverages();
-
-            // let totalPrice = 0
-            // let totalTime = 0
-            // let totalRating = 0
-            // const length = event.reviews.length
-            // event.reviews.map(review => {
-            //     totalPrice += review.price
-            //     totalTime += review.time
-            //     totalRating += review.rating
-            // });
-
-            // event.avgPrice = totalPrice / length
-            // event.avgTime = totalTime / length
-            // event.avgRating = totalRating / length
-            // event.updateAverages();
             await event.save();
         }
 
