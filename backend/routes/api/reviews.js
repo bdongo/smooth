@@ -60,7 +60,7 @@ router.post('/', validateReviewInput, async (req, res) => {
         }
 
         eventToUpdate.reviews.push(review._id);
-        eventToUpdate.populate("reviews")
+        await eventToUpdate.populate("reviews")
         eventToUpdate.updateAverages()
         await eventToUpdate.save();
 
@@ -75,7 +75,7 @@ router.post('/', validateReviewInput, async (req, res) => {
 });
 
 // PUT update a review
-router.put('/:reviewId', requireUser, validateReviewInput, async (req, res) => {
+router.put('/:reviewId', validateReviewInput, async (req, res) => {
     const { reviewId } = req.params;
     try {
         const review = await Review.findById(reviewId);
@@ -91,6 +91,16 @@ router.put('/:reviewId', requireUser, validateReviewInput, async (req, res) => {
         review.author = author;
         review.event = event;
         await review.save();
+
+        const eventToUpdate = await Event.findById(event);
+        if (!eventToUpdate) {
+            return res.status(404).json({ error: 'Event not found' });
+        }
+
+        await eventToUpdate.populate("reviews")
+        eventToUpdate.updateAverages()
+        await eventToUpdate.save();
+
         return res.json(review);
     } catch (error) {
         console.error(error);
@@ -103,10 +113,27 @@ router.delete('/:reviewId', async (req, res) => {
     const { reviewId } = req.params;
     try {
         const review = await Review.findById(reviewId);
+        const eventId = review.event._id
         if (!review) {
             return res.status(404).json({ error: 'Review not found' });
-        }
-        await review.remove();
+        };
+
+        await Review.deleteOne({ _id: reviewId });
+
+        const eventToUpdate = await Event.findOneAndUpdate(
+            { reviews: reviewId },
+            { $pull: { reviews: reviewId } },
+            { new: true }
+        );
+
+        if (!eventToUpdate) {
+            return res.status(404).json({ error: 'Event not found' });
+        };
+
+        await eventToUpdate.populate("reviews")
+        eventToUpdate.updateAverages()
+        await eventToUpdate.save();
+
         return res.status(204).json({ message: 'Review deleted' });
     } catch (error) {
         console.error(error);
