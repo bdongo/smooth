@@ -23,7 +23,6 @@ const Itinerary = () => {
     const handleDrop =(event) => {
         event.preventDefault();
 
-        event.preventDefault();
         const eventID = event.dataTransfer.getData("text");
         const updatedItinerary = [...itinerary, eventID];
         const updatedTotalHours = updatedItinerary.reduce(
@@ -60,13 +59,10 @@ const Itinerary = () => {
         
     }
 
-    const removeEvent = (eventID) => {
-        const eventIndex = itinerary.findIndex((id) => id === eventID);
-        if (eventIndex !== -1) {
-            const updatedItinerary = [...itinerary];
-            updatedItinerary.splice(eventIndex, 1);
-            setItinerary(updatedItinerary);
-        }
+    const removeEvent = (idx) => {
+        const updatedItinerary = [...itinerary];
+        updatedItinerary.splice(idx, 1);
+        setItinerary(updatedItinerary);
     };
 
     return (
@@ -97,7 +93,7 @@ const Itinerary = () => {
                             
                             <span className="details">
                                 
-                                <IoCloseSharp className='remove-icon' onClick={() => removeEvent(eventID)} />
+                                <IoCloseSharp className='remove-icon' onClick={() => removeEvent(idx)} />
                                 <span className="title">{events[eventID].title}  </span>
                                 <span>  ${events[eventID].avgPrice.toFixed(2)}  </span>
                                 <span>  {events[eventID].avgTime.toFixed(2)} hrs</span>
