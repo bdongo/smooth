@@ -1,8 +1,7 @@
 import { closeItinerary } from '../NavBar/NavBar';
 import './Itinerary.css';
 import { IoCloseSharp } from 'react-icons/io5';
-import {useDrop, useDrag} from 'react-dnd';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createAgenda } from '../../store/agendas';
 
@@ -70,7 +69,7 @@ const Itinerary = () => {
 
             <IoCloseSharp id='close-it' onClick={closeItinerary} />
             <h1 className='welcome'>
-                Welcome
+                Welcome {user ? user.username : 'Guest'}
             </h1>
             <div className='hours-input'>
                 <label>Hours Available </label>

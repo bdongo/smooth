@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    
 }
 .time-frame {
     height: 70%;
@@ -11,7 +10,7 @@
     border-radius: 5px;
     overflow-y: auto;
     /* Enable vertical scrolling */
-    padding: 1em;
+    padding: 0.5em;
     /* Add padding for better spacing */
 }
 .itinerary-event {
@@ -82,10 +81,12 @@
 
 .welcome{
     font-family: 'NHaas65';
+    font-size: x-large;
 }
 
 .hours-input, .price-input{
     font-family: 'NHaas55';
+    font-size: small;
 }
 
 .end-details{
