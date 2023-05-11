@@ -1,3 +1,5 @@
+import jwtFetch from "./jwt";
+
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const ADD_REVIEW = 'ADD_REVIEW';
 export const UPDATE_REVIEW = 'UPDATE_REVIEW';
@@ -23,16 +25,9 @@ export const deleteReview = (reviewId) => ({
     reviewId
 });
 
-// export const fetchReviews = (eventId) => async (dispatch) => {
-//     const res = await fetch(`/api/events/${eventId}/reviews`);
-//     if (res.ok) {
-//         const reviews = await res.json();
-//         dispatch(getReviews(reviews));
-//     }
-// }
 
 export const createReview = (review) => async (dispatch) => {
-    const res = await fetch(`/api/reviews`, {
+    const res = await jwtFetch(`/api/reviews`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -46,7 +41,7 @@ export const createReview = (review) => async (dispatch) => {
 }
 
 export const editReview = (review) => async (dispatch) => {
-    const res = await fetch(`/api/reviews/${review._id}`, {
+    const res = await jwtFetch(`/api/reviews/${review._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -60,7 +55,7 @@ export const editReview = (review) => async (dispatch) => {
 }
 
 export const removeReview = (reviewId) => async (dispatch) => {
-    const res = await fetch(`/api/reviews/${reviewId}`, {
+    const res = await jwtFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     });
     if (res.ok) {
