@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addReview, createReview } from '../../store/reviews';
-import './ReviewForm.css';
+import { editReview } from '../../store/reviews';
+import './UpdateForm.css';
 import { Link } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ReviewForm = () => {
     const dispatch = useDispatch();
+
     const [rating, setRating] = useState('');
     const [price, setPrice] = useState('');
     const [time, setTime] = useState('');
@@ -16,21 +17,22 @@ const ReviewForm = () => {
     const location = useLocation();
     const params = new URLSearchParams(location.search)
     const history = useHistory();
-    const id = params.get('id')
+    const id = params.get('eventid')
+    const reviewId = params.get('id')
+    
     const event = useSelector((state) => state.events[id])
+
+
 
     console.log(currentUser);
     console.log(id, "event id")
-    console.log(event, "event")
-    
+    console.log(reviewId, "reviewID")
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (currentUser){
-            
-
-            console.log("submitted")
-
+        if (currentUser) {
             const form = {
+                _id: reviewId,
                 rating: parseInt(rating),
                 price: parseInt(price),
                 time: parseInt(time),
@@ -38,21 +40,21 @@ const ReviewForm = () => {
                 title,
                 author: currentUser._id,
                 event: id
-            } 
-            dispatch(createReview(form));
+            }
+            dispatch(editReview(form));
             setPrice('');
             setRating('');
             setTime('');
-            alert("Review created successfully!")
+            alert("Review updated successfully!")
             history.push(`/event/${id}`)
         }
         else {
-            alert("Please log in to create a review!")
+            alert("Please log in to update the review!")
         }
-        
+
     }
     return (
-        <form onSubmit={handleSubmit} className='create-form'>
+        <form onSubmit={handleSubmit} className='update-form'>
             <label>
                 Rating:
                 <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
@@ -72,15 +74,15 @@ const ReviewForm = () => {
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             </label>
             <button type="submit">
-                Create Review
+                Update Review
             </button>
 
-            
-                
-            
 
-             
-            
+
+
+
+
+
         </form>
     )
 };

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams} from "react-router-dom/cjs/react-router-dom.min";
 import "./EventShow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, fetchEvents, getEvent } from "../../store/event";
@@ -19,17 +19,19 @@ const EventShow = () => {
     const currentUser = useSelector((state) => state.session.user)
     const location = event?.location;
     const [map, setMap] = useState(null);
+    const history = useHistory();
+    const [deleteHelper, setDeleteHelper] = useState(false);
     // console.log(location)
-
+    const reviews = event?.reviews;
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
     useEffect(()=> {
-        dispatch(fetchEvent(id))
-    }, [dispatch, id])
+         dispatch(fetchEvent(id))
+    }, [deleteHelper])
 
-
+    
 
     useEffect(() => {
         if (event) {
@@ -42,6 +44,11 @@ const EventShow = () => {
 
     const deleteReview = (reviewID) => {
         dispatch(removeReview(reviewID))
+        setDeleteHelper(!deleteHelper)
+    }
+
+    const updateReview = (reviewID) => {
+
     }
 
     return (
@@ -105,9 +112,14 @@ const EventShow = () => {
                         </div>
                         </div>
                         {currentUser && (currentUser._id === review.author) && (
-                            <button className="remove-icon" onClick={() => deleteReview(review._id)}>
-                                Remove Review
-                            </button>
+                            <div>
+                                <button className="remove" onClick={() => deleteReview(review._id)}>
+                                    Remove Review
+                                </button>
+                                <Link to={`/updateReview?id=${review._id}&eventid=${id}`}>
+                                    Update Review
+                                </Link>
+                            </div>
                         )}
                         
                     </div>

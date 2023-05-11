@@ -9,6 +9,7 @@ import SignupForm from './components/SessionForms/SignupForm';
 import ExplorePage from './components/ExplorePage/ExplorePage';
 import EventShow from './components/EventShow/EventShow';
 import ReviewForm from './components/ReviewForm/ReviewForm';
+import UpdateForm from './components/UpdateForm/UpdateForm';
 import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import SearchBar from './components/Search/SearchBar';
@@ -28,6 +29,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={SplashPage} />
         <Route path='/newReview' component={ReviewForm} />
+        <Route path='/updateReview' component={UpdateForm} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
       <Route path="/search">
