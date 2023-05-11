@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams} from "react-router-dom/cjs/react-router-dom.min";
 import "./EventShow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, fetchEvents, getEvent } from "../../store/event";
@@ -19,17 +19,19 @@ const EventShow = () => {
     const currentUser = useSelector((state) => state.session.user)
     const location = event?.location;
     const [map, setMap] = useState(null);
+    const history = useHistory();
+    const [deleteHelper, setDeleteHelper] = useState(false);
     // console.log(location)
-
+    const reviews = event?.reviews;
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
 
     useEffect(()=> {
          dispatch(fetchEvent(id))
-       // dispatch(fetchEvents())
-    }, [dispatch, id, event.reviews.length])
+    }, [deleteHelper])
 
+    
 
     useEffect(() => {
         if (event) {
@@ -40,6 +42,7 @@ const EventShow = () => {
 
     const deleteReview = (reviewID) => {
         dispatch(removeReview(reviewID))
+        setDeleteHelper(!deleteHelper)
     }
 
     return (

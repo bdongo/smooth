@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addReview, createReview } from '../../store/reviews';
 import './ReviewForm.css';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ReviewForm = () => {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const ReviewForm = () => {
     const currentUser = useSelector((state => state.session.user))
     const location = useLocation();
     const params = new URLSearchParams(location.search)
-    
+    const history = useHistory();
     const id = params.get('id')
     const event = useSelector((state) => state.events[id])
 
@@ -28,7 +28,7 @@ const ReviewForm = () => {
         if (currentUser){
             
 
-            console.log(rating, price, time, text, title, currentUser._id, id)
+            console.log("submitted")
 
             const form = {
                 rating: parseInt(rating),
@@ -44,6 +44,7 @@ const ReviewForm = () => {
             setRating('');
             setTime('');
             alert("Review created successfully!")
+            history.push(`/event/${id}`)
         }
         else {
             alert("Please log in to create a review!")
@@ -70,7 +71,16 @@ const ReviewForm = () => {
             <label> Title:
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             </label>
-            <button type="submit">Create Review</button>
+            <button type="submit">
+                Create Review
+            </button>
+
+            
+                
+            
+
+             
+            
         </form>
     )
 };
