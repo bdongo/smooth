@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 function ExplorePage() {
     const dispatch = useDispatch();
     const events = useSelector(getEvents)
- 
+   
 
     useEffect(() => {
         window.scrollTo(0, 0)

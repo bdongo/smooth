@@ -18,6 +18,21 @@ import SearchResults from './components/Search/SearchResults';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [itineraryOpen, setItineraryOpen] = useState(false);
+
+  const openItinerary = () => {
+    const itinerary = document.querySelector('.itinerary');
+    itinerary.style.translate = '0%';
+    setItineraryOpen(true);
+    console.log(itineraryOpen, "in open")
+  }
+
+  const closeItinerary = () => {
+    const itinerary = document.querySelector('.itinerary');
+    itinerary.style.translate = '100%';
+    console.log(itineraryOpen, "in close")
+    setItineraryOpen(false);
+  }
 
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
@@ -25,7 +40,7 @@ function App() {
 
   return loaded && (
     <>
-    <NavBar />
+    <NavBar setItineraryOpen={setItineraryOpen} openItinerary={openItinerary} closeItinerary={closeItinerary}/>
     <Switch>
       <Route exact path="/" component={SplashPage} />
         <Route path='/newReview' component={ReviewForm} />
@@ -34,9 +49,11 @@ function App() {
       <AuthRoute exact path="/signup" component={SignupForm} />
       <Route path="/search">
         {/* <SearchBar></SearchBar> */}
-        <SearchResults></SearchResults>
+          <SearchResults itineraryOpen={itineraryOpen}  />
       </Route>
-      <Route exact path="/explore" component={ExplorePage} />
+      <Route exact path="/explore" >
+        <ExplorePage />
+      </Route>
 
       <Route exact path="/event/:id" component={EventShow} />
 

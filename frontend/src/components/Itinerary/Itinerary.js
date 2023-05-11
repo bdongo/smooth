@@ -1,4 +1,4 @@
-import { closeItinerary } from '../NavBar/NavBar';
+// import { closeItinerary } from '../NavBar/NavBar';
 import './Itinerary.css';
 import { IoCloseSharp } from 'react-icons/io5';
 import { useState } from 'react';
@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createAgenda } from '../../store/agendas';
 
 
-const Itinerary = () => {
+const Itinerary = ({closeItinerary}) => {
     const events = useSelector((state) => state.events);
     const [itinerary, setItinerary] = useState([]);
     const totalHours = itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0);
