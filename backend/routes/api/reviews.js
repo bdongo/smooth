@@ -61,7 +61,7 @@ router.post('/', validateReviewInput, async (req, res) => {
 
         eventToUpdate.reviews.push(review._id);
         eventToUpdate.populate("reviews")
-        // eventToUpdate.updateAverages()
+        eventToUpdate.updateAverages()
         await eventToUpdate.save();
 
         const payload = {
