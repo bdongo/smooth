@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const Review = mongoose.model('Review');
-// const reviewSchema = require('./Review')
 const reviewSchema = require('./Review').schema
 
-const getAverage = (array) => {
-    let sum = 0;
-    array.forEach(el => {
-        sum += el;
-    });
-    return sum / array.length;
-}
+// const getAverage = (array) => {
+//     let sum = 0;
+//     array.forEach(el => {
+//         sum += el;
+//     });
+//     return sum / array.length;
+// }
 
 const eventSchema = new Schema({
     author: {
@@ -57,35 +55,47 @@ const eventSchema = new Schema({
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     // reviews: [reviewSchema],
     agendas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'}],
+    // avgPrice: {
+    //     type: Number,
+    //     default: function () {
+    //         if (this.reviews && this.reviews.length > 0) {
+    //             const prices = this.reviews.map(review => review.price);
+    //             return getAverage(prices);
+    //         }
+    //         return 0;
+    //     }
+    // },
     avgPrice: {
         type: Number,
-        default: function () {
-            if (this.reviews && this.reviews.length > 0) {
-                const prices = this.reviews.map(review => review.price);
-                return getAverage(prices);
-            }
-            return 0;
-        }
+        default: 0
     },
+    // avgTime: {
+    //     type: Number,
+    //     default: function () {
+    //         if (this.reviews && this.reviews.length > 0) {
+    //             const times = this.reviews.map(review => review.time);
+    //             return getAverage(times);
+    //         }
+    //         return 0;
+    //     }
+    // }, 
     avgTime: {
         type: Number,
-        default: function () {
-            if (this.reviews && this.reviews.length > 0) {
-                const times = this.reviews.map(review => review.time);
-                return getAverage(times);
-            }
-            return 0;
-        }
-    }, 
+        default: 0
+    },
+    // avgRating: {
+    //     type: Number,
+    //     default: function () {
+    //         if (this.reviews && this.reviews.length > 0) {
+    //             const ratings = this.reviews.map(review => review.rating);
+    //             return getAverage(ratings);
+    //         }
+    //         return 0;
+    //     }
+    // },
     avgRating: {
         type: Number,
-        default: function () {
-            if (this.reviews && this.reviews.length > 0) {
-                const ratings = this.reviews.map(review => review.rating);
-                return getAverage(ratings);
-            }
-            return 0;
-        }
+        default: 0
     },
     imageUrls: {
         type: [String],

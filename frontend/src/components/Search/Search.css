@@ -192,3 +192,7 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
     color: #FF5F1F;
 }
+
+.error-handling {
+    font-style: italic;
+}

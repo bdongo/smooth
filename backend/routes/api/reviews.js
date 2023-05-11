@@ -39,7 +39,6 @@ router.post('/', validateReviewInput, async (req, res) => {
     try {
         const { text, title, rating, price, time, author, event } = req.body;
 
-        // console.log(event)
         // Create a new review object
         const newReview = new Review({
             text,
@@ -113,7 +112,6 @@ router.delete('/:reviewId', async (req, res) => {
     const { reviewId } = req.params;
     try {
         const review = await Review.findById(reviewId);
-        const eventId = review.event._id
         if (!review) {
             return res.status(404).json({ error: 'Review not found' });
         };

@@ -9,15 +9,18 @@ const validateReviewForm = [
     check('event')
         .exists({checkFalsy: true})
         .withMessage('Review must reference an event'),
+    check('text')
+        .isLength({ max: 255})
+        .withMessage('Text cannot exceed 255 characters'),
     check('rating')
-        .isInt({ min: 0, max: 5 })
-        .withMessage('Rating must be between 0 and 5'),
+        .isInt({ min: 1, max: 5 })
+        .withMessage('Rating must be between 1 and 5'),
     check('price')
-        .exists({checkFalsy: true})
-        .withMessage('Price cannot be blank'),
+        .isInt({ min: 1, max: 100 })
+        .withMessage('Price must be between 1 and 100'),
     check('time')
-        .exists({checkFalsy: true})
-        .withMessage('Time cannot be blank'),
+        .isInt({ min: 1, max: 8 })
+        .withMessage('Amount of time must be between 1 and 8'),
     handleValidationErrors
 ]
 

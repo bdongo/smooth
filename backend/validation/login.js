@@ -10,8 +10,8 @@ const validateLoginInput = [
         .withMessage('Email is invalid'),
     check('password')
         .exists({ checkFalsy: true })
-        .isLength({ min: 6, max: 30 })
-        .withMessage('Password must be between 6 and 30 characters'),
+        .isLength({ min: 4, max: 24 })
+        .withMessage('Password must be between 4 and 24 characters'),
     handleValidationErrors
 ];
 
