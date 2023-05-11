@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaRoute } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
+import Itinerary from "../Itinerary/Itinerary";
 
 export const openItinerary = () => {
     const itinerary = document.querySelector('.itinerary');
@@ -85,10 +86,11 @@ function NavBar() {
                 </>
                 }
             </div>
-            <div className='itinerary'>
+            {/* <div className='itinerary'>
                 <IoCloseSharp id='close-it' onClick={closeItinerary} />
 
-            </div>
+            </div> */}
+            <Itinerary />
         </div>
     )
 }

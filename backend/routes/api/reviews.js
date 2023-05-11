@@ -59,7 +59,7 @@ router.post('/', validateReviewInput, async (req, res) => {
             return res.status(404).json({ error: 'Event not found' });
         }
 
-        eventToUpdate.reviews.push(review);
+        eventToUpdate.reviews.push(review._id);
         eventToUpdate.populate("reviews")
         eventToUpdate.updateAverages()
         await eventToUpdate.save();

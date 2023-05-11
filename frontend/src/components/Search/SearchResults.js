@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEvents, fetchEvents } from "../../store/event";
 import { Link } from 'react-router-dom';
+import {useDrag} from 'react-dnd';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -26,12 +27,18 @@ const SearchResults = () => {
         dispatch(fetchEvents(rating, price, time, query));
     }, [query ,price, time, rating]);
 
+    const handleDragStart = (e, eventId) => {
+        e.stopPropagation();
+        e.dataTransfer.setData('text/plain', eventId);
+        console.log('dragging', eventId);
+    };
+
     return (
         <>
         <div className = "search-results">
             {events.map((event,idx) => (
                 <Link to={`/event/${event._id}`} className='card-link'>
-                <div className = "card">
+                    <div className="card" draggable onDragStart={(e) => handleDragStart(e, event._id)}>
                     <img src={event.imageUrls[0]}/>
                         <div className = 'card-body'>
                             <h2>{event.title}</h2>
