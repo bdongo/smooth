@@ -8,42 +8,59 @@ const PricingVisualizer = ({ score }) => {
     const [fill4, setFill4] = useState('pricing-bar')
     const [fill5, setFill5] = useState('pricing-bar')
 
+    const barArr = [
+        "price-one-bar",
+        "price-two-bar",
+        "price-three-bar",
+        "price-four-bar",
+        "price-five-bar"
+    ]
+
+    const fillArr = [
+        setFill1,
+        setFill2,
+        setFill3,
+        setFill4,
+        setFill5
+    ]
+
     useEffect(() => {
         const wholeNum = Math.floor(score / 20);
-        console.log(wholeNum)
         const leftOver = (score % 20) / 20;
         const width = leftOver * 60;
-        if (wholeNum === 5) {
-            setFill1('pricing-bar-filled')
-            setFill2('pricing-bar-filled')
-            setFill3('pricing-bar-filled')
-            setFill4('pricing-bar-filled')
-            setFill5('pricing-bar-filled')
-        } else if (wholeNum >= 4) {
-            document.getElementById("price-five-bar").style.width = `${width}px`;
-            setFill1('pricing-bar-filled')
-            setFill2('pricing-bar-filled')
-            setFill3('pricing-bar-filled')
-            setFill4('pricing-bar-filled')
-        } else if (wholeNum >= 3) {
-            document.getElementById("price-four-bar").style.width = `${width}px`;
-            setFill1('pricing-bar-filled')
-            setFill2('pricing-bar-filled')
-            setFill3('pricing-bar-filled')
-        } else if (wholeNum >= 2) {
-            document.getElementById("price-three-bar").style.width = `${width}px`;
-            setFill1('pricing-bar-filled')
-            setFill2('pricing-bar-filled')
-        } else if (wholeNum >= 1) {
-            document.getElementById("price-two-bar").style.width = `${width}px`;
-            setFill1('pricing-bar-filled')
-        } else {
-            document.getElementById("price-one-bar").style.width = `${width}px`;
+        for (let i = 0; i < wholeNum - 1; i++) {
+            let currentElement = barArr[i];
+            document.getElementById(currentElement).style.width = `60px`;
+            fillArr[i]("pricing-bar-filled");
+
+            if (leftOver !== 0) {
+                let currentElement = document.getElementById(barArr[wholeNum - 1])
+                currentElement.style.width = `${width}px`;
+            }
+        }
+        if (wholeNum > 0) {
+            fillArr[wholeNum - 1]("pricing-bar-filled");
         }
     }, [score]);
 
 
 
+    // useEffect(() => {
+    //     const wholeNum = Math.floor(score / 20);
+    //     const leftOver = (score % 20) / 20;
+    //     const width = leftOver * 60;
+    //     for (let i = 0; i < wholeNum; i++) {
+    //         let currentElement = barArr[i];
+    //         document.getElementById(currentElement).style.width = `60px`;
+    //         fillArr[i]("pricing-bar-filled");
+    //         if (leftOver !== 0 && i < wholeNum - 1) {
+    //             document.getElementById(barArr[i + 1]).style.width = `${width}px`;
+    //         }
+    //     }
+    //     if (wholeNum > 0) {
+    //         fillArr[wholeNum - 1]("pricing-bar-filled");
+    //     }
+    // }, [score]);
 
     return (
         <div className='pricingVisualizer-container'>

@@ -30,7 +30,7 @@ function LoginForm() {
 
     const handleDemo = (e) => {
         e.preventDefault();
-        dispatch(login({ email: 'demo-user@appacademy.io',password: 'password'}));
+        dispatch(login({ email: 'demo-user@appacademy.io',password: 'Password!'}));
     }
 
 
