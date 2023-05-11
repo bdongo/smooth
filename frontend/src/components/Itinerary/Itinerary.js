@@ -9,7 +9,7 @@ import { createAgenda } from '../../store/agendas';
 
 const Itinerary = () => {
     const events = useSelector((state) => state.events);
-    const [plannedEvents, setPlannedEvents] = useState([]);
+    //const [plannedEvents, setPlannedEvents] = useState([]);
     const [itinerary, setItinerary] = useState([]);
     const totalHours = itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0);
     const totalPrice = itinerary.reduce((acc, eventID) => acc + events[eventID].avgPrice, 0);
