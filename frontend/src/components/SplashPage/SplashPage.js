@@ -6,12 +6,22 @@ import Scroll3 from './Scroll3';
 import 'swiper/css';
 import 'swiper/css/autoplay'
 import { FiChevronsDown } from 'react-icons/fi';
+import { useEffect } from 'react';
 
 function SplashPage() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
     
     return (
         <>
         <div id='all-scrolls'>
+            <div className='video-container'>
+                <video autoPlay loop muted id='video'>
+                    <source src='https://smooth-mern.s3.us-west-1.amazonaws.com/beach.mp4' type='video/mp4'/>
+                </video>
+            </div>
             <div className="splash-page">
                 <div className='splash-1-overlay'></div>
                 <div className='splash-1-text-wrapper'> 
@@ -21,7 +31,7 @@ function SplashPage() {
                     <Swiper
                         id='splash-1-text-swiper'
                         modules={[Autoplay]}
-                        spaceBetween={0}
+                        spaceBetween={100}
                         slidesPerView={1}
                         loop={true}
                         autoplay={{ 

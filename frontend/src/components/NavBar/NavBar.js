@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaRoute } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
+import Itinerary from "../Itinerary/Itinerary";
 
 export const openItinerary = () => {
     const itinerary = document.querySelector('.itinerary');
@@ -72,7 +73,7 @@ function NavBar() {
                 { user ? 
                 <>
                     <Link to='/explore' className='right-nav-buttons'>Explore</Link>
-                    <button id='itinerary-button'>ITINERARY</button>
+                    <button id='itinerary-button' onClick={openItinerary}>ITINERARY</button>
                     <button id='logout-button' onClick={handleLogout} className='right-nav-buttons'>LOG OUT</button> 
                     <FaRoute id='it-icon' />
                 </> : 
@@ -85,10 +86,11 @@ function NavBar() {
                 </>
                 }
             </div>
-            <div className='itinerary'>
+            {/* <div className='itinerary'>
                 <IoCloseSharp id='close-it' onClick={closeItinerary} />
 
-            </div>
+            </div> */}
+            <Itinerary />
         </div>
     )
 }
