@@ -51,16 +51,14 @@ const EventShow = () => {
                         </Wrapper>
                     </div>
                     <div>
-                        
-                        <div className="rating">
-                            <p className="sub-header">Average amount spent: ${event?.avgPrice}</p>
-                            <PricingVisualizer score={event?.avgPrice}/>
-                        </div>
-
-                        
                         <div className="rating">
                             <p className="sub-header">Average rating: {event?.avgRating}</p>
                             <RatingVisualizer score={event?.avgRating} />
+                        </div>
+
+                        <div className="rating">
+                            <p className="sub-header">Average amount spent: ${event?.avgPrice}</p>
+                            <PricingVisualizer score={event?.avgPrice}/>
                         </div>
                     </div>
                     
@@ -84,17 +82,18 @@ const EventShow = () => {
             <div className="review-container">
                 {event?.reviews?.map((review, idx) => (
                     <div key={idx} className="review show-page-text">
-                        <h2>{idx + 1}.</h2>
-                        <p className="sub-header">Rating: 
-                            <RatingVisualizer score={review.rating} />
+                        <p className="show-page-text">{review.text}</p>
+                        <div>
+                        <p className="sub-header">
+                            Rating: <RatingVisualizer score={review.rating} />
                         </p>
-                        <p className="sub-header">Price: 
-                            <PricingVisualizer score={review.price} />
+                        <p className="sub-header">
+                            Price: <PricingVisualizer score={review.price} />
                         </p>
-                        <p className="sub-header">Time: 
-                            <PieChart value={review.time} />
+                        <p className="sub-header">
+                            Time: <PieChart value={review.time} />
                         </p>
-                        <p>{review.text}</p>
+                        </div>
                     </div>
                 ))}
             </div>

@@ -113,3 +113,41 @@
 .rating {
     margin-bottom: 12px;
 }
+
+.review-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.review {
+    /* padding: 2em; */
+    margin-top: 2em;
+    margin-left: 2em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 60%;
+    display: flex;
+
+}
+.review >p {
+    width: 60%;
+    line-height: 1.5;
+    text-align: right;
+    margin-right: 30px;
+}
+
+.review >div> p > .ratingVisualizer-container > div{
+    transform: scale(0.5);
+    margin-right: -23px;
+}
+
+.review>div>p>.pricingVisualizer-container>div {
+    transform: scale(0.5);
+    margin-right: -23px;
+}
+
+.review>div>p>.chart-container {
+    transform: scale(0.5);
+    margin-left: -23px;
+    margin-top: -23px;
+}
