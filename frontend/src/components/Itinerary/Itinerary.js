@@ -25,19 +25,18 @@ const Itinerary = () => {
 
         const eventID = event.dataTransfer.getData("text");
         const updatedItinerary = [...itinerary, eventID];
-        const updatedTotalHours = updatedItinerary.reduce(
-            (acc, eventID) => acc + events[eventID].avgTime,
-            0
-        );
-        const updatedTotalPrice = updatedItinerary.reduce(
-            (acc, eventID) => acc + events[eventID].avgPrice,
-            0
-        );
-        if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
-            setItinerary(updatedItinerary);
-        } else {
-            alert("The event cannot be added to your itinerary.");
+        if (eventID){
+            const updatedTotalHours = updatedItinerary.reduce(
+            (acc, eventID) => acc + events[eventID].avgTime, 0);
+            const updatedTotalPrice = updatedItinerary.reduce(
+            (acc, eventID) => acc + events[eventID].avgPrice,0);
+            if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+                setItinerary(updatedItinerary);
+            } else {
+                alert("The event cannot be added to your itinerary.");
+            }
         }
+     
     }
 
     const handleDragOver = (e) => {
