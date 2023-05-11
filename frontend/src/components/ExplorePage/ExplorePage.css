@@ -82,9 +82,11 @@
     width: 12em;
     border-radius: 2.5em;
     padding: 1em;
+    min-height: 17em;
     max-height: 17em;
     transition: all 0.4s ease-in-out;
     animation: fadeIn 1s ease-in-out;
+    object-fit: cover;
 }
 
 .featured-experiences-container img:hover {
