@@ -88,12 +88,12 @@ const Itinerary = () => {
                                 <img src={events[eventID].imageUrls[0] } className="image" />
                             </div>
                             <span className="details"> 
-                                <IoCloseSharp className='remove-icon' onClick={() => removeEvent(idx)} />
+                                
                                 <span className="title">{events[eventID].title}  </span>
                                 <span>  ${events[eventID].avgPrice.toFixed(2)}  </span>
                                 <span>  {events[eventID].avgTime.toFixed(2)} hrs</span>
                             </span>
-                            
+                            <IoCloseSharp className='remove-icon' onClick={() => removeEvent(idx)} />
                         </div>
                     ))}
             </div>
