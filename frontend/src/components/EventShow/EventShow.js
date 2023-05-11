@@ -3,9 +3,11 @@ import "./EventShow.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, fetchEvents, getEvent } from "../../store/event";
 import { useEffect, useState } from "react";
-import WrappedMap from "../Map/Map";
+import { Wrapper } from "@googlemaps/react-wrapper";
+import Map from '../Map/Map'
 import RatingVisualizer from "../RatingVisualizer/RatingVisualizer";
 import PieChart from "../PieChart/PieChart";
+import PricingVisualizer from "../RatingVisualizer/PriceVisualizer";
 
 const EventShow = () => {
     const dispatch = useDispatch();
@@ -44,24 +46,26 @@ const EventShow = () => {
                 </div>
                 <div className="ratings-container">
                     <div id="map">
-                        <WrappedMap mapOptions={{ center: event?.location }} />
+                        <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY}>
+                            <Map mapOptions={ {center: location}} />
+                        </Wrapper>
                     </div>
                     <div>
                         
                         <div className="rating">
-                            <p className="sub-header">Price: {event?.avgPrice}</p>
-                            <RatingVisualizer score={event?.avgPrice}/>
+                            <p className="sub-header">Average amount spent: ${event?.avgPrice}</p>
+                            <PricingVisualizer score={event?.avgPrice}/>
                         </div>
 
                         
                         <div className="rating">
-                            <p className="sub-header">Rating: {event?.avgRating}</p>
+                            <p className="sub-header">Average rating: {event?.avgRating}</p>
                             <RatingVisualizer score={event?.avgRating} />
                         </div>
                     </div>
                     
                     <div className="chart">
-                        <p className="sub-header">Time: {event?.avgTime} hours</p>
+                        <p className="sub-header">Average time spent: {event?.avgTime} hours</p>
                         <PieChart value={event?.avgTime} />
                     </div>
                 </div>
@@ -81,9 +85,15 @@ const EventShow = () => {
                 {event?.reviews?.map((review, idx) => (
                     <div key={idx} className="review show-page-text">
                         <h2>{idx + 1}.</h2>
-                        <p>Rating: {review.rating}</p>
-                        <p>Price: {review.price}</p>
-                        <p>Time: {review.time}</p>
+                        <p className="sub-header">Rating: 
+                            <RatingVisualizer score={review.rating} />
+                        </p>
+                        <p className="sub-header">Price: 
+                            <PricingVisualizer score={review.price} />
+                        </p>
+                        <p className="sub-header">Time: 
+                            <PieChart value={review.time} />
+                        </p>
                         <p>{review.text}</p>
                     </div>
                 ))}

@@ -1,4 +1,4 @@
-.ratingVisualizer-contianer {
+.ratingVisualizer-container {
     display: flex;
 }
 
@@ -8,8 +8,53 @@
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     margin-right: 3px;
+    overflow: hidden;
 }
 
-.score-bar {
+.rating-bar > div {
+    display: table-cell;
+    vertical-align: top;
+    height: 30px;
+    background-color: #FF5F1F;
+    /* border-radius: 20px; */
+    margin-right: 3px;
+}
 
+.rating-bar-filled {
+    width: 60px;
+    height: 30px;
+    background-color: #FF5F1F;
+    border-radius: 20px;
+    margin-right: 3px;
+}
+/*  */
+
+.pricingVisualizer-container {
+    display: flex;
+}
+
+.pricing-bar {
+    width: 60px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-right: 3px;
+    overflow: hidden;
+}
+
+.pricing-bar>div {
+    display: table-cell;
+    vertical-align: top;
+    height: 30px;
+    background-color: #FF5F1F;
+    /* border-radius: 20px; */
+    margin-right: 3px;
+}
+
+.pricing-bar-filled {
+    width: 60px;
+    height: 30px;
+    background-color: #FF5F1F;
+    border-radius: 20px;
+    margin-right: 3px;
 }

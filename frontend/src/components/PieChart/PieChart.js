@@ -12,6 +12,7 @@ const PieChart = ({ value = 0}) => {
         // labels: [`Average Time: ${value} hours`],
         datasets: [
             {
+                label: ` ${value} hours`,
                 data: [percentage, 100 - percentage],
                 backgroundColor: [`#FF5F1F`, 'rgba(0, 0, 0, 0.1)'],
                 borderWidth: 0,
@@ -21,6 +22,15 @@ const PieChart = ({ value = 0}) => {
 
     const options = {
         maintainAspectRatio: false,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: (tooltipItem, data) => {
+                        return tooltipItem.dataset.label;
+                    }
+                }
+            }
+        }        
     };
 
     return (

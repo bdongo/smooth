@@ -104,7 +104,10 @@
 }
 
 .chart {
-    width: 120px;
+    /* width: 120px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .rating {
