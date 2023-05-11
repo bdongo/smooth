@@ -37,6 +37,15 @@ export const fetchEvents = (rating, price, time, query) => async (dispatch) => {
     }
 };
 
+export const fetchSplashEvents = () => async(dispatch) => {
+    const res = await jwtFetch (`/api/events/splash`);
+
+    if(res.ok){
+        const events = await res.json();
+        dispatch(receiveEvents(events))
+    }
+};
+
 export const fetchEvent = eventId => async(dispatch) => {
     const res = await jwtFetch (`/api/events/${eventId}`);
 

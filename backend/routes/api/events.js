@@ -57,6 +57,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/splash', async (req, res) => {
+    try {
+        const events = await Event.find().sort({avgRating: -1}).limit(5)
+        return res.json(events)
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    };
+});
+
 router.get('/highestrating', async (req, res) => {
     try {
         const events = await Event.find().sort({avgRating: -1});
@@ -101,7 +111,8 @@ router.get('/search', async (req, res) => {
 router.get('/:eventId', async (req, res) => {
     const { eventId } = req.params;
     try {
-        const event = await Event.findById(eventId);
+        const event = await Event.findById(eventId)
+        await event.populate('reviews');
         if (!event) {
             return res.status(404).json({ error: 'Event not found' });
         }

@@ -34,7 +34,6 @@ const Itinerary = () => {
                 alert("The event cannot be added to your itinerary.");
             }
         }
-     
     }
 
     const handleDragOver = (e) => {
@@ -56,6 +55,7 @@ const Itinerary = () => {
         
     }
 
+
     const removeEvent = (idx) => {
         const updatedItinerary = [...itinerary];
         updatedItinerary.splice(idx, 1);
@@ -68,6 +68,7 @@ const Itinerary = () => {
             onDrop={event => handleDrop(event)}>
 
             <IoCloseSharp id='close-it' onClick={closeItinerary} />
+
             <h1 className='welcome'>
                 Welcome {user ? user.username : 'Guest'}
             </h1>
@@ -81,6 +82,7 @@ const Itinerary = () => {
             </div>
             <div className='time-frame' >
                     {itinerary.map((eventID, idx) => (
+
                         <div key={idx} className='itinerary-event'>
                             <div className="image-container">
                                 <img src={events[eventID].imageUrls[0] } className="image" />
