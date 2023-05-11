@@ -34,9 +34,10 @@ module.exports = mongoose.model('Review', reviewSchema);
 // module.exports = Review
 
 newreview = {
-    "author": "645aeaa012d08c4b32993801",
-    "event": "645aeaa612d08c4b32993839",
+    "author": "645d2392a6e27c34fd77c7f9",
+    "event": "645d2393a6e27c34fd77c804",
+    "text": "Nice!",
     "rating": 5,
     "price": 100,
-    "time": 1
+    "time": 8
 }
