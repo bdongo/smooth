@@ -71,11 +71,11 @@ export default function reviewsReducer(state = {}, action) {
         //         newState[review._id] = review;
         //     });
         //     return newState;
-        case ADD_REVIEW:
-            return {
-                ...state,
-                [action.payload.review.id]: action.payload.review
-            };
+        // case ADD_REVIEW:
+        //     return {
+        //         ...state,
+        //         [action.payload.review.id]: action.payload.review
+        //     };
         // case UPDATE_REVIEW:
         //     return {
         //         ...state,

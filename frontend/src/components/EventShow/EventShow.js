@@ -45,6 +45,10 @@ const EventShow = () => {
         setDeleteHelper(!deleteHelper)
     }
 
+    const updateReview = (reviewID) => {
+
+    }
+
     return (
         <div className="show-page">
             <div className="show-page-top">
@@ -106,9 +110,14 @@ const EventShow = () => {
                         </p>
                         </div>
                         {currentUser && (currentUser._id === review.author) && (
-                            <button className="remove-icon" onClick={() => deleteReview(review._id)}>
-                                Remove Review
-                            </button>
+                            <div>
+                                <button className="remove" onClick={() => deleteReview(review._id)}>
+                                    Remove Review
+                                </button>
+                                <Link to={`/updateReview?id=${review._id}&eventid=${id}`}>
+                                    Update Review
+                                </Link>
+                            </div>
                         )}
                         
                     </div>
