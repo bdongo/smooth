@@ -6,6 +6,9 @@ import { getEvents, fetchEvents } from "../../store/event";
 import { Link } from 'react-router-dom';
 import {useDrag} from 'react-dnd';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import Search from './SearchBar';
+import { AiFillStar } from 'react-icons/ai';
+import { MdLocationPin } from 'react-icons/md';
 
 
 const SearchResults = () => {
@@ -35,16 +38,32 @@ const SearchResults = () => {
 
     return (
         <>
+        <div className="search-results-header">
+            <div className='search-results-bar'>
+                <Search />
+            </div>
+        </div>
+        <h2 id='search-title'>Search Results</h2>
         <div className = "search-results">
-            {events.map((event,idx) => (
+            {
+            events.length === 0 ? <h2 id='no-results'>No results found</h2> :
+            
+            events.map((event,idx) => (
                 <Link to={`/event/${event._id}`} className='card-link'>
                     <div className="card" draggable onDragStart={(e) => handleDragStart(e, event._id)}>
                     <img src={event.imageUrls[0]}/>
+                        <div id='card-star'>{event.avgRating.toFixed(0)} <AiFillStar /> </div>
                         <div className = 'card-body'>
                             <h2>{event.title}</h2>
-                            <p>${event.avgPrice.toFixed(2)}</p>
-                            <p> {event.avgTime.toFixed(2)} hours</p>
-                            <p>{event.avgRating.toFixed(0)}</p>
+                            <div id='card-details'> 
+                                <div> 
+                                    <p> <MdLocationPin/>{event.address.city}</p>
+                                </div>
+                                <div> 
+                                    <p>${event.avgPrice.toFixed(2)}</p>
+                                    <p> {event.avgTime.toFixed(2)} hours</p>
+                                </div>
+                            </div>
                         </div>
                 </div>
                 </Link>
