@@ -10,12 +10,12 @@ const validateRegisterInput = [
         .withMessage('Email is invalid'),
     check('username')
         .exists({ checkFalsy: true })
-        .isLength({ min: 2, max: 30 })
-        .withMessage('Username must be between 2 and 30 characters'),
+        .isLength({ min: 4, max: 24 })
+        .withMessage('Username must be between 4 and 24 characters'),
     check('password')
         .exists({ checkFalsy: true })
-        .isLength({ min: 6, max: 30 })
-        .withMessage('Password must be between 6 and 30 characters'),
+        .isLength({ min: 8, max: 24 })
+        .withMessage('Password must be between 8 and 24 characters'),
     handleValidationErrors
 ];
 

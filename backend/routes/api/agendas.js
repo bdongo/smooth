@@ -46,27 +46,25 @@ router.post('/', validateCreateAgenda, async (req, res) => {
 
         if (!userToUpdate) {
             return res.status(404).json({ error: 'User not found' });
-        }
+        };
 
-        userToUpdate.agenda = newAgenda._id;
-        // await userToUpdate.populate('agenda');
+        userToUpdate.agendas.push(newAgenda._id);
         await userToUpdate.save();
 
-        // const eventToUpdate = await Event.findById(events);
+        // const eventToUpdate = await Event.findById(event);
 
         // if(!eventToUpdate) {
         //     return res.status(404).json({ error: 'Event not found'});
-        // }
+        // };
 
         // eventToUpdate.agendas.push(newAgenda._id);
-        // await eventToUpdate.populate('agendas');
         // await eventToUpdate.save();
         
         const payload = {
             agenda: newAgenda, 
             user: userToUpdate, 
-            // event: eventToUpdate
-        }
+            event: eventToUpdate
+        };
 
         return res.status(201).json(payload);
     } catch (error) {
