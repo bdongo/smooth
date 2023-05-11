@@ -27,6 +27,7 @@ export const getAgenda = agendaId => state => {
     return state?.agendas ? state.agendas[agendaId] : null;
 };
 
+
 export const fetchAgendas = ( userId ) => async(dispatch) => {
     const params = new URLSearchParams();
     if(userId) params.append('user', userId)
@@ -47,6 +48,7 @@ export const fetchAgenda = agendaId => async(dispatch) => {
         dispatch(receiveAgenda(agenda))
     }
 };
+
 
 export const createAgenda = (agenda) => async(dispatch) => {
     const res = await jwtFetch(`/api/agendas`, {
@@ -86,11 +88,12 @@ export const deleteAgenda = (agendaId) => async (dispatch) => {
 };
 
 const agendasReducer = (state = {}, action) => {
-    switch(action.type){
+    switch (action.type) {
         case RECEIVE_AGENDAS:
-            return {...action.agendas};
+            return { ...action.agendas };
         case RECEIVE_AGENDA:
-            return {...state, [action.agenda._id]: action.agenda}
+            return { ...state, [action.agenda._id]: action.agenda }
+
         case REMOVE_AGENDA:
             const newState = {}
             delete newState[action.agendas._id];
