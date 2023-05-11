@@ -6,7 +6,6 @@ import feature3 from '../../assets/feature3.jpg';
 import feature4 from '../../assets/feature4.jpg';
 import feature5 from '../../assets/feature5.jpg';
 import Search from '../Search/SearchBar';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useEffect } from 'react';
 
 
@@ -15,7 +14,7 @@ function ExplorePage() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
-    
+
     return (
         <> 
         <div className="explore-page">
@@ -23,7 +22,6 @@ function ExplorePage() {
             <h2>What are you looking for?</h2>
             <div className='explore-page-header'>
                 <Search/>
-                <FaSearch id='search-icon'/>
             </div>
         </div>
         <div className='explore-2'>

@@ -3,6 +3,8 @@ import './Search.css'
 import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { FaSearch } from 'react-icons/fa';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 const Search = () => {
   const [query, setQuery] = useState('')
@@ -11,7 +13,16 @@ const Search = () => {
   const [avgTime, setAvgTime] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
-
+  
+  const toggleAdvancedSearch = () => {
+    const advancedSearch = document.querySelector('.advanced-search');
+    if (advancedSearch.style.display === 'none' || advancedSearch.style.display === '') {
+      advancedSearch.style.display = 'flex';
+    }
+    else {
+      advancedSearch.style.display = 'none';
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +32,9 @@ const Search = () => {
     if (avgTime) params.append('time', avgTime);
     if (query) params.append('query', query);
     window.location.href = `/search?${params}`
+
+    const advancedSearch = document.querySelector('.advanced-search');
+    advancedSearch.style.display = 'none';
   }
 
   const resetForm = () => {
@@ -29,6 +43,7 @@ const Search = () => {
     setAvgPrice('');
     setAvgTime('');
   }
+
 
     return (
       <>
@@ -40,6 +55,8 @@ const Search = () => {
           onChange={(event) => setQuery(event.target.value)}
           placeholder='Search by location'
         />
+          <FaSearch id='search-icon' />
+          <AiOutlinePlusCircle id='plus-icon' onClick={toggleAdvancedSearch}/>
       </form>
     <div className='advanced-search'>
       <div>ADVANCED SEARCH</div>
