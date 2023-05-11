@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    font-family: T-Star Bold;
 }
 .time-frame {
     height: 70%;
@@ -11,22 +10,24 @@
     border-radius: 5px;
     overflow-y: auto;
     /* Enable vertical scrolling */
-    padding: 1em;
+    padding: 0.5em;
     /* Add padding for better spacing */
 }
 .itinerary-event {
-  display: flex;
-  align-items: center;
-  margin-top: 1.5em;
-
-margin-left: 2%;
-margin-right: 2%;
-justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: 2%;
+    margin-right: 2%;
+    justify-content: center;
 }
 
 .title {
   font-weight: bold;
   margin-bottom: 0.5em;
+  max-width: 50%;
+  font-family: 'NHaas65';
 }
 
 .details {
@@ -34,6 +35,7 @@ justify-content: center;
   flex-direction: column;
   justify-content: center;
   margin-left: 1em;
+  font-family: 'NHaas55';
 }
 
 .image {
@@ -46,16 +48,13 @@ justify-content: center;
 .remove-icon {
     cursor: pointer;
     margin-left: auto;
-    /* Moves the remove icon to the right */
     font-size: 1.2em;
-    /* Adjust the font size as desired */
     transition: color 0.3s;
-    /* Add transition effect for color change */
+    min-width: 1.5em;
 }
 
 .remove-icon:hover {
     color: red;
-    /* Changes the color to red on hover */
 }
 
 .submit{
@@ -79,4 +78,18 @@ justify-content: center;
             transform: scale(1.1);
             color:#ffffff
         }
+}
+
+.welcome{
+    font-family: 'NHaas65';
+    font-size: x-large;
+}
+
+.hours-input, .price-input{
+    font-family: 'NHaas55';
+    font-size: small;
+}
+
+.end-details{
+    font-family: 'NHaas65';
 }
