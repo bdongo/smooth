@@ -30,37 +30,38 @@ const Search = () => {
 
   useEffect(()=> {
     const priceBar = document.querySelector('#search-price-bar')
-    if(avgPrice > 100 || avgPrice < 1){
+    if(avgPrice > 100 || avgPrice < 1 && avgPrice !== ''){
       setPriceError('Price must be between $1 and $100')
-      priceBar.className = '.error-handling'
-      console.log(priceBar.className, 'error')
+      priceBar.style.border = 'solid'
+      priceBar.style.borderColor = 'red'
     } else {
       setPriceError('Price')
-      priceBar.classList.remove('error-handling')
-      console.log(priceBar.className, 'error none')
+      priceBar.style.border = 'none'
     }
   }, [avgPrice])
 
   useEffect(()=> {
-    const ratingBar = document.querySelector('#search-rating-bar')
-    if(avgRating > 5 || avgRating < 1) {
+    const input = document.querySelector('#search-rating-bar')
+    if(avgRating > 5 || avgRating < 1 && avgRating !== '') {
       setRatingError('Rating must be between 1 and 5')
-      ratingBar.className = '.error-handling'
+      input.style.border = 'solid';
+      input.style.borderColor = 'red';
     } else {
       setRatingError('Rating')
-      ratingBar.classList.remove('error-handling');
+      input.style.border = 'none';
     }
   }, [avgRating])
 
 
   useEffect(()=> {
-    const timeBar = document.querySelector('#search-time-bar')
-    if((avgTime > 4 || avgTime < 1) && timeError !== 'Time') {
+    const input = document.querySelector('#search-time-bar')
+    if(avgTime > 4 || avgTime < 1 && avgTime !== '') {
       setTimeError('Time must be between 1 and 4 hours')
-      timeBar.className = '.error-handling'
+      input.style.border = 'solid'
+      input.style.borderColor = 'red'
     } else {
       setTimeError('Time')
-      timeBar.classList.remove('error-handling');
+      input.style.border = 'none';
     }
   }, [avgTime])
 
@@ -101,7 +102,7 @@ const Search = () => {
       </form>
     <div className='advanced-search'>
       <div>ADVANCED SEARCH</div>
-      <form onSubmit={handleSubmit}>
+      <form id='advanced-search-inputs' onSubmit={handleSubmit}>
               <input
                 id='search-price-bar'
                 placeholder='Price'
