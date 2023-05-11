@@ -136,17 +136,17 @@
     margin-right: 30px;
 }
 
-.review >div> p > .ratingVisualizer-container > div{
+.review >div> div > .ratingVisualizer-container > div{
     transform: scale(0.5);
     margin-right: -23px;
 }
 
-.review>div>p>.pricingVisualizer-container>div {
+.review>div>div>.pricingVisualizer-container>div {
     transform: scale(0.5);
     margin-right: -23px;
 }
 
-.review>div>p>.chart-container {
+.review>div>div>.chart-container {
     transform: scale(0.5);
     margin-left: -23px;
     margin-top: -23px;
