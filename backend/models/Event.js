@@ -54,8 +54,8 @@ const eventSchema = new Schema({
             type: Number
         }
     },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
-    // reviews: [reviewSchema],
+    // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+    reviews: [reviewSchema],
     agendas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'}],
     avgPrice: {
         type: Number,
