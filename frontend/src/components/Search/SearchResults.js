@@ -11,7 +11,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { MdLocationPin } from 'react-icons/md';
 
 
-const SearchResults = () => {
+const SearchResults = ({itineraryOpen}) => {
     const events = useSelector(getEvents);
     const dispatch = useDispatch();
     const location = useLocation();
@@ -23,6 +23,21 @@ const SearchResults = () => {
     const price = params.get('price');
     const time = params.get('time');
     const rating = params.get('rating');
+
+    useEffect(() => {
+        const searchResults = document.querySelector('.search-results')
+        if (itineraryOpen) {
+            searchResults.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            searchResults.style.width = "60%";
+
+            searchResults.style.rowGap = '5vh';
+
+        } else {
+            searchResults.style.removeProperty('grid-template-columns');
+            searchResults.style.removeProperty('row-gap');
+            searchResults.style.removeProperty('width')
+        }
+    }, [itineraryOpen])
 
     useEffect(() => {
         if (!query && !price && !time && !rating) return;

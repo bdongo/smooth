@@ -10,17 +10,17 @@ import { FaRoute } from 'react-icons/fa';
 import { IoCloseSharp } from 'react-icons/io5';
 import Itinerary from "../Itinerary/Itinerary";
 
-export const openItinerary = () => {
-    const itinerary = document.querySelector('.itinerary');
-    itinerary.style.translate = '0%';
-}
+// export const openItinerary = () => {
+//     const itinerary = document.querySelector('.itinerary');
+//     itinerary.style.translate = '0%';
+// }
 
-export const closeItinerary = () => {
-    const itinerary = document.querySelector('.itinerary');
-    itinerary.style.translate = '100%';
-}
+// export const closeItinerary = () => {
+//     const itinerary = document.querySelector('.itinerary');
+//     itinerary.style.translate = '100%';
+// }
 
-function NavBar() {
+function NavBar({ setItineraryOpen, openItinerary, closeItinerary }) {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -90,7 +90,7 @@ function NavBar() {
                 <IoCloseSharp id='close-it' onClick={closeItinerary} />
 
             </div> */}
-            <Itinerary />
+            <Itinerary closeItinerary={closeItinerary} />
         </div>
     )
 }
