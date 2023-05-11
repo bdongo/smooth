@@ -4,35 +4,54 @@
     justify-content: space-evenly;
 }
 .time-frame {
-    height: 60%;
-    width: 60%;
+    height: 70%;
+    width: 70%;
     background-color: grey;
     border-radius: 5px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    padding: 1em;
+    /* Add padding for better spacing */
 }
-
 .itinerary-event {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5em;
+justify-content: center;
+margin-left: 0.5em;
+margin-right: 0.5em;
 }
 
 .title {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-    font-weight: bold;
-    margin-right: auto;
-    /* Aligns the title to the left */
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 .details {
-    display: flex;
-    justify-content: flex-end;
-    /* Aligns the details to the right */
-    align-items: center;
-    /* Centers the content vertically */
-    height: 40%;
-    /* Sets the height to 100% to occupy the entire space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1em;
+}
+
+.image {
+  width: 8vw;
+  height: 10vh;
+  margin-left: 0.5em;
+  border-radius: 10px;
+}
+
+.remove-icon {
+    cursor: pointer;
     margin-left: auto;
-    margin-bottom: 0.5em;
-    /* Pushes the details to the right */
+    /* Moves the remove icon to the right */
+    font-size: 1.2em;
+    /* Adjust the font size as desired */
+    transition: color 0.3s;
+    /* Add transition effect for color change */
+}
+
+.remove-icon:hover {
+    color: red;
+    /* Changes the color to red on hover */
 }
