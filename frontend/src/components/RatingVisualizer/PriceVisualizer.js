@@ -9,35 +9,35 @@ const PricingVisualizer = ({ score }) => {
     const [fill5, setFill5] = useState('pricing-bar')
 
     useEffect(() => {
-        const wholeNum = score % 20;
-        const leftOver = score / 20;
+        const wholeNum = Math.floor(score / 20);
+        console.log(wholeNum)
+        const leftOver = (score % 20) / 20;
         const width = leftOver * 60;
-        if (wholeNum === 100) {
+        if (wholeNum === 5) {
             setFill1('pricing-bar-filled')
             setFill2('pricing-bar-filled')
             setFill3('pricing-bar-filled')
             setFill4('pricing-bar-filled')
             setFill5('pricing-bar-filled')
-        } else if (wholeNum >= 80) {
+        } else if (wholeNum >= 4) {
             document.getElementById("price-five-bar").style.width = `${width}px`;
             setFill1('pricing-bar-filled')
             setFill2('pricing-bar-filled')
             setFill3('pricing-bar-filled')
             setFill4('pricing-bar-filled')
-        } else if (wholeNum >= 60) {
+        } else if (wholeNum >= 3) {
             document.getElementById("price-four-bar").style.width = `${width}px`;
             setFill1('pricing-bar-filled')
             setFill2('pricing-bar-filled')
             setFill3('pricing-bar-filled')
-        } else if (wholeNum >= 40) {
+        } else if (wholeNum >= 2) {
             document.getElementById("price-three-bar").style.width = `${width}px`;
             setFill1('pricing-bar-filled')
             setFill2('pricing-bar-filled')
-        } else if (wholeNum >= 20) {
+        } else if (wholeNum >= 1) {
             document.getElementById("price-two-bar").style.width = `${width}px`;
             setFill1('pricing-bar-filled')
         } else {
-            console.log("in last bar")
             document.getElementById("price-one-bar").style.width = `${width}px`;
         }
     }, [score]);
