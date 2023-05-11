@@ -22,14 +22,24 @@ const Itinerary = () => {
 
     const handleDrop =(event) => {
         event.preventDefault();
-        if (totalHours <= hoursAvailable && totalPrice <= cost){ 
-            const eventID = event.dataTransfer.getData("text");
-            console.log("dropped event id: ", eventID);
-            setItinerary([...itinerary, eventID]);
+
+        event.preventDefault();
+        const eventID = event.dataTransfer.getData("text");
+        const updatedItinerary = [...itinerary, eventID];
+        const updatedTotalHours = updatedItinerary.reduce(
+            (acc, eventID) => acc + events[eventID].avgTime,
+            0
+        );
+        const updatedTotalPrice = updatedItinerary.reduce(
+            (acc, eventID) => acc + events[eventID].avgPrice,
+            0
+        );
+        if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+            setItinerary(updatedItinerary);
+        } else {
+            alert("The event cannot be added to your itinerary.");
         }
     }
-
-    console.log("itinerary: ", itinerary);
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -51,7 +61,6 @@ const Itinerary = () => {
     }
 
     const removeEvent = (eventID) => {
-       // setItinerary(itinerary.filter((id) => id !== eventID));
         const eventIndex = itinerary.findIndex((id) => id === eventID);
         if (eventIndex !== -1) {
             const updatedItinerary = [...itinerary];
