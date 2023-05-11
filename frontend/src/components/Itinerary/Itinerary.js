@@ -1,7 +1,7 @@
 import { closeItinerary } from '../NavBar/NavBar';
 import './Itinerary.css';
 import { IoCloseSharp } from 'react-icons/io5';
-import {useDrop} from 'react-dnd';
+import {useDrop, useDrag} from 'react-dnd';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createAgenda } from '../../store/agendas';
@@ -84,15 +84,11 @@ const Itinerary = () => {
             </div>
             <div className='time-frame' >
                     {itinerary.map((eventID, idx) => (
-                        <div key={idx} className='itinerary-event' draggable>
+                        <div key={idx} className='itinerary-event'>
                             <div className="image-container">
                                 <img src={events[eventID].imageUrls[0] } className="image" />
                             </div>
-                            
-                            
-                            
-                            <span className="details">
-                                
+                            <span className="details"> 
                                 <IoCloseSharp className='remove-icon' onClick={() => removeEvent(idx)} />
                                 <span className="title">{events[eventID].title}  </span>
                                 <span>  ${events[eventID].avgPrice.toFixed(2)}  </span>

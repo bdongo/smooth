@@ -15,13 +15,12 @@
     /* Add padding for better spacing */
 }
 .itinerary-event {
-  display: flex;
-  align-items: center;
-  margin-top: 1.5em;
-
-margin-left: 2%;
-margin-right: 2%;
-justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-left: 2%;
+    margin-right: 2%;
+    justify-content: center;
 }
 
 .title {
@@ -46,16 +45,12 @@ justify-content: center;
 .remove-icon {
     cursor: pointer;
     margin-left: auto;
-    /* Moves the remove icon to the right */
     font-size: 1.2em;
-    /* Adjust the font size as desired */
     transition: color 0.3s;
-    /* Add transition effect for color change */
 }
 
 .remove-icon:hover {
     color: red;
-    /* Changes the color to red on hover */
 }
 
 .submit{
