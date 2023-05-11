@@ -5,6 +5,7 @@ const Event = require('../models/Event');
 const Review = require('../models/Review.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
+// const Event = mongoose.model('Event');
 
 const NUM_SEED_USERS = 60;
 
@@ -348,55 +349,64 @@ const insertSeeds = async () => {
         for (let i = 0; i < insertedEvents.length; i++) {
             const event = insertedEvents[i];
             for (let j = 0; j < 5; j++) {
-                const review = {
+                const review = new Review({
                     author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
                     event: event._id,
                     rating: Math.floor(Math.random() * 3) + 3,
-                    price: Math.floor(Math.random() * 4) + 1,
-                    time: Math.floor(Math.random() * 4) + 1,
+                    price: Math.floor(Math.random() * 80) + 1,
+                    time: Math.floor(Math.random() * 8) + 1,
                     text: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
-                };
-                reviews.push(review);
-                event.reviews.push(review);
+                });
+                // reviews.push(review);
+                await review.save()
+                event.reviews.push(review._id);
             }
             
             await event.save();
         }
 
+        console.log("reviews made!")
+
         // create additional reviews for random events
         for (let i = 0; i < 3; i++) {
             const event = insertedEvents[Math.floor(Math.random() * insertedEvents.length)];
-            const review = {
+            const review = new Review({
                 author: insertedUsers[Math.floor(Math.random() * NUM_SEED_USERS)]._id,
                 event: event._id,
                 rating: Math.floor(Math.random() * 2) + 1,
-                price: Math.floor(Math.random() * 4) + 1,
-                time: Math.floor(Math.random() * 4) + 1,
+                price: Math.floor(Math.random() * 100) + 1,
+                time: Math.floor(Math.random() * 12) + 1,
                 text: sampleReviews[Math.floor(Math.random() * sampleReviews.length)],
-            };
-            event.reviews.push(review);
+            });
+            await review.save()
+            event.reviews.push(review._id);
             await event.save();
-            reviews.push(review);
+            // reviews.push(review);
+            
         }
 
         // insert all reviews to the database
-        await Review.insertMany(reviews);
+        // await Review.insertMany(reviews);
 
         for (let i = 0; i < insertedEvents.length; i++) {
             const event = insertedEvents[i];
-            let totalPrice = 0
-            let totalTime = 0
-            let totalRating = 0
-            const length = event.reviews.length
-            event.reviews.map(review => {
-                totalPrice += review.price
-                totalTime += review.time
-                totalRating += review.rating
-            });
+            const populated = await event.populate('reviews');
+            console.log("populated",populated )
+            event.updateAverages();
 
-            event.avgPrice = totalPrice / length
-            event.avgTime = totalTime / length
-            event.avgRating = totalRating / length
+            // let totalPrice = 0
+            // let totalTime = 0
+            // let totalRating = 0
+            // const length = event.reviews.length
+            // event.reviews.map(review => {
+            //     totalPrice += review.price
+            //     totalTime += review.time
+            //     totalRating += review.rating
+            // });
+
+            // event.avgPrice = totalPrice / length
+            // event.avgTime = totalTime / length
+            // event.avgRating = totalRating / length
             // event.updateAverages();
             await event.save();
         }

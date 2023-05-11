@@ -1,15 +1,13 @@
 import { closeItinerary } from '../NavBar/NavBar';
 import './Itinerary.css';
 import { IoCloseSharp } from 'react-icons/io5';
-import {useDrop} from 'react-dnd';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createAgenda } from '../../store/agendas';
 
 
 const Itinerary = () => {
     const events = useSelector((state) => state.events);
-    const [plannedEvents, setPlannedEvents] = useState([]);
     const [itinerary, setItinerary] = useState([]);
     const totalHours = itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0);
     const totalPrice = itinerary.reduce((acc, eventID) => acc + events[eventID].avgPrice, 0);
@@ -23,21 +21,18 @@ const Itinerary = () => {
     const handleDrop =(event) => {
         event.preventDefault();
 
-        event.preventDefault();
         const eventID = event.dataTransfer.getData("text");
         const updatedItinerary = [...itinerary, eventID];
-        const updatedTotalHours = updatedItinerary.reduce(
-            (acc, eventID) => acc + events[eventID].avgTime,
-            0
-        );
-        const updatedTotalPrice = updatedItinerary.reduce(
-            (acc, eventID) => acc + events[eventID].avgPrice,
-            0
-        );
-        if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
-            setItinerary(updatedItinerary);
-        } else {
-            alert("The event cannot be added to your itinerary.");
+        if (eventID){
+            const updatedTotalHours = updatedItinerary.reduce(
+            (acc, eventID) => acc + events[eventID].avgTime, 0);
+            const updatedTotalPrice = updatedItinerary.reduce(
+            (acc, eventID) => acc + events[eventID].avgPrice,0);
+            if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+                setItinerary(updatedItinerary);
+            } else {
+                alert("The event cannot be added to your itinerary.");
+            }
         }
     }
 
@@ -60,13 +55,11 @@ const Itinerary = () => {
         
     }
 
-    const removeEvent = (eventID) => {
-        const eventIndex = itinerary.findIndex((id) => id === eventID);
-        if (eventIndex !== -1) {
-            const updatedItinerary = [...itinerary];
-            updatedItinerary.splice(eventIndex, 1);
-            setItinerary(updatedItinerary);
-        }
+
+    const removeEvent = (idx) => {
+        const updatedItinerary = [...itinerary];
+        updatedItinerary.splice(idx, 1);
+        setItinerary(updatedItinerary);
     };
 
     return (
@@ -75,38 +68,36 @@ const Itinerary = () => {
             onDrop={event => handleDrop(event)}>
 
             <IoCloseSharp id='close-it' onClick={closeItinerary} />
-            <div className='welcome'>
-                Welcome
-            </div>
+
+            <h1 className='welcome'>
+                Welcome {user ? user.username : 'Guest'}
+            </h1>
             <div className='hours-input'>
-                <label>Hours Available: </label>
+                <label>Hours Available </label>
                 <input type='number' value={hoursAvailable} onChange={(e) => setHoursAvailable(e.target.value)} />
             </div>
             <div className='price-input'>
-                <label>Your Day's Budget: </label>
+                <label> Budget $ </label>
                 <input type='number' value={cost} onChange={(e) => setCost(e.target.value)} />
             </div>
             <div className='time-frame' >
                     {itinerary.map((eventID, idx) => (
-                        <div key={idx} className='itinerary-event' draggable>
+
+                        <div key={idx} className='itinerary-event'>
                             <div className="image-container">
                                 <img src={events[eventID].imageUrls[0] } className="image" />
                             </div>
-                            
-                            
-                            
-                            <span className="details">
+                            <span className="details"> 
                                 
-                                <IoCloseSharp className='remove-icon' onClick={() => removeEvent(eventID)} />
                                 <span className="title">{events[eventID].title}  </span>
                                 <span>  ${events[eventID].avgPrice.toFixed(2)}  </span>
                                 <span>  {events[eventID].avgTime.toFixed(2)} hrs</span>
                             </span>
-                            
+                            <IoCloseSharp className='remove-icon' onClick={() => removeEvent(idx)} />
                         </div>
                     ))}
             </div>
-            <div>
+            <div className='end-details'>
                 <div>
                     Total Events: {totalEvents}
                 </div>
