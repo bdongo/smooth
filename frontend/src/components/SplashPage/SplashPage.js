@@ -7,8 +7,6 @@ import 'swiper/css';
 import 'swiper/css/autoplay'
 import { FiChevronsDown } from 'react-icons/fi';
 import { useEffect } from 'react';
-import beach from '../../assets/beach.mp4';
-
 
 function SplashPage() {
 
@@ -21,7 +19,7 @@ function SplashPage() {
         <div id='all-scrolls'>
             <div className='video-container'>
                 <video autoPlay loop muted id='video'>
-                    <source src={beach} type='video/mp4'/>
+                    <source src='https://smooth-mern.s3.us-west-1.amazonaws.com/beach.mp4' type='video/mp4'/>
                 </video>
             </div>
             <div className="splash-page">

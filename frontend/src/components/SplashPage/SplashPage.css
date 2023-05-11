@@ -26,6 +26,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: url(../../assets/splashAlt.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 @keyframes fadeInNoFloat {
@@ -326,9 +329,4 @@
         display: none;
     }
 
-    .splash-page {
-        background: url(../../assets/splashAlt.jpg);
-        background-position: center;
-        background-size: cover;
-    }
 }
