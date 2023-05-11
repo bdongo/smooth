@@ -109,7 +109,7 @@ const Itinerary = () => {
                 </div>
             </div>
 
-            <button onClick={handleSubmit}>Save Itinerary</button>
+            <button onClick={handleSubmit} className='submit'>Save Itinerary</button>
 
 
         </div>
