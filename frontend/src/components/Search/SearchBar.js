@@ -13,9 +13,9 @@ const Search = () => {
   const [avgRating, setAvgRating] = useState('');
   const [avgPrice, setAvgPrice] = useState('');
   const [avgTime, setAvgTime] = useState('');
-  const [ratingError, setRatingError] = useState('Rating');
+  const [ratingError, setRatingError] = useState('');
   const [priceError, setPriceError] = useState('');
-  const [timeError, setTimeError] = useState('')
+  const [timeError, setTimeError] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   
