@@ -5,16 +5,28 @@ import feature2 from '../../assets/feature2.jpg';
 import feature3 from '../../assets/feature3.jpg';
 import feature4 from '../../assets/feature4.jpg';
 import feature5 from '../../assets/feature5.jpg';
+import Search from '../Search/SearchBar';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { useEffect } from 'react';
 
 
 function ExplorePage() {
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
     return (
+        <> 
         <div className="explore-page">
+            <div className='splash-1-overlay'></div>
+            <h2>What are you looking for?</h2>
             <div className='explore-page-header'>
-                <input type='text' placeholder='Search for experiences' />
+                <Search/>
                 <FaSearch id='search-icon'/>
             </div>
+        </div>
+        <div className='explore-2'>
             <div className='featured-experiences'>
                 <h2>Featured Experiences</h2>
                 <div className='featured-experiences-container'>
@@ -26,6 +38,8 @@ function ExplorePage() {
                 </div>
             </div>
         </div>
+
+        </>
     )
 }
 

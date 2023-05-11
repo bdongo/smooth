@@ -9,12 +9,12 @@
     height: 95vh;
     z-index: 1;
     width: 100vw;
-    background-color: rgb(0 0 0 / 70%);
+    background-color: rgb(0 0 0 / 65%);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    animation: fadeInNoFloat 1s ease-in-out;
+    /* animation: fadeInNoFloat 1s ease-in-out; */
 }
 
 .splash-page { 
@@ -84,7 +84,7 @@
     color: #FF5F1F !important;
     font-family: Nhaas65 !important;
     overflow: hidden !important;
-    text-align: center;
+    padding-right: 0.9em;
 }
 
 
@@ -199,8 +199,6 @@
     height: 100%;
     width: 100%;
     display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
     height: 100%;
 }
 
@@ -237,8 +235,6 @@
     border-radius: 2em;
     position: absolute;
     height: 4em;
-    /* top: 44%;
-    left: 31%; */
 }
 
 #fake-expenses p, 
@@ -291,6 +287,18 @@
     color: rgb(195, 177, 225)
 }
 
+#video {
+    width: 100vw;
+    height: 95vh;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
 @media all and (max-width: 950px) {
     .scroll-2-image, .scroll-3-image {
         display: none;
@@ -308,5 +316,14 @@
 
     .splash-1-text, #splash-1-text-swiper {
         font-size: 4em !important;
+    }
+
+    #splash-1-text-swiper {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    #video {
+        display: none;
     }
 }

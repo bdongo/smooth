@@ -29,7 +29,7 @@ function App() {
       <Route exact path="/" component={SplashPage} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
-      <Route exact path = "/search">
+      <Route path="/search">
         <SearchBar></SearchBar>
         <SearchResults></SearchResults>
       </Route>
