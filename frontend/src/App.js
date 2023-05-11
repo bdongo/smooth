@@ -30,7 +30,7 @@ function App() {
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
       <Route path="/search">
-        <SearchBar></SearchBar>
+        {/* <SearchBar></SearchBar> */}
         <SearchResults></SearchResults>
       </Route>
       <Route exact path="/explore" component={ExplorePage} />
