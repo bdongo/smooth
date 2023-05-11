@@ -15,7 +15,11 @@ const validateRegisterInput = [
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 8, max: 24 })
-        .withMessage('Password must be between 8 and 24 characters'),
+        .withMessage('Password must be between 8 and 24 characters')
+        .matches(/[!@#$%^&*(),.?":{}|<>]/)
+        .withMessage('Password must contain at least one special character')
+        .matches(/[A-Z]/)
+        .withMessage('Password must contain at least one capitalized letter'),
     handleValidationErrors
 ];
 
