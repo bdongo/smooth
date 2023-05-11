@@ -9,7 +9,6 @@ import { createAgenda } from '../../store/agendas';
 
 const Itinerary = () => {
     const events = useSelector((state) => state.events);
-    //const [plannedEvents, setPlannedEvents] = useState([]);
     const [itinerary, setItinerary] = useState([]);
     const totalHours = itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0);
     const totalPrice = itinerary.reduce((acc, eventID) => acc + events[eventID].avgPrice, 0);
@@ -70,15 +69,15 @@ const Itinerary = () => {
             onDrop={event => handleDrop(event)}>
 
             <IoCloseSharp id='close-it' onClick={closeItinerary} />
-            <div className='welcome'>
+            <h1 className='welcome'>
                 Welcome
-            </div>
+            </h1>
             <div className='hours-input'>
-                <label>Hours Available: </label>
+                <label>Hours Available </label>
                 <input type='number' value={hoursAvailable} onChange={(e) => setHoursAvailable(e.target.value)} />
             </div>
             <div className='price-input'>
-                <label>Your Day's Budget: </label>
+                <label> Budget $ </label>
                 <input type='number' value={cost} onChange={(e) => setCost(e.target.value)} />
             </div>
             <div className='time-frame' >
@@ -97,7 +96,7 @@ const Itinerary = () => {
                         </div>
                     ))}
             </div>
-            <div>
+            <div className='end-details'>
                 <div>
                     Total Events: {totalEvents}
                 </div>
