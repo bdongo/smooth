@@ -9,7 +9,7 @@ const User = mongoose.model('User');
 router.get('/', async (req, res) => {
     try {
         const { userId } = req.query
-        const agendas = await Agenda.find({user: userId}).populate('events');
+        const agendas = await Agenda.find({user: userId});
         return res.json(agendas);
     } catch (error) {
         console.error(error);
@@ -48,10 +48,10 @@ router.post('/', validateCreateAgenda, async (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        userToUpdate.agenda = newAgenda._id;
-        // await userToUpdate.populate('agenda');
+        userToUpdate.agendas.push(newAgenda._id);
         await userToUpdate.save();
 
+        // // Logic for how many itineraries event was added to
         // const eventToUpdate = await Event.findById(events);
 
         // if(!eventToUpdate) {
@@ -59,7 +59,6 @@ router.post('/', validateCreateAgenda, async (req, res) => {
         // }
 
         // eventToUpdate.agendas.push(newAgenda._id);
-        // await eventToUpdate.populate('agendas');
         // await eventToUpdate.save();
         
         const payload = {
@@ -79,10 +78,24 @@ router.delete('/:agendaId', async (req, res) => {
     const { agendaId } = req.params;
     try {
         // Find the agenda by ID and remove it
-        const agenda = await Agenda.findByIdAndRemove(agendaId);
+        const agenda = await Agenda.findById(agendaId);
         if (!agenda) {
             return res.status(404).json({ error: 'Agenda not found' });
         }
+
+        await Agenda.deleteOne({ _id: agendaId });
+
+        const userToUpdate = await User.findOneAndUpdate(
+            { agendas: agendaId },
+            { $pull: { agendas: agendaId }},
+            { new: true }
+        );
+
+        if(!userToUpdate){
+            return res.status(404).json({ error: 'User not found'})
+        };
+
+        await userToUpdate.save()
 
         return res.json({ message: 'Agenda removed successfully' });
     } catch (error) {
@@ -95,6 +108,6 @@ router.delete('/:agendaId', async (req, res) => {
 module.exports = router
 
 testAgenda = {
-    "user": "645c05ed8a4a9d541a0f4ed2",
-    "events": ["645af79634cd12e0ff7ad1c1", "645af79634cd12e0ff7ad1c2", "645af79634cd12e0ff7ad1c3"]
+    "user": "645d238fa6e27c34fd77c7c9",
+    "events": ["645d2393a6e27c34fd77c804", "645d2393a6e27c34fd77c805"]
 }

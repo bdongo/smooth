@@ -8,12 +8,15 @@ import Map from '../Map/Map'
 import RatingVisualizer from "../RatingVisualizer/RatingVisualizer";
 import PieChart from "../PieChart/PieChart";
 import PricingVisualizer from "../RatingVisualizer/PriceVisualizer";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { removeReview } from "../../store/reviews";
 
 const EventShow = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     // obj id of union sq 645a7bffc64b62d6212c51b5 
     const event = useSelector(getEvent(id))
+    const currentUser = useSelector((state) => state.session.user)
     const location = event?.location;
     const [map, setMap] = useState(null);
     // console.log(location)
@@ -27,11 +30,17 @@ const EventShow = () => {
     }, [dispatch, id])
 
 
+
     useEffect(() => {
         if (event) {
             document.title = `Smooth - ${event.title}`;
         }
     }, [event]);
+
+
+    const deleteReview = (reviewID) => {
+        dispatch(removeReview(reviewID))
+    }
 
     return (
         <div className="show-page">
@@ -93,10 +102,19 @@ const EventShow = () => {
                             Time: <PieChart value={review.time} />
                         </div>
                         </div>
+                        {currentUser && (currentUser._id === review.author) && (
+                            <button className="remove-icon" onClick={() => deleteReview(review._id)}>
+                                Remove Review
+                            </button>
+                        )}
+                        
                     </div>
+                    
                 ))}
             </div>
-           
+            <Link to={`/newReview?id=${id}`}>
+                Make a Review
+            </Link>
         </div>
     )
 }

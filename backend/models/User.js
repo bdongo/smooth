@@ -15,7 +15,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    agenda: [{type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'}],
+    agendas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Agenda'}],
     // events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     // agendas: [agendaSchema]
 }, {
