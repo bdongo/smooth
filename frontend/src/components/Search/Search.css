@@ -210,8 +210,10 @@ input::-webkit-inner-spin-button {
 }
 
 
-.error-handling {
-    font-style: italic;
+
+#advanced-search-inputs > #search-price-bar.error-handling {
+    background-color: yellow;
+    border: #FF5F1F 1px solid;
 }
 
 .search-results-header {

@@ -13,9 +13,9 @@ const Search = () => {
   const [avgRating, setAvgRating] = useState('');
   const [avgPrice, setAvgPrice] = useState('');
   const [avgTime, setAvgTime] = useState('');
-  const [ratingError, setRatingError] = useState('Rating');
+  const [ratingError, setRatingError] = useState('');
   const [priceError, setPriceError] = useState('');
-  const [timeError, setTimeError] = useState('')
+  const [timeError, setTimeError] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   
@@ -31,43 +31,44 @@ const Search = () => {
 
   useEffect(()=> {
     const priceBar = document.querySelector('#search-price-bar')
-    if(avgPrice > 100 || avgPrice < 1){
+    if(avgPrice > 100 || avgPrice < 1 && avgPrice !== ''){
       setPriceError('Price must be between $1 and $100')
-      priceBar.className = '.error-handling'
-      console.log(priceBar.className, 'error')
+      priceBar.style.border = 'solid'
+      priceBar.style.borderColor = 'red'
     } else {
-      setPriceError('Price')
-      priceBar.classList.remove('error-handling')
-      console.log(priceBar.className, 'error none')
+      setPriceError('')
+      priceBar.style.removeProperty('border')
     }
   }, [avgPrice])
 
   useEffect(()=> {
-    const ratingBar = document.querySelector('#search-rating-bar')
-    if(avgRating > 5 || avgRating < 1) {
+    const input = document.querySelector('#search-rating-bar')
+    if(avgRating > 5 || avgRating < 1 && avgRating !== '') {
       setRatingError('Rating must be between 1 and 5')
-      ratingBar.className = '.error-handling'
+      input.style.border = 'solid';
+      input.style.borderColor = 'red';
     } else {
-      setRatingError('Rating')
-      ratingBar.classList.remove('error-handling');
+      setRatingError('')
+      input.style.removeProperty('border')
     }
   }, [avgRating])
 
 
   useEffect(()=> {
-    const timeBar = document.querySelector('#search-time-bar')
-    if((avgTime > 4 || avgTime < 1) && timeError !== 'Time') {
+    const input = document.querySelector('#search-time-bar')
+    if(avgTime > 4 || avgTime < 1 && avgTime !== '') {
       setTimeError('Time must be between 1 and 4 hours')
-      timeBar.className = '.error-handling'
+      input.style.border = 'solid'
+      input.style.borderColor = 'red'
     } else {
-      setTimeError('Time')
-      timeBar.classList.remove('error-handling');
+      setTimeError('')
+      input.style.removeProperty('border')
     }
   }, [avgTime])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if(ratingError || priceError || timeError) return;
+    if(ratingError || priceError || timeError) return;
     const params = new URLSearchParams();
     if (avgRating) params.append('rating', avgRating);
     if (avgPrice) params.append('price', avgPrice);
@@ -102,7 +103,7 @@ const Search = () => {
       </form>
     <div className='advanced-search'>
       <div>ADVANCED SEARCH</div>
-      <form onSubmit={handleSubmit}>
+      <form id='advanced-search-inputs' onSubmit={handleSubmit}>
               <input
                 id='search-price-bar'
                 placeholder='Price'
