@@ -23,8 +23,7 @@ const EventShow = () => {
     }, [])
 
     useEffect(()=> {
-        // dispatch(fetchEvent(id))
-        dispatch(fetchEvents())
+        dispatch(fetchEvent(id))
     }, [dispatch, id])
 
 
