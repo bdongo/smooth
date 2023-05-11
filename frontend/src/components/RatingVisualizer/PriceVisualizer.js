@@ -16,19 +16,51 @@ const PricingVisualizer = ({ score }) => {
         "price-five-bar"
     ]
 
+    const fillArr = [
+        setFill1,
+        setFill2,
+        setFill3,
+        setFill4,
+        setFill5
+    ]
+
     useEffect(() => {
         const wholeNum = Math.floor(score / 20);
-        console.log(wholeNum)
         const leftOver = (score % 20) / 20;
         const width = leftOver * 60;
-        for (let i = 0; i < wholeNum -1; i++){
-            let currentElement = barArr[i]
+        for (let i = 0; i < wholeNum - 1; i++) {
+            let currentElement = barArr[i];
             document.getElementById(currentElement).style.width = `60px`;
+            fillArr[i]("pricing-bar-filled");
+
             if (leftOver !== 0) {
-                document.getElementById(barArr[i + 1]).style.width = `${width}px`;
+                let currentElement = document.getElementById(barArr[wholeNum - 1])
+                currentElement.style.width = `${width}px`;
             }
         }
+        if (wholeNum > 0) {
+            fillArr[wholeNum - 1]("pricing-bar-filled");
+        }
     }, [score]);
+
+
+
+    // useEffect(() => {
+    //     const wholeNum = Math.floor(score / 20);
+    //     const leftOver = (score % 20) / 20;
+    //     const width = leftOver * 60;
+    //     for (let i = 0; i < wholeNum; i++) {
+    //         let currentElement = barArr[i];
+    //         document.getElementById(currentElement).style.width = `60px`;
+    //         fillArr[i]("pricing-bar-filled");
+    //         if (leftOver !== 0 && i < wholeNum - 1) {
+    //             document.getElementById(barArr[i + 1]).style.width = `${width}px`;
+    //         }
+    //     }
+    //     if (wholeNum > 0) {
+    //         fillArr[wholeNum - 1]("pricing-bar-filled");
+    //     }
+    // }, [score]);
 
     return (
         <div className='pricingVisualizer-container'>
