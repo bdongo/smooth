@@ -36,8 +36,8 @@ const Search = () => {
       priceBar.style.border = 'solid'
       priceBar.style.borderColor = 'red'
     } else {
-      setPriceError('Price')
-      priceBar.style.border = 'none'
+      setPriceError('')
+      priceBar.style.removeProperty('border')
     }
   }, [avgPrice])
 
@@ -48,8 +48,8 @@ const Search = () => {
       input.style.border = 'solid';
       input.style.borderColor = 'red';
     } else {
-      setRatingError('Rating')
-      input.style.border = 'none';
+      setRatingError('')
+      input.style.removeProperty('border')
     }
   }, [avgRating])
 
@@ -61,14 +61,14 @@ const Search = () => {
       input.style.border = 'solid'
       input.style.borderColor = 'red'
     } else {
-      setTimeError('Time')
-      input.style.border = 'none';
+      setTimeError('')
+      input.style.removeProperty('border')
     }
   }, [avgTime])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if(ratingError || priceError || timeError) return;
+    if(ratingError || priceError || timeError) return;
     const params = new URLSearchParams();
     if (avgRating) params.append('rating', avgRating);
     if (avgPrice) params.append('price', avgPrice);
