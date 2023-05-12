@@ -12,7 +12,6 @@ const ReviewForm = () => {
     const [price, setPrice] = useState('');
     const [time, setTime] = useState('');
     const [text, setText] = useState('');
-    const [title, setTitle] = useState('');
     const currentUser = useSelector((state => state.session.user))
     const location = useLocation();
     const params = new URLSearchParams(location.search)
@@ -37,7 +36,6 @@ const ReviewForm = () => {
                 price: parseInt(price),
                 time: parseInt(time),
                 text,
-                title,
                 author: currentUser._id,
                 event: id
             }
@@ -55,34 +53,20 @@ const ReviewForm = () => {
     }
     return (
         <form onSubmit={handleSubmit} className='update-form'>
-            <label>
-                Rating:
-                <input type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
-            </label>
-            <label>
-                Price:
-                <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
-            </label>
-            <label>
-                Time:
-                <input type="text" value={time} onChange={(e) => setTime(e.target.value)} />
-            </label>
-            <label> Comment:
-                <textarea type="text" value={text} onChange={(e) => setText(e.target.value)} />
-            </label>
-            <label> Title:
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-            </label>
-            <button type="submit">
+            <div className = "form-details">
+                 <h2 className="headings">Write your review</h2>
+                <textarea className = "comments-box" type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                <h2 className="headings">How would you rate this experience?</h2>
+                <input className = "ratings-box" type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
+                <h2 className="headings">What was the estimated price for this experience?</h2>
+                <input className = "prices-box" type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+                <h2 className="headings">How much time (hours) did the experience take?</h2>
+                <input className ="time-box"type="text" value={time} onChange={(e) => setTime(e.target.value)} />
+                <br></br>
+                <button type="submit" className="button">
                 Update Review
-            </button>
-
-
-
-
-
-
-
+                </button>
+            </div>
         </form>
     )
 };
