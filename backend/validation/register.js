@@ -12,6 +12,9 @@ const validateRegisterInput = [
         .exists({ checkFalsy: true })
         .isLength({ min: 4, max: 24 })
         .withMessage('Username must be between 4 and 24 characters'),
+    check('username')
+        .matches(/^[a-zA-Z0-9]+$/)
+        .withMessage('Username must be alphanumeric'),
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 8, max: 24 })

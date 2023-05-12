@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
             ]
         }
 
-        const events = await Event.find(search);
+        const events = await Event.find(search).sort({ avgRating: -1 });
 
         const eventObj = {}
         events.forEach(event => eventObj[event._id] = event)
