@@ -32,11 +32,14 @@ const EventShow = () => {
     }, [deleteHelper])
 
     useEffect(() => {
-        event?.reviews?.forEach(review => {
+        if (currentUser){
+            event?.reviews?.forEach(review => {
                 if (review.author === currentUser._id ){
                     setShowCreateReview(false);
                 }
         })
+        }
+        
     }, [])
    
 
