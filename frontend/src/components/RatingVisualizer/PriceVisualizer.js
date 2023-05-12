@@ -2,11 +2,6 @@ import { useEffect, useState } from 'react';
 import './RatingVisualizer.css';
 
 const PricingVisualizer = ({ score }) => {
-    const [fill1, setFill1] = useState('pricing-bar')
-    const [fill2, setFill2] = useState('pricing-bar')
-    const [fill3, setFill3] = useState('pricing-bar')
-    const [fill4, setFill4] = useState('pricing-bar')
-    const [fill5, setFill5] = useState('pricing-bar')
     const [width1, setWidth1] = useState('0px')
     const [width2, setWidth2] = useState('0px')
     const [width3, setWidth3] = useState('0px')
@@ -37,23 +32,6 @@ const PricingVisualizer = ({ score }) => {
     }, [score, widthArr]);
 
 
-
-    // useEffect(() => {
-    //     const wholeNum = Math.floor(score / 20);
-    //     const leftOver = (score % 20) / 20;
-    //     const width = leftOver * 60;
-    //     for (let i = 0; i < wholeNum; i++) {
-    //         let currentElement = barArr[i];
-    //         document.getElementById(currentElement).style.width = `60px`;
-    //         fillArr[i]("pricing-bar-filled");
-    //         if (leftOver !== 0 && i < wholeNum - 1) {
-    //             document.getElementById(barArr[i + 1]).style.width = `${width}px`;
-    //         }
-    //     }
-    //     if (wholeNum > 0) {
-    //         fillArr[wholeNum - 1]("pricing-bar-filled");
-    //     }
-    // }, [score]);
 
     return (
         <div className='pricingVisualizer-container'>

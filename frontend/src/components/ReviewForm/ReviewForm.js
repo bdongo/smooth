@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReview, createReview } from '../../store/reviews';
 import './ReviewForm.css';
 import { Link } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { fetchEvent } from '../../store/event';
 const ReviewForm = () => {
     const dispatch = useDispatch();
     const [rating, setRating] = useState('');
@@ -18,34 +18,39 @@ const ReviewForm = () => {
     const id = params.get('id')
     const event = useSelector((state) => state.events[id])
 
-    console.log(currentUser);
-    console.log(id, "event id")
-    console.log(event, "event")
-    
+
+    useEffect(() => {
+        dispatch(fetchEvent(id))
+    },[])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentUser){
             
             if (!rating || !text || !time || !price ) {
                 alert("Please fill in all the fields")
+                return;
             }
 
             if (rating > 5 || rating < 1 ) {
                 alert("Please enter a rating between 1 & 5")
+                return;
             }
 
             if (price < 1 || price > 100) {
                 alert("Please enter a price between $1 & $100")
+                return;
             }
 
             if (text.length > 255 || text.length < 1) {
                 alert("Please ensure the review is less than 255 characters")
+                return;
             }
 
             if (time < 1 || time > 8) {
                 alert("Please enter the time between 1 and 8 hours")
+                return;
             }
-            console.log("submitted")
 
             const form = {
                 rating: parseInt(rating),
@@ -69,7 +74,7 @@ const ReviewForm = () => {
     }
     return (
         <form onSubmit={handleSubmit} className='create-form'>
-            {/* <img src={event?.imageUrls[0]}/> */}
+            
             <div className = "form-details">
                  <h2 className="headings">Write your review</h2>
                 <textarea className = "comments-box" type="text" value={text} onChange={(e) => setText(e.target.value)} />
@@ -84,6 +89,13 @@ const ReviewForm = () => {
                 Create Review
                 </button>
             </div>
+            <div className="right-side">
+                <h1 id="header">Tell us, how was your experience? </h1>
+                {event && <img src={event?.imageUrls[0]} alt="Event Image" id="image"/>}
+
+            </div>
+            
+
         </form>
     )
 };

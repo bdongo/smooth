@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editReview } from '../../store/reviews';
 import './UpdateForm.css';
 import { Link } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { fetchEvent } from '../../store/event';
 
 const ReviewForm = () => {
     const dispatch = useDispatch();
@@ -23,9 +24,9 @@ const ReviewForm = () => {
 
 
 
-    console.log(currentUser);
-    console.log(id, "event id")
-    console.log(reviewId, "reviewID")
+    useEffect(() => {
+        dispatch(fetchEvent(id))
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -66,6 +67,12 @@ const ReviewForm = () => {
                 <button type="submit" className="button">
                 Update Review
                 </button>
+            </div>
+
+            <div className="right-side">
+                <h1 id="header">Tell us, how was your experience? </h1>
+                {event && <img src={event?.imageUrls[0]} alt="Event Image" id="image" />}
+
             </div>
         </form>
     )

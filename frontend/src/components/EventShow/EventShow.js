@@ -15,29 +15,29 @@ import { AiFillStar } from 'react-icons/ai';
 const EventShow = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
-    // obj id of union sq 645a7bffc64b62d6212c51b5 
     const event = useSelector(getEvent(id))
     const currentUser = useSelector((state) => state.session.user)
     const location = event?.location;
     const [map, setMap] = useState(null);
     const history = useHistory();
     const [deleteHelper, setDeleteHelper] = useState(false);
-    // console.log(location)
     const reviews = event?.reviews;
 
-    console.log(currentUser._id)
-    console.log(event?.reviews)
+    // console.log(currentUser._id)
+    // console.log(event?.reviews)
 
-    const reviewAuthors = event?.reviews.map(review => review.author)
+    // const reviewAuthors = event?.reviews.map(review => review.author)
 
-    useEffect(()=> {
-        const createButton = document.querySelector('.create-btn')
-        if(reviewAuthors?.includes(currentUser?._id)) {
-            createButton.style.display = 'none'
-        } else {
-            createButton.style = ''
-        }
-    }, [event])
+    // useEffect(()=> {
+    //     const createButton = document.querySelector('.create-btn')
+    //     if(reviewAuthors?.includes(currentUser?._id)) {
+    //         createButton.style.display = 'none'
+    //     } else {
+    //         createButton.style = ''
+    //     }
+    // }, [event])
+
+    const [showCreateReview, setShowCreateReview] = useState(true)
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -47,7 +47,17 @@ const EventShow = () => {
          dispatch(fetchEvent(id))
     }, [deleteHelper])
 
-    
+    useEffect(() => {
+        if (currentUser){
+            event?.reviews?.forEach(review => {
+                if (review.author === currentUser._id ){
+                    setShowCreateReview(false);
+                }
+        })
+        }
+        
+    }, [])
+   
 
     useEffect(() => {
         if (event) {
@@ -111,11 +121,26 @@ const EventShow = () => {
                 <p className="show-page-text about">{event?.description}</p>
             </div>
                 
-
+            <Link to={`/newReview?id=${id}`} id="link">
+                {setShowCreateReview ? <span className="make-review"> Create Review </span> : null }
+            </Link>
             <div className="review-container">
                 {event?.reviews?.map((review, idx) => (
+                    <> 
+                    { currentUser && (currentUser._id === review.author) && (
+                        <div className="buttons">
+                            <button className="remove-review" onClick={() => deleteReview(review._id)}>
+                                Remove Review
+                            </button>
+                            <Link id="update" to={`/updateReview?id=${review._id}&eventid=${id}`}>
+                                Update Review
+                            </Link>
+                        </div>
+                    )}
                     <div key={idx} className="review show-page-text">
-                        <p className="show-page-text">{review.text}</p>
+                        <p className="show-page-text">{review.text}
+    
+                        </p>
                         <div>
                         <div className="sub-header">
                             Rating: <RatingVisualizer score={review.rating} />
@@ -127,26 +152,14 @@ const EventShow = () => {
                             Time: <PieChart value={review.time} />
                         </div>
                         </div>
-                        {currentUser && (currentUser._id === review.author) && (
-                            <div>
-                                <button className="remove" onClick={() => deleteReview(review._id)}>
-                                    Remove Review
-                                </button>
-                                <Link to={`/updateReview?id=${review._id}&eventid=${id}`}>
-                                    Update Review
-                                </Link>
-                            </div>
-                        )}
+                
                         
                     </div>
+                    </>
                     
                 ))}
             </div>
-            <div className="create-btn">
-                <Link to={`/newReview?id=${id}`}>
-                    Make a Review
-                </Link>
-            </div>
+            
         </div>
     )
 }

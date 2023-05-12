@@ -15,11 +15,9 @@ const SearchResults = ({itineraryOpen, openItinerary}) => {
     const events = useSelector(getEvents);
     const dispatch = useDispatch();
     const location = useLocation();
-    console.log(location);
 
     const params = new URLSearchParams(location.search)
     const query = params.get('query');
-    console.log(query);
     const price = params.get('price');
     const time = params.get('time');
     const rating = params.get('rating');
@@ -40,7 +38,6 @@ const SearchResults = ({itineraryOpen, openItinerary}) => {
 
     useEffect(() => {
         if (!query && !price && !time && !rating) return;
-        console.log('fetching events');
         dispatch(fetchEvents(rating, price, time, query));
     }, [query ,price, time, rating]);
 
@@ -48,7 +45,6 @@ const SearchResults = ({itineraryOpen, openItinerary}) => {
         e.stopPropagation();
         e.dataTransfer.setData('text/plain', eventId);
         openItinerary()
-        console.log('dragging', eventId);
     };
 
     return (
