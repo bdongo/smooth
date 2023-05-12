@@ -11,7 +11,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { MdLocationPin } from 'react-icons/md';
 
 
-const SearchResults = ({itineraryOpen}) => {
+const SearchResults = ({itineraryOpen, openItinerary}) => {
     const events = useSelector(getEvents);
     const dispatch = useDispatch();
     const location = useLocation();
@@ -48,6 +48,7 @@ const SearchResults = ({itineraryOpen}) => {
     const handleDragStart = (e, eventId) => {
         e.stopPropagation();
         e.dataTransfer.setData('text/plain', eventId);
+        openItinerary()
         console.log('dragging', eventId);
     };
 
