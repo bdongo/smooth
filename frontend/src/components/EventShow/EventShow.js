@@ -24,6 +24,21 @@ const EventShow = () => {
     const [deleteHelper, setDeleteHelper] = useState(false);
     // console.log(location)
     const reviews = event?.reviews;
+
+    console.log(currentUser._id)
+    console.log(event?.reviews)
+
+    const reviewAuthors = event?.reviews.map(review => review.author)
+
+    useEffect(()=> {
+        const createButton = document.querySelector('.create-btn')
+        if(reviewAuthors?.includes(currentUser?._id)) {
+            createButton.style.display = 'none'
+        } else {
+            createButton.style = ''
+        }
+    }, [event])
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [])
@@ -127,9 +142,11 @@ const EventShow = () => {
                     
                 ))}
             </div>
-            <Link to={`/newReview?id=${id}`}>
-                Make a Review
-            </Link>
+            <div className="create-btn">
+                <Link to={`/newReview?id=${id}`}>
+                    Make a Review
+                </Link>
+            </div>
         </div>
     )
 }
