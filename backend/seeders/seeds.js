@@ -396,7 +396,7 @@ const insertSeeds = async () => {
         for (let i = 0; i < insertedEvents.length; i++) {
             const event = insertedEvents[i];
             const populated = await event.populate('reviews');
-            console.log("populated",populated )
+            console.log("populated")
             event.updateAverages();
             await event.save();
         }
