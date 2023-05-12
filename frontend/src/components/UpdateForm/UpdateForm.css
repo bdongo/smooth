@@ -1,5 +1,7 @@
 .update-form{
     padding-top: 100px;
+    display: flex;
+    flex-direction: row;
 }
 
 .form-details {
@@ -67,3 +69,4 @@
 .time-box {
     border-color: #838383;
 }
+
