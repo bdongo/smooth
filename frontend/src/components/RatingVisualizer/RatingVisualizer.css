@@ -9,6 +9,8 @@
     border-radius: 20px;
     margin-right: 3px;
     overflow: hidden;
+    display: flex;
+
 }
 
 .rating-bar > div {
@@ -59,3 +61,8 @@
     border-radius: 3px;
     margin-right: 3px;
 }
+
+/* #card-star svg {
+    color: #FF5F1F;
+} */
+

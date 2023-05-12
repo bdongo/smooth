@@ -29,7 +29,6 @@ const SearchResults = ({itineraryOpen}) => {
         if (itineraryOpen) {
             searchResults.style.gridTemplateColumns = 'repeat(2, 1fr)';
             searchResults.style.width = "60%";
-
             searchResults.style.rowGap = '5vh';
 
         } else {

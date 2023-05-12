@@ -43,6 +43,10 @@
 
 }
 
+.rating svg {
+    color: #FF5F1F;
+}
+
 .show-page-img-container>img:first-child {
     border-radius: 10px 0 0 10px;
     margin-right: 10px;
