@@ -26,18 +26,18 @@ const EventShow = () => {
     // console.log(currentUser._id)
     // console.log(event?.reviews)
 
-    // const reviewAuthors = event?.reviews.map(review => review.author)
+    const reviewAuthors = event?.reviews.map(review => review.author)
 
-    // useEffect(()=> {
-    //     const createButton = document.querySelector('.create-btn')
-    //     if(reviewAuthors?.includes(currentUser?._id)) {
-    //         createButton.style.display = 'none'
-    //     } else {
-    //         createButton.style = ''
-    //     }
-    // }, [event])
+    useEffect(()=> {
+        const createButton = document.querySelector('#link')
+        if(!currentUser || reviewAuthors?.includes(currentUser?._id)) {
+            createButton.style.display = 'none'
+        } else {
+            createButton.style = ''
+        }
+    }, [event, currentUser])
 
-    const [showCreateReview, setShowCreateReview] = useState(true)
+    // const [showCreateReview, setShowCreateReview] = useState(true)
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -47,16 +47,16 @@ const EventShow = () => {
          dispatch(fetchEvent(id))
     }, [deleteHelper])
 
-    useEffect(() => {
-        if (currentUser){
-            event?.reviews?.forEach(review => {
-                if (review.author === currentUser._id ){
-                    setShowCreateReview(false);
-                }
-        })
-        }
+    // useEffect(() => {
+    //     if (currentUser){
+    //         event?.reviews?.forEach(review => {
+    //             if (review.author === currentUser._id ){
+    //                 setShowCreateReview(false);
+    //             }
+    //     })
+    //     }
         
-    }, [])
+    // }, [])
    
 
     useEffect(() => {
@@ -122,7 +122,7 @@ const EventShow = () => {
             </div>
                 
             <Link to={`/newReview?id=${id}`} id="link">
-                {setShowCreateReview ? <span className="make-review"> Create Review </span> : null }
+                <span className="make-review"> Create Review </span>
             </Link>
             <div className="review-container">
                 {event?.reviews?.map((review, idx) => (
