@@ -64,7 +64,7 @@ router.post('/', validateCreateAgenda, async (req, res) => {
         const payload = {
             agenda: newAgenda, 
             user: userToUpdate, 
-            event: eventToUpdate
+           // event: eventToUpdate
         };
 
         return res.status(201).json(payload);
