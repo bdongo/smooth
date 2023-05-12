@@ -90,45 +90,47 @@ const Search = () => {
 
     return (
       <>
-      <form onSubmit={handleSubmit}>
-        <input
-          id='search-bar'
-          type="text"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder='Search by location'
-        />
-          <FaSearch id='search-icon' />
-          <AiOutlinePlusCircle id='plus-icon' onClick={toggleAdvancedSearch}/>
-      </form>
-    <div className='advanced-search'>
-      <div>ADVANCED SEARCH</div>
-      <form id='advanced-search-inputs' onSubmit={handleSubmit}>
-              <input
-                id='search-price-bar'
-                placeholder='Price'
-                type="number"
-                value={avgPrice}
-                onChange={(event) => setAvgPrice(event.target.value)}
-              />
-              <input
-                id='search-rating-bar'
-                placeholder='Rating'
-                type="number"
-                value={avgRating}
-                onChange={(event) => setAvgRating(event.target.value)}
-              />
-              <input
-                id='search-time-bar'
-                placeholder='Time'
-                type="number"
-                value={avgTime}
-                onChange={(event) => setAvgTime(event.target.value)}
-              />
-            <div onClick={resetForm} id='reset-button'>RESET</div>
-            <button type="submit">Search</button>
-      </form>
+      <div className='search-container'>
+        <form onSubmit={handleSubmit}>
+          <input
+            id='search-bar'
+            type="text"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder='Search by location'
+          />
+            <FaSearch id='search-icon' />
+            <AiOutlinePlusCircle id='plus-icon' onClick={toggleAdvancedSearch}/>
+        </form>
+      <div className='advanced-search'>
+        <div>ADVANCED SEARCH</div>
+        <form id='advanced-search-inputs' onSubmit={handleSubmit}>
+                <input
+                  id='search-price-bar'
+                  placeholder='Price'
+                  type="number"
+                  value={avgPrice}
+                  onChange={(event) => setAvgPrice(event.target.value)}
+                />
+                <input
+                  id='search-rating-bar'
+                  placeholder='Rating'
+                  type="number"
+                  value={avgRating}
+                  onChange={(event) => setAvgRating(event.target.value)}
+                />
+                <input
+                  id='search-time-bar'
+                  placeholder='Time'
+                  type="number"
+                  value={avgTime}
+                  onChange={(event) => setAvgTime(event.target.value)}
+                />
+              <div onClick={resetForm} id='reset-button'>RESET</div>
+              <button type="submit">Search</button>
+        </form>
 
+      </div>
     </div>
     </>
     );
