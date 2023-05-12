@@ -7,41 +7,34 @@ const PricingVisualizer = ({ score }) => {
     const [fill3, setFill3] = useState('pricing-bar')
     const [fill4, setFill4] = useState('pricing-bar')
     const [fill5, setFill5] = useState('pricing-bar')
+    const [width1, setWidth1] = useState('0px')
+    const [width2, setWidth2] = useState('0px')
+    const [width3, setWidth3] = useState('0px')
+    const [width4, setWidth4] = useState('0px')
+    const [width5, setWidth5] = useState('0px')
 
-    const barArr = [
-        "price-one-bar",
-        "price-two-bar",
-        "price-three-bar",
-        "price-four-bar",
-        "price-five-bar"
+    const widthArr = [
+        setWidth1,
+        setWidth2,
+        setWidth3,
+        setWidth4,
+        setWidth5
     ]
 
-    const fillArr = [
-        setFill1,
-        setFill2,
-        setFill3,
-        setFill4,
-        setFill5
-    ]
 
     useEffect(() => {
         const wholeNum = Math.floor(score / 20);
         const leftOver = (score % 20) / 20;
         const width = leftOver * 60;
-        for (let i = 0; i < wholeNum - 1; i++) {
-            let currentElement = barArr[i];
-            document.getElementById(currentElement).style.width = `60px`;
-            fillArr[i]("pricing-bar-filled");
+        if (wholeNum >= 0) {
 
-            if (leftOver !== 0) {
-                let currentElement = document.getElementById(barArr[wholeNum - 1])
-                currentElement.style.width = `${width}px`;
-            }
+            widthArr[wholeNum](`${width}px`);
         }
-        if (wholeNum > 0) {
-            fillArr[wholeNum - 1]("pricing-bar-filled");
+        for (let i = 0; i <= wholeNum - 1; i++) {
+            let currentElement = widthArr[i];
+            currentElement(`60px`);
         }
-    }, [score]);
+    }, [score, widthArr]);
 
 
 
@@ -64,20 +57,20 @@ const PricingVisualizer = ({ score }) => {
 
     return (
         <div className='pricingVisualizer-container'>
-            <div className={fill1}>
-                <div id='price-one-bar'></div>
+            <div className='pricing-bar'>
+                <div id='price-one-bar' style={{ width: width1 }}></div>
             </div>
-            <div className={fill2}>
-                <div id='price-two-bar'></div>
+            <div className='pricing-bar'>
+                <div id='price-two-bar' style={{ width: width2 }}></div>
             </div>
-            <div className={fill3}>
-                <div id='price-three-bar'></div>
+            <div className='pricing-bar'>
+                <div id='price-three-bar' style={{ width: width3 }}></div>
             </div>
-            <div className={fill4}>
-                <div id='price-four-bar'></div>
+            <div className='pricing-bar'>
+                <div id='price-four-bar' style={{ width: width4 }}></div>
             </div>
-            <div className={fill5}>
-                <div id='price-five-bar' ></div>
+            <div className='pricing-bar'>
+                <div id='price-five-bar' style={{ width: width5 }}></div>
             </div>
 
         </div>
