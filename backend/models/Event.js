@@ -127,30 +127,6 @@ module.exports = mongoose.model('Event', eventSchema);
 
 const Event = mongoose.model('Event', eventSchema);
 
-// Event.find()
-//     .then((events) => {
-//         events.forEach((event) => {
-//             event.updateAverages();
-//             event.save();
-//         });
-//         // console.log(events);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//     });
-
-// Event.find()
-//     .populate('reviews')
-//     .then((events) => {
-//         events.forEach((event) => {
-//             event.updateAverages();
-//             event.save();
-//         });
-//         // console.log(events);
-//     })
-//     .catch((err) => {
-//         console.error(err);
-//     });
 
 test = {
     "author": "645a7bf9c64b62d6212c5179",

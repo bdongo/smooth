@@ -24,13 +24,11 @@ function App() {
     const itinerary = document.querySelector('.itinerary');
     itinerary.style.translate = '0%';
     setItineraryOpen(true);
-    console.log(itineraryOpen, "in open")
   }
 
   const closeItinerary = () => {
     const itinerary = document.querySelector('.itinerary');
     itinerary.style.translate = '100%';
-    console.log(itineraryOpen, "in close")
     setItineraryOpen(false);
   }
 

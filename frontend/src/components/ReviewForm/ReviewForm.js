@@ -51,7 +51,6 @@ const ReviewForm = () => {
                 alert("Please enter the time between 1 and 8 hours")
                 return;
             }
-            console.log("submitted")
 
             const form = {
                 rating: parseInt(rating),
