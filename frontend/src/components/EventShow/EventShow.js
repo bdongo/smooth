@@ -10,6 +10,7 @@ import PieChart from "../PieChart/PieChart";
 import PricingVisualizer from "../RatingVisualizer/PriceVisualizer";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { removeReview } from "../../store/reviews";
+import { AiFillStar } from 'react-icons/ai';
 
 const EventShow = () => {
     const dispatch = useDispatch();
@@ -69,7 +70,7 @@ const EventShow = () => {
                     </div>
                     <div>
                         <div className="rating">
-                            <p className="sub-header">Average rating: {event?.avgRating.toFixed(1)}</p>
+                            <p className="sub-header">Average rating: {event?.avgRating.toFixed(1)} <AiFillStar /></p>
                             <RatingVisualizer score={event?.avgRating} />
                         </div>
 

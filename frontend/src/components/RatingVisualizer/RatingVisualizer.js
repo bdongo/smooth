@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './RatingVisualizer.css';
+import { AiFillStar } from 'react-icons/ai';
 
 const RatingVisualizer = ({score}) => {
     const [fill1, setFill1] = useState('rating-bar')
@@ -49,6 +50,7 @@ const RatingVisualizer = ({score}) => {
     return (
         <div className='ratingVisualizer-container'>
             <div className={fill1}>
+               
                 <div id='one-bar'></div>
             </div>
             <div className={fill2}>
