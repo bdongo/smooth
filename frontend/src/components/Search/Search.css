@@ -221,7 +221,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     height: 20vh;
     justify-content: center;
-    background: url(http://localhost:3000/static/media/search.00b6bc3fc1b478ca878d.jpg);
+    background: url(../../assets/search.jpg);
     background-size: cover;
     background-position-y: 24%;
 }

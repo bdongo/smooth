@@ -5,30 +5,68 @@
     font-family: T-Star Bold;
 }
 .time-frame {
-    height: 70%;
+    height: 60%;
     width: 70%;
-    background-color: grey;
+    background-color: rgb(128 128 128 / 15%);
     border-radius: 5px;
     overflow-y: auto;
-    /* Enable vertical scrolling */
     padding: 1em;
-    /* Add padding for better spacing */
 }
+
 .itinerary-event {
     display: flex;
     align-items: center;
-    margin-top: 1.5em;
+    background: white;
+    border-radius: 2em;
     margin-bottom: 1.5em;
+    /* padding-top: 0.03em; */
     margin-left: 2%;
     margin-right: 2%;
+    height: 6.99em;
     justify-content: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.307);
+}
 
+.submit {
+    font-family: Nhaas65;
+    background-color: black;
+    height: 3em;
+    border: none;
+    color: white;
+    transition: 0.5s;
+    text-align: center;
+    letter-spacing: 0.03em;
+    border-radius: 5vw;
+    font-size: 1em;
+    padding: 1.5vh 2vw;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: #FF5F1F;
+    /* color: black; */
+}
+
+#it-background {
+    display: none;
+    position: absolute;
+}
+
+.itinerary-event:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.375);
+    transform: translate(3px, -3px);
+    cursor: pointer;
+}
+
+.image-container {
+    height: 100%;
 }
 
 .title {
   font-weight: bold;
   margin-bottom: 0.5em;
-  max-width: 50%;
+  max-width: 100%;
   font-family: 'NHaas65';
 }
 
@@ -40,63 +78,150 @@
   font-family: 'NHaas55';
 }
 
+.details span {
+    margin-bottom: 0.5em;
+}
+
 .image {
-  width: 8vw;
-  height: 10vh;
-  margin-left: 0.5em;
-  border-radius: 10px;
+    width: 8vw;
+    height: 7em;
+    border-top-left-radius: 1.5em;
+    border-bottom-left-radius: 1.5em;
+    object-fit: cover;
 }
 
 .remove-icon {
     cursor: pointer;
     margin-left: auto;
     font-size: 1.2em;
+    translate: -0.3em -2em;
     transition: color 0.3s;
     min-width: 1.5em;
+    text-align: -webkit-auto;
 }
 
 .remove-icon:hover {
     color: red;
 }
 
-.submit{
-    color: var(--off-black);
-        
-        background-color: #ffffff;
-        border: 2px solid #000000;
-        transition: 0.5s;
-        text-align: center;
-        letter-spacing: 0.03em;
-        border-radius: 6px;
-        font-size: 1em;
-        padding: 1.5vh 5vw;
-        margin-bottom: 2em;
-    
-        &:hover {
-            cursor: pointer;
-            background-color: rgb(0, 0, 0);
-            color: var(--off-black);
-            border-color: #000000;
-            transform: scale(1.1);
-            color:#ffffff
-        }
-}
 
 .welcome{
     font-family: 'NHaas65';
     font-size: x-large;
 }
 
-.hours-input, .price-input{
-    font-family: 'NHaas55';
-    font-size: small;
+.hours-input input, .price-input input{
+    font-family: Nhaas65;
+    background-color: lightgrey;
+    height: 2em;
+    border: none;
+    color: black;
+    transition: 0.5s;
+    text-indent: 1em;
+    width: 10em;
+    letter-spacing: 0.03em;
+    border-radius: 3vw;
+    font-size: 1em;
 }
 
 .end-details{
     font-family: 'NHaas65';
 }
 
+.end-details div {
+    margin-bottom: 0.3em;
+    flex-wrap: nowrap;
+    display: flex;
+}
+
+.end-details div p {
+    margin-left: 0.5em;
+    color: #FF5F1F;
+}
+
 .instruction-message{
     font-family: 'NHaas55';
+    color: rgb(128 128 128 / 70%);
+}
 
+#it-header {
+    position: absolute;
+    top: 4%;
+    font-size: 2em;
+    padding-bottom: 0.2em;
+    width: 68%;
+    text-align: center;
+    font-family: 'NHaas65';
+}
+
+.please-log-in {
+    height: 80%;
+}
+
+.please-log-in div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.please-log-in img{
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+#please-log-in-button {
+    font-size: 1.8em;
+}
+
+#altlogo {
+    scale: 0.7;
+}
+
+#it-settings {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    padding-top: 1em;
+}
+
+.price-input input:before {
+    content: "$";
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.it-end {
+    display: flex;
+    width: 75%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hours-input p, .price-input p {
+    font-family: 'NHaas65';
+    margin-bottom: 0.5em;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#drop-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 4em;
+    color: rgb(128 128 128 / 70%);
+}
+
+@keyframes logoFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(12px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }

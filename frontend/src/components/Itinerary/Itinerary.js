@@ -4,6 +4,9 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createAgenda } from '../../store/agendas';
+import altlogo from '../../assets/altlogo.jpg';
+import { Link } from 'react-router-dom';
+import { BsPlusSquareDotted } from 'react-icons/bs';
 
 
 const Itinerary = ({closeItinerary}) => {
@@ -42,7 +45,7 @@ const Itinerary = ({closeItinerary}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (user){
+        if (user && itinerary.length > 0){
            const agenda = {
                 user: user,
                 events: itinerary
@@ -51,7 +54,7 @@ const Itinerary = ({closeItinerary}) => {
             alert("Your itinerary has been saved!")
         }
         else {
-            alert("Please log in to save your itinerary");
+            alert("No itinerary to save!");
         }
         
     }
@@ -69,21 +72,30 @@ const Itinerary = ({closeItinerary}) => {
             onDrop={event => handleDrop(event)}>
 
             <IoCloseSharp id='close-it' onClick={closeItinerary} />
-
-            <h1 className='welcome'>
-                Welcome {user ? user.username : 'Guest'}
-            </h1>
-            <div className='hours-input'>
-                <label>Hours Available </label>
-                <input type='number' value={hoursAvailable} onChange={(e) => setHoursAvailable(e.target.value)} />
-            </div>
-            <div className='price-input'>
-                <label> Budget $ </label>
-                <input type='number' value={cost} onChange={(e) => setCost(e.target.value)} />
-            </div>
+            <div id='id-background' />
+            <h2 id='it-header'>ITINERARY</h2>
+        { user ? 
+            <>
+            <div id='it-settings'> 
+                <div className='hours-input'>
+                    <p>Hours Available</p>
+                    <input type='number' 
+                        value={hoursAvailable} 
+                        onChange={(e) => setHoursAvailable(e.target.value)} 
+                        placeholder='Hours Available'/>
+                </div>
+                <div className='price-input'>
+                    <p>Budget</p>
+                    <input type='number' 
+                        value={cost} 
+                        onChange={(e) => setCost(e.target.value)} 
+                        placeholder='Budget'/>
+                </div>
+            </div>   
             <div className='time-frame' >
                 <div className="instruction-message">
                    {itinerary.length === 0 && (
+                    <>
                     <p>
                         1. Search for events to add to your itinerary 
                         <br />
@@ -91,11 +103,13 @@ const Itinerary = ({closeItinerary}) => {
                         2. Set your time frame and budget
                         <br />
                         <br />
-                        3. Drag and Drop here
+                        3. Drag and drop here
                         <br />
                         <br />
                         4. Save when you're done!
                     </p>
+                    <BsPlusSquareDotted id='drop-icon'/>
+                    </>
                 )} 
                 </div>
                 
@@ -115,21 +129,32 @@ const Itinerary = ({closeItinerary}) => {
                         </div>
                     ))}
             </div>
-            <div className='end-details'>
-                <div>
-                    Total Events: {totalEvents}
+            <div className='it-end'>
+                <div className='end-details'>
+                    <div>
+                        Total Events: <p>{totalEvents}</p>
+                    </div>
+                    <div>
+                        Total Price: <p>${totalPrice.toFixed(2)} </p>
+                    </div>
+                    <div>
+                        Total Hours: <p>{totalHours.toFixed(2)} </p>
+                    </div>
                 </div>
-                <div>
-                    Total Price: ${totalPrice.toFixed(2)}
-                </div>
-                <div>
-                    Total Hours: {totalHours.toFixed(2)}
-                </div>
+
+                <button onClick={handleSubmit} className='submit'>Save Itinerary</button>
             </div>
-
-            <button onClick={handleSubmit} className='submit'>Save Itinerary</button>
-
-
+            </>
+            : 
+            <> 
+                <div className="please-log-in">
+                    <div>
+                        <img src={altlogo} alt='altlogo' id='altlogo'/>
+                        <Link to='/login' id='please-log-in-button' onClick={closeItinerary}>LOG IN TO PLAN</Link>
+                    </div>
+                </div>
+            </>
+        }
         </div>
     )
 
