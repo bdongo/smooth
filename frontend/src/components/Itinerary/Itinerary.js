@@ -12,9 +12,12 @@ import { BsPlusSquareDotted } from 'react-icons/bs';
 const Itinerary = ({closeItinerary}) => {
     const events = useSelector((state) => state.events);
     const [itinerary, setItinerary] = useState([]);
-    const totalHours = itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0);
-    const totalPrice = itinerary.reduce((acc, eventID) => acc + events[eventID].avgPrice, 0);
+    
+    const totalHours = itinerary.length > 0 ? itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0) : 0;
+    const totalPrice = itinerary.length > 0 ? itinerary.reduce((acc, eventID) => acc + events[eventID].avgPrice, 0) : 0;
     const totalEvents = itinerary.length;
+   
+
     const dispatch = useDispatch();
     const [hoursAvailable, setHoursAvailable] = useState(8);
     const [cost, setCost] = useState(100);
