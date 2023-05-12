@@ -49,7 +49,7 @@ function App() {
       <AuthRoute exact path="/signup" component={SignupForm} />
       <Route path="/search">
         {/* <SearchBar></SearchBar> */}
-          <SearchResults itineraryOpen={itineraryOpen}  />
+          <SearchResults itineraryOpen={itineraryOpen} openItinerary={openItinerary} />
       </Route>
       <Route exact path="/explore" >
         <ExplorePage />
