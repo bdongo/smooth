@@ -15,6 +15,7 @@ const ReviewForm = () => {
     const [priceError, setPriceError] = useState('');
     const [timeError, setTimeError] = useState('');
     const [textError, setTextError] = useState('');
+    const [textBoxError, setTextBoxError] = useState('');
     const [flashMessage, setFlashMessage] = useState('');
     const currentUser = useSelector((state) => state.session.user);
     const location = useLocation();
@@ -25,7 +26,11 @@ const ReviewForm = () => {
 
     useEffect(() => {
         dispatch(fetchEvent(id));
+        
     }, []);
+
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,7 +57,7 @@ const ReviewForm = () => {
             }
 
             if (text.length > 255 || text.length < 1) {
-                setTextError('Please ensure the review is less than 255 characters');
+                setTextBoxError('Please ensure the review is less than 255 characters');
                 return;
             } else {
                 setTextError('');
@@ -77,6 +82,7 @@ const ReviewForm = () => {
             setPrice('');
             setRating('');
             setTime('');
+            setText('');
             setFlashMessage('Review created successfully!');
             setTimeout(() => {
                 setFlashMessage('');
@@ -95,6 +101,7 @@ const ReviewForm = () => {
             <div className = "form-details">
                  <h2 className="headings">Write your review</h2>
                 <textarea className = "comments-box" type="text" value={text} onChange={(e) => setText(e.target.value)} />
+                {textBoxError && <div className='error'>{textBoxError}</div>}
                 <h2 className="headings">How would you rate this experience?</h2>
                 <div className="star-rating">
                     <input className="star" type="radio" id="star5" name="rating" value="5" onChange={(e) => setRating(e.target.value)} />
