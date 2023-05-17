@@ -1,0 +1,10 @@
+.profile-container {
+    font-family: NHaas65;
+    margin-top: 6em;
+    width: 100vw;
+   position: absolute;
+}
+
+.profile-container h1 {
+    font-size: 30px;
+}
