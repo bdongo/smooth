@@ -17,7 +17,7 @@ const { isProduction } = require('../../config/keys');
 
 // router.get('/current', (req, res) => res.send("Hello User")); /api/users/current
 
-router.get('/current', restoreUser, (req, res) => {
+router.get('/current', restoreUser, async (req, res) => {
   if (!isProduction) {
     // In development, allow React server to gain access to the CSRF token
     // whenever the current user information is first loaded into the
@@ -26,10 +26,12 @@ router.get('/current', restoreUser, (req, res) => {
     res.cookie("CSRF-TOKEN", csrfToken);
   }
   if (!req.user) return res.json(null);
+  await req.user.populate('agendas')
   res.json({
     _id: req.user._id,
     username: req.user.username,
-    email: req.user.email
+    email: req.user.email,
+    agendas: req.user.agendas
   });
 })
 

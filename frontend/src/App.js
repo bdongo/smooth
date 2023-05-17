@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import SearchBar from './components/Search/SearchBar';
 import SearchResults from './components/Search/SearchResults';
+import ProfilePage from './components/ProfilePage/ProfilePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -45,6 +46,7 @@ function App() {
         <Route path='/updateReview' component={UpdateForm} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
+      <Route exact path="/profile" component={ProfilePage} />
       <Route path="/search">
         {/* <SearchBar></SearchBar> */}
           <SearchResults itineraryOpen={itineraryOpen} openItinerary={openItinerary} />
