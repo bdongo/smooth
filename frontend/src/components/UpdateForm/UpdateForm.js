@@ -9,17 +9,19 @@ import { fetchEvent } from '../../store/event';
 const ReviewForm = () => {
     const dispatch = useDispatch();
 
-    const [rating, setRating] = useState('');
-    const [price, setPrice] = useState('');
-    const [time, setTime] = useState('');
-    const [text, setText] = useState('');
-    const currentUser = useSelector((state => state.session.user))
     const location = useLocation();
     const params = new URLSearchParams(location.search)
     const history = useHistory();
     const id = params.get('eventid')
     const reviewId = params.get('id')
-    
+
+    const [rating, setRating] = useState('');
+    const [price, setPrice] = useState('');
+    const [time, setTime] = useState('');
+    const [text, setText] = useState('');
+
+
+    const currentUser = useSelector((state => state.session.user))
     const event = useSelector((state) => state.events[id])
 
 

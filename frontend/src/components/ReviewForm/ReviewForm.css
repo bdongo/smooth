@@ -97,3 +97,13 @@
     margin-left: 10%;
     margin-top: 5%;
 }
+
+.error {
+    color: red;
+    font-family: Nhaas55;
+}
+
+.flash-message{
+    color: green;
+    font-family: Nhaas55;
+}
