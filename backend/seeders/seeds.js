@@ -3,6 +3,7 @@ const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Event = require('../models/Event');
 const Review = require('../models/Review.js')
+const Agenda = require('../models/Agenda')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 // const Event = mongoose.model('Event');
@@ -339,6 +340,7 @@ const insertSeeds = async () => {
 
     try {
         // drop collections to start fresh
+        await Agenda.collection.drop();
         await User.collection.drop();
         await Review.collection.drop();
         await Event.collection.drop();
