@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 const Schema = mongoose.Schema;
 const eventSchema = require('./Event').schema
 
@@ -9,10 +10,22 @@ const agendaSchema = new Schema({
     },
     events: [{
         type: Schema.Types.ObjectId,
-        ref: 'Event'
-    }]
+        ref: 'Event',
+    }],
+    saved: {
+        type: Boolean,
+        default: false
+    },
 }, {
     timestamps: true
 });
 
+agendaSchema.set('toObject', { default: true }, { default: [] });
+agendaSchema.set('toJSON', { default: true }, { default: [] });
+
 module.exports = mongoose.model('Agenda', agendaSchema)
+
+testagenda = {
+    user: "645e55526ec97b3e427620f2",
+    events: [],
+}
