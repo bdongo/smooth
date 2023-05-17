@@ -21,7 +21,10 @@ router.get('/', async (req, res) => {
 router.get('/unsaved', async (req, res) => {
     try {
         const { userId } = req.query
-        const agenda = await Agenda.find({user: userId, saved: false});
+        const agenda = await Agenda.find({user: userId, saved: false}).populate('events');
+        if(!agenda) {
+            return res.status(404).json({ error: 'No Agenda Found'})
+        };
         return res.json(agenda);
     } catch (error) {
         console.error(error);
@@ -45,11 +48,13 @@ router.get('/:agendaId', async(req, res) => {
 
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
-        const { user, events } = req.body;
+        const { user } = req.body;
+        
+        // const existingAgenda = Agenda.find({ user: user, saved: false})
+        // if(existingAgenda) return res.status(404).json({ error: 'Pending itinerary already exists'})
 
         const newAgenda = new Agenda({
             user,
-            events
         });
 
         await newAgenda.save();
@@ -86,16 +91,16 @@ router.post('/', validateCreateAgenda, async (req, res) => {
     }
 });
 
-router.put('/:agendaId', validateCreateAgenda, async (req, res) => {
+router.put('/:agendaId', async (req, res) => {
     const { agendaId } = req.params;
     try {
         const agenda = await Agenda.findById(agendaId);
         if(!agenda) {
             return res.status(404).json({ error: 'Agenda not found'})
         }
-        const { event, saved } = req.body;
-        agenda.event = event;
-        agenda.saved = saved;
+        const { events, saved } = req.body;
+        agenda.events = events || agenda.events
+        agenda.saved = saved || false
         await agenda.save();
 
         return res.json(agenda);
@@ -104,6 +109,23 @@ router.put('/:agendaId', validateCreateAgenda, async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// router.put('/saved/:agendaId', validateCreateAgenda, async (req, res) => {
+//     const { agendaId } = req.params;
+//     try {
+//         const agenda = await Agenda.findById(agendaId);
+//         if(!agenda) {
+//             return res.status(404).json({ error: 'Agenda not found'})
+//         }
+//         agenda.saved = true;
+//         await agenda.save();
+
+//         return res.json(agenda);
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 router.delete('/:agendaId', async (req, res) => {
     const { agendaId } = req.params;
