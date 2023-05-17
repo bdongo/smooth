@@ -4,13 +4,25 @@ const mongoose = require('mongoose');
 const Agenda = mongoose.model('Agenda');
 const { requireUser } = require('../../config/passport');
 const validateCreateAgenda = require('../../validation/agenda');
+const Review = require("../../models/Review");
 const User = mongoose.model('User');
 
 router.get('/', async (req, res) => {
     try {
         const { userId } = req.query
-        const agendas = await Agenda.find({user: userId});
+        const agendas = await Agenda.find({ user: userId});
         return res.json(agendas);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/unsaved', async (req, res) => {
+    try {
+        const { userId } = req.query
+        const agenda = await Agenda.find({user: userId, saved: false});
+        return res.json(agenda);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -68,6 +80,25 @@ router.post('/', validateCreateAgenda, async (req, res) => {
         };
 
         return res.status(201).json(payload);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.put('/:agendaId', validateCreateAgenda, async (req, res) => {
+    const { agendaId } = req.params;
+    try {
+        const agenda = await Agenda.findById(agendaId);
+        if(!agenda) {
+            return res.status(404).json({ error: 'Agenda not found'})
+        }
+        const { event, saved } = req.body;
+        agenda.event = event;
+        agenda.saved = saved;
+        await agenda.save();
+
+        return res.json(agenda);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

@@ -10,9 +10,18 @@ const agendaSchema = new Schema({
     events: [{
         type: Schema.Types.ObjectId,
         ref: 'Event'
-    }]
+    }],
+    saved: {
+        type: Boolean,
+        default: false
+    },
 }, {
     timestamps: true
 });
 
 module.exports = mongoose.model('Agenda', agendaSchema)
+
+testagenda = {
+    user: "645e55526ec97b3e427620f2",
+    events: [],
+}
