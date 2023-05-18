@@ -9,11 +9,20 @@ import LoginForm from "../SessionForms/LoginForm";
 const ProfilePage = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session?.user)
-    const agendas = useSelector(getAgendas)
+    const agendas = useSelector(getAgendas);
 
     useEffect(() => {
         dispatch(fetchAgendas(currentUser?._id))
     }, [dispatch, currentUser])
+
+
+    useEffect(() => {
+        if (currentUser) {
+            document.title = `Smooth - Profile`;
+        }
+    }, [currentUser]);
+
+    useEffect(() => () => document.title = `Smooth`, []);
 
     if (!currentUser) {
         return (
@@ -43,13 +52,13 @@ const ProfilePage = () => {
                         <SavedItinerary key={idx} itinerary={agenda}/>
                         <div className='itinerary-calc'>
                             <div>
-                                Total Events: <p>{totalEvents(agenda)}</p>
+                                <p>Total Events: {totalEvents(agenda)}</p>
                             </div>
                             <div>
-                                Total Price: <p>${totalPrice(agenda).toFixed(2)} </p>
+                                <p>Total Price: ${totalPrice(agenda).toFixed(2)} </p>
                             </div>
                             <div>
-                                Total Hours: <p>{totalHours(agenda).toFixed(2)} </p>
+                                <p>Total Hours: {totalHours(agenda).toFixed(2)} </p>
                             </div>
                         </div>
                     </div>
