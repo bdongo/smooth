@@ -13,7 +13,6 @@ import { useEffect } from 'react';
 const Itinerary = ({closeItinerary}) => {
     const events = useSelector((state) => state.events);
     const [itinerary, setItinerary] = useState([]);
-    const [scratchAgenda, setScratchAgenda] = useState([])
     const [toggle, setToggle] = useState(false)
     
     const totalHours = itinerary.length > 0 ? itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0) : 0;
@@ -30,8 +29,9 @@ const Itinerary = ({closeItinerary}) => {
 
     useEffect(()=> {
         dispatch(fetchLiveAgenda(user?._id))
-        setScratchAgenda(agenda?.events)
-    }, [user, agenda?._id, toggle])
+        console.log(agenda)
+        // setScratchAgenda(agenda?.events)
+    }, [dispatch, toggle])
 
     // const handleDrop =(event) => {
     //     event.preventDefault();
@@ -55,10 +55,11 @@ const Itinerary = ({closeItinerary}) => {
         e.preventDefault();
 
         const eventID = e.dataTransfer.getData("text");
-        const newAgenda = [...scratchAgenda, eventID]
-        console.log(newAgenda)
+        const newAgenda = [...agenda?.events, eventID]
+        // console.log(newAgenda)
         dispatch(editAgenda(agenda, newAgenda))
         setToggle(!toggle)
+        // console.log(toggle, 'toggle')
     }
 
     const handleDragOver = (e) => {
@@ -87,7 +88,7 @@ const Itinerary = ({closeItinerary}) => {
             dispatch(saveAgenda(agenda))
             setTimeout(()=> {
                 dispatch(createAgenda(user?._id))
-                console.log('creation done')
+                setToggle(!toggle)
             }, 1000)
         };
     };

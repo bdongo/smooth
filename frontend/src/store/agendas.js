@@ -3,16 +3,16 @@ import jwtFetch from "./jwt";
 export const RECEIVE_AGENDAS = 'agendas/RECEIVE_AGENDAS';
 export const RECEIVE_AGENDA = 'agendas/RECEIVE_AGENDA';
 export const REMOVE_AGENDA = 'agendas/REMOVE_AGENDA';
-export const RECEIVE_LIVE_AGENDA = 'agendas/RECEIVE_LIVE_AGENDA'
+export const UPDATE_AGENDA = 'agendas/UPDATE_AGENDA';
 
 const receiveAgendas = agendas => ({
     type: RECEIVE_AGENDAS,
     agendas
 });
 
-const receiveLiveAgenda = agenda => ({
-    type: RECEIVE_LIVE_AGENDA,
-    agenda
+const updateAgenda = newAgenda => ({
+    type: UPDATE_AGENDA,
+    payload: newAgenda
 })
 
 const receiveAgenda = agenda => ({
@@ -87,19 +87,19 @@ export const createAgenda = (user) => async(dispatch) => {
     };
 };
 
-export const editAgenda = (agenda, events) => async (dispatch) => {
+export const editAgenda = (agenda, newAgenda) => async (dispatch) => {
     const res = await jwtFetch(`/api/agendas/${agenda._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            events: events
+            events: newAgenda
         })
     });
     if(res.ok){
-        const agenda = await res.json();
-        dispatch(receiveAgenda(agenda))
+        const newAgenda = await res.json();
+        dispatch(updateAgenda(newAgenda))
     };
 };
 
@@ -114,8 +114,8 @@ export const saveAgenda = (agenda) => async (dispatch) => {
         })
     });
     if(res.ok){
-        const agenda = await res.json();
-        dispatch(receiveAgenda(agenda))
+        const newAgenda = await res.json();
+        dispatch(receiveAgenda(newAgenda))
     };
 };
 
@@ -132,8 +132,8 @@ const agendasReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_AGENDAS:
             return { ...action.agendas };
-        // case RECEIVE_LIVE_AGENDA:
-        //     return { action.agenda}
+        case UPDATE_AGENDA:
+            return { ...state, events: action.payload}
         case RECEIVE_AGENDA:
             return { ...state, [action.agenda._id]: action.agenda }
         case REMOVE_AGENDA:
