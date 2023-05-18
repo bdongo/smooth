@@ -30,7 +30,8 @@ export const getAgendas = state => {
 };
 
 export const getLiveAgenda = state => {
-    return state?.agendas ? Object.values(state.agendas)[0] : null;
+    const len = Object.values(state.agendas).length
+    return state?.agendas ? Object.values(state.agendas)[len - 1] : null;
 }
 
 export const getAgenda = agendaId => state => {
@@ -111,6 +112,24 @@ export const saveAgenda = (agenda) => async (dispatch) => {
         },
         body: JSON.stringify({
             saved: true
+        })
+    });
+    if(res.ok){
+        const newAgenda = await res.json();
+        dispatch(receiveAgenda(newAgenda))
+    };
+};
+
+export const reviseAgenda = (agenda, time, budget) => async (dispatch) => {
+    if(!agenda) return;
+    const res = await jwtFetch(`/api/agendas/${agenda._id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            time: time,
+            budget: budget
         })
     });
     if(res.ok){

@@ -116,12 +116,19 @@ router.put('/:agendaId', async (req, res) => {
         if(!agenda) {
             return res.status(404).json({ error: 'Agenda not found'})
         }
-        const { events, saved } = req.body;
+        const { events, saved, time, budget } = req.body;
         agenda.events = events || agenda.events
         agenda.saved = saved || false
-        await agenda.save();
-
-        return res.json(agenda);
+        agenda.time = time || agenda.time
+        agenda.budget = budget || agenda.budget
+        
+        // const populatedAgenda = await agenda.populate('events')
+        await agenda.save()
+        
+        const populatedAgenda = await Agenda.findById(agendaId).populate('events');
+        
+        return res.json(populatedAgenda)
+        // return res.json(agenda);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
