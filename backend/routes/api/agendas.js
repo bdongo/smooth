@@ -9,8 +9,12 @@ const User = mongoose.model('User');
 
 router.get('/', async (req, res) => {
     try {
-        const { userId } = req.query
-        const agendas = await Agenda.find({ user: userId});
+        const { user } = req.query
+        const agendas = await Agenda.find({ user: user});
+
+        // const agendaObj = {}
+        // agendas.forEach(agenda => agendaObj[agenda._id] = agenda)
+
         return res.json(agendas);
     } catch (error) {
         console.error(error);
@@ -20,8 +24,8 @@ router.get('/', async (req, res) => {
 
 router.get('/unsaved', async (req, res) => {
     try {
-        const { userId } = req.query
-        const agenda = await Agenda.find({user: userId, saved: false}).populate('events');
+        const { user } = req.query
+        const agenda = await Agenda.find({user: user, saved: false}).populate('events');
         if(!agenda) {
             return res.status(404).json({ error: 'No Agenda Found'})
         };
@@ -44,14 +48,25 @@ router.get('/:agendaId', async(req, res) => {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error'});
     }
-})
+});
+
+
+// router.get('/user/:userId/agendas', async (req, res) => {
+//     const { userId } = req.params;
+  
+//     try {
+//       const agenda = await Agenda.find({ user: userId, saved: false });
+  
+//       return res.json(agenda);
+//     } catch (error) {
+//       console.error(error);
+//       return res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
         const { user } = req.body;
-        
-        // const existingAgenda = Agenda.find({ user: user, saved: false})
-        // if(existingAgenda) return res.status(404).json({ error: 'Pending itinerary already exists'})
 
         const newAgenda = new Agenda({
             user,

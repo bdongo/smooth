@@ -9,13 +9,14 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Search from './SearchBar';
 import { AiFillStar } from 'react-icons/ai';
 import { MdLocationPin } from 'react-icons/md';
+import { getAgendas, fetchAgendas } from '../../store/agendas';
 
 
 const SearchResults = ({itineraryOpen, openItinerary}) => {
     const events = useSelector(getEvents);
     const dispatch = useDispatch();
     const location = useLocation();
-
+    
     const params = new URLSearchParams(location.search)
     const query = params.get('query');
     const price = params.get('price');
