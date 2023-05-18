@@ -17,6 +17,13 @@
     align-items: center;
     justify-content: center;
     animation: fadeIn 1s ease-in-out;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.307);
+    transition: all 0.4s ease-in-out;
+}
+
+.login-form:hover, .signup-form:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.375);
+    transform: translate(3px, -3px);
 }
 
 .signup-form { 
