@@ -34,11 +34,13 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
     }, [dispatch, user])
 
     useEffect(()=> {
-        if (agenda) {
+        if (agenda && Object.keys(events).length != 0) {
             const eventIds = agenda.events.map(event => event._id)
             setItinerary(eventIds)
+            console.log(eventIds, "eventid")
+            console.log(events, "events")
         }
-    }, [agenda])
+    }, [agenda, events])
 
     // const handleDrop =(event) => {
     //     event.preventDefault();
