@@ -37,8 +37,6 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         if (agenda && Object.keys(events).length != 0) {
             const eventIds = agenda.events.map(event => event._id)
             setItinerary(eventIds)
-            console.log(eventIds, "eventid")
-            console.log(events, "events")
         }
     }, [agenda, events])
 
