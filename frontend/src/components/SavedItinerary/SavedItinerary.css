@@ -1,0 +1,90 @@
+
+
+.saved-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #e3e3e3;
+    border-radius: 1.5em;
+    margin-bottom: 16px;
+    position: relative;
+    width: 20vw;
+    height: 12em;
+    cursor: pointer;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.307);
+    background-color: white;
+    transition: all 0.4s ease-in-out;
+    margin-left: 1em;
+    margin-left: 1em;
+}
+
+.saved-card:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.375);
+    transform: translate(3px, -3px);
+}
+
+
+
+.saved-card img {
+    width: 100%;
+    max-height: 59%;
+    object-fit: cover;
+    border-top-left-radius: 1.5em;
+    border-top-right-radius: 1.5em;
+}
+
+.saved-card-body {
+    padding: 16px;
+    width: 85%;
+}
+
+.saved-card-body h2 {
+    font-family: Nhaas65;
+    margin-bottom: 0.6em;
+    font-size: 0.99em;
+
+}
+
+.saved-card-body p {
+    font-size: 0.75em;
+    padding-bottom: 0.1em;
+    margin: 0;
+    font-family: Nhaas55;
+}
+
+.saved-card-body p:first-child {
+    /* font-weight: bold; */
+    /* margin-bottom: 8px; */
+    font-family: Nhaas55;
+}
+
+
+.saved-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+#saved-card-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#saved-card-star {
+    font-family: 'NHaas55';
+    display: flex;
+    background: rgb(1 1 1 / 70%);
+    position: absolute;
+    color: white;
+    border-radius: 1em;
+    padding: 0.5em;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+    top: 2%;
+    right: 4%;
+}
+
+#saved-card-star svg {
+    color: #FF5F1F;
+}

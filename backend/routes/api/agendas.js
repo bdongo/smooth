@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
             await agenda.populate('events')
             return agenda;
         }));
-        console.log(populatedAgendas);
         return res.json(populatedAgendas);
     } catch (error) {
         console.error(error);

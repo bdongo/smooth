@@ -3,24 +3,36 @@ import "./ProfilePage.css";
 import { getAgendas } from "../../store/agendas";
 import { useEffect } from "react";
 import { fetchAgendas } from "../../store/agendas";
+import SavedItinerary from "../SavedItinerary/SavedItinerary";
+import LoginForm from "../SessionForms/LoginForm";
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.session.user)
+    const currentUser = useSelector(state => state.session?.user)
     const agendas = useSelector(getAgendas)
 
     useEffect(() => {
         dispatch(fetchAgendas(currentUser?._id))
-    }, [currentUser])
+    }, [dispatch, currentUser])
+
+    if (!currentUser) {
+        return (
+            <LoginForm/>
+        )
+    }
     
 
     return (
         <div className="profile-container">
-            <h1>{currentUser?.username}</h1>
-            <div className="itinerary-conatiner">
-                {agendas?.map(agenda => 
-                    <div>
-
+            
+            <div className="itineraries-container">
+                {currentUser && 
+                    <h1>{currentUser?.username}'s saved itineraries:</h1>
+                }
+                {agendas?.map((agenda, idx) => 
+                    <div className="saved-itinerary"> 
+                        <h2>{idx+1}.</h2>
+                        <SavedItinerary key={idx} itinerary={agenda}/>
                     </div>
                 )}
             </div>

@@ -8,3 +8,30 @@
 .profile-container h1 {
     font-size: 30px;
 }
+
+.itineraries-container {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.saved-itinerary {
+    height: 15em;
+    width: 90vw;
+    display: flex;
+    /* border: dotted 1px red; */
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(128 128 128 / 15%);
+    border-radius: 20px;
+    margin-top: 2em;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.saved-itinerary > h2 {
+    font-size: 20px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
