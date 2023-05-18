@@ -5,9 +5,12 @@ import './ReviewForm.css';
 import { Link } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import { fetchEvent } from '../../store/event';
+import { AiFillStar } from 'react-icons/ai';
+
 const ReviewForm = () => {
     const dispatch = useDispatch();
     const [rating, setRating] = useState('');
+    const [activeRating, setActiveRating] = useState('');
     const [price, setPrice] = useState('');
     const [time, setTime] = useState('');
     const [text, setText] = useState('');
@@ -26,9 +29,40 @@ const ReviewForm = () => {
 
     useEffect(() => {
         dispatch(fetchEvent(id));
-        
+        window.scrollTo(0, 0);
     }, []);
 
+    const starRating = () => {
+        const hoverRating = activeRating || rating;
+
+        const handleHover = (hoverRating) => {
+            setActiveRating(hoverRating);
+        };
+
+        const handleClick = (clickedRating) => {
+            setRating(clickedRating);
+            setActiveRating(clickedRating);
+        };
+
+        return (
+            <>
+                {[1, 2, 3, 4, 5].map((index) => {
+                    return (
+                        <AiFillStar
+                            key={index}
+                            id='form-star'
+                            className={
+                                hoverRating >= index ? "filled-star" : "empty-star"
+                            }
+                            onMouseEnter={() => handleHover(index)}
+                            onMouseLeave={() => handleHover(null)}
+                            onClick={() => handleClick(index)}
+                        />
+                    );
+                })}
+            </>
+        );
+    };
 
 
 
@@ -43,14 +77,14 @@ const ReviewForm = () => {
             }
 
             if (rating > 5 || rating < 1) {
-                setRatingError('Please enter a rating between 1 & 5');
+                setRatingError('Please enter a rating between 1 - 5');
                 return;
             } else {
                 setRatingError('');
             }
 
             if (price < 1 || price > 100) {
-                setPriceError('Please enter a price between $1 & $100');
+                setPriceError('Please enter a price between $1 - $100');
                 return;
             } else {
                 setPriceError('');
@@ -64,7 +98,7 @@ const ReviewForm = () => {
             }
 
             if (time < 1 || time > 8) {
-                setTimeError('Please enter the time between 1 and 8 hours');
+                setTimeError('Please enter the time between 1 - 8 hours');
                 return;
             } else {
                 setTimeError('');
@@ -83,7 +117,7 @@ const ReviewForm = () => {
             setRating('');
             setTime('');
             setText('');
-            setFlashMessage('Review created successfully!');
+            setFlashMessage('Review created successfully! Redirecting to event page...');
             setTimeout(() => {
                 setFlashMessage('');
                 history.push(`/event/${id}`);
@@ -97,14 +131,15 @@ const ReviewForm = () => {
     }
     return (
         <form onSubmit={handleSubmit} className='create-form'>
-            
+        
+            <div className='review-form'> 
             <div className = "form-details">
-                 <h2 className="headings">Write your review</h2>
+                 <h2 className="headings" id='first-header'>Write your review</h2>
                 <textarea className = "comments-box" type="text" value={text} onChange={(e) => setText(e.target.value)} />
                 {textBoxError && <div className='error'>{textBoxError}</div>}
                 <h2 className="headings">How would you rate this experience?</h2>
                 <div className="star-rating">
-                    <input className="star" type="radio" id="star5" name="rating" value="5" onChange={(e) => setRating(e.target.value)} />
+                    {/* <input className="star" type="radio" id="star5" name="rating" value="5" onChange={(e) => setRating(e.target.value)} />
                     <label htmlFor="star5"></label>
                     <input className="star" type="radio" id="star4" name="rating" value="4" onChange={(e) => setRating(e.target.value)} />
                     <label htmlFor="star4"></label>
@@ -113,7 +148,8 @@ const ReviewForm = () => {
                     <input className="star" type="radio" id="star2" name="rating" value="2" onChange={(e) => setRating(e.target.value)} />
                     <label htmlFor="star2"></label>
                     <input className="star" type="radio" id="star1" name="rating" value="1" onChange={(e) => setRating(e.target.value)} />
-                    <label htmlFor="star1"></label>
+                    <label htmlFor="star1"></label> */}
+                    {starRating()}
                 </div>
                 {ratingError && <div className='error'>{ratingError}</div>}
                 <h2 className='headings'>What was the estimated price for this experience?</h2>
@@ -138,17 +174,17 @@ const ReviewForm = () => {
                 </button>
                 {textError && <div className='error'>{textError}</div>}
             </div>
-            <div className="right-side">
+            {/* <div className="right-side">
                 <h1 id="header">Tell us, how was your experience? </h1>
                 {event && <img src={event?.imageUrls[0]} alt="Event Image" id="image"/>}
 
+            </div> */}
             </div>
             {flashMessage && <div className='flash-message'>
                 
                 {flashMessage}
                 
             </div>}
-            
 
         </form>
     )
