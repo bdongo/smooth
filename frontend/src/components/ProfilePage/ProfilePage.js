@@ -20,6 +20,14 @@ const ProfilePage = () => {
             <LoginForm/>
         )
     }
+
+    const totalEvents = (itinerary) => ( itinerary?.events.length);
+    const totalHours = (itinerary) =>  (itinerary?.events.reduce((acc, event) => (
+        acc + event.avgTime
+    ), 0));
+    const totalPrice = (itinerary) => (itinerary?.events.reduce((acc, event) => (
+        acc + event.avgPrice
+    ), 0));
     
 
     return (
@@ -30,9 +38,20 @@ const ProfilePage = () => {
                     <h1>{currentUser?.username}'s saved itineraries:</h1>
                 }
                 {agendas?.map((agenda, idx) => 
-                    <div className="saved-itinerary"> 
+                    <div className="itinerary-display"> 
                         <h2>{idx+1}.</h2>
                         <SavedItinerary key={idx} itinerary={agenda}/>
+                        <div className='itinerary-calc'>
+                            <div>
+                                Total Events: <p>{totalEvents(agenda)}</p>
+                            </div>
+                            <div>
+                                Total Price: <p>${totalPrice(agenda).toFixed(2)} </p>
+                            </div>
+                            <div>
+                                Total Hours: <p>{totalHours(agenda).toFixed(2)} </p>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

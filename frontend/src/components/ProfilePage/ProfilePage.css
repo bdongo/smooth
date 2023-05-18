@@ -23,15 +23,29 @@
     /* border: dotted 1px red; */
     align-items: center;
     justify-content: flex-start;
-    background-color: rgb(128 128 128 / 15%);
-    border-radius: 20px;
-    margin-top: 2em;
+    
+    
+    
     overflow-x: auto;
     overflow-y: hidden;
 }
 
-.saved-itinerary > h2 {
+.itinerary-display > h2 {
     font-size: 20px;
     margin-left: 1em;
     margin-right: 1em;
+
+}
+
+.itinerary-display {
+    display: flex;
+    height: 15em;
+    width: 90vw;
+    background-color: rgb(128 128 128 / 15%);
+    border-radius: 20px;
+    margin-top: 2em;
+}
+
+.itinerary-calc {
+    border: solid blue 1px;
 }

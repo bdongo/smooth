@@ -4,8 +4,9 @@ import { AiFillStar } from 'react-icons/ai';
 import { MdLocationPin } from 'react-icons/md';
 
 const SavedItinerary = ({itinerary}) => {
+
     return (
-        <>
+        <div className="saved-itinerary">
             {itinerary.events.map((event, idx) => 
                 <Link to={`/event/${event._id}`} className='saved-card-link'>
                     <div className="saved-card" >
@@ -26,7 +27,8 @@ const SavedItinerary = ({itinerary}) => {
                     </div>
                 </Link>
             )}
-        </>
+
+        </div>
     )
 }
 
