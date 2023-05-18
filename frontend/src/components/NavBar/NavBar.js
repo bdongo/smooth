@@ -74,6 +74,7 @@ function NavBar({ setItineraryOpen, openItinerary, closeItinerary }) {
                 <>
                     <Link to='/explore' className='right-nav-buttons'>Explore</Link>
                     <button id='itinerary-button' onClick={openItinerary}>ITINERARY</button>
+                    <Link to='/profile' className='right-nav-buttons'>Profile</Link>
                     <button id='logout-button' onClick={handleLogout} className='right-nav-buttons'>LOG OUT</button> 
                     <FaRoute id='it-icon' />
                 </> : 

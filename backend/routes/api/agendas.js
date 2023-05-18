@@ -9,9 +9,13 @@ const User = mongoose.model('User');
 
 router.get('/', async (req, res) => {
     try {
-        const { userId } = req.query
-        const agendas = await Agenda.find({ user: userId});
-        return res.json(agendas);
+        const { user } = req.query
+        const agendas = await Agenda.find({ user: user});
+        const populatedAgendas = await Promise.all(agendas.map(async (agenda) => {
+            await agenda.populate('events')
+            return agenda;
+        }));
+        return res.json(populatedAgendas);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

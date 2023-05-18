@@ -1,0 +1,66 @@
+.profile-container {
+    font-family: NHaas65;
+    margin-top: 6em;
+    width: 100vw;
+   position: absolute;
+}
+
+.profile-container h1 {
+    font-size: 30px;
+}
+
+.itineraries-container {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.saved-itinerary {
+    height: 15em;
+    width: 90vw;
+    display: flex;
+    /* border: dotted 1px red; */
+    align-items: center;
+    justify-content: flex-start;
+    
+    
+    
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.itinerary-display > h2 {
+    font-size: 20px;
+    margin-left: 1em;
+    margin-right: 1em;
+
+}
+
+.itinerary-display {
+    display: flex;
+    height: 15em;
+    width: 90vw;
+    background-color: rgb(128 128 128 / 15%);
+    border-radius: 20px;
+    margin-top: 2em;
+    align-items: center;
+}
+
+.itinerary-calc {
+    background-color: #FF5F1F;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    width: 13em;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+    justify-content: center;
+}
+
+.itinerary-calc p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: white;
+}
+
