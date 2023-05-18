@@ -61,7 +61,7 @@ const SearchResults = ({itineraryOpen, openItinerary}) => {
             events.length === 0 ? <h2 id='no-results'>No results found</h2> :
             
             events.map((event,idx) => (
-                <Link to={`/event/${event._id}`} className='card-link'>
+                <Link key={idx} to={`/event/${event._id}`} className='card-link'>
                     <div className="card" draggable onDragStart={(e) => handleDragStart(e, event._id)}>
                     <img src={event.imageUrls[0]}/>
                         <div id='card-star'>{event.avgRating.toFixed(0)} <AiFillStar /> </div>

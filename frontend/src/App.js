@@ -38,7 +38,7 @@ function App() {
 
   return loaded && (
     <>
-    <NavBar setItineraryOpen={setItineraryOpen} openItinerary={openItinerary} closeItinerary={closeItinerary}/>
+      <NavBar itineraryOpen={itineraryOpen} setItineraryOpen={setItineraryOpen} openItinerary={openItinerary} closeItinerary={closeItinerary}/>
     <Switch>
       <Route exact path="/" component={SplashPage} />
         <Route path='/newReview' component={ReviewForm} />

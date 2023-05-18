@@ -66,7 +66,7 @@ export const fetchLiveAgenda = userId => async(dispatch) => {
 
     if(res.ok){
         const agenda = await res.json();
-        dispatch(receiveAgendas(agenda));
+        dispatch(receiveAgenda(agenda));
     }
 };
 

@@ -3,14 +3,14 @@ import './Itinerary.css';
 import { IoCloseSharp } from 'react-icons/io5';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createAgenda, editAgenda, saveAgenda, getLiveAgenda, fetchLiveAgenda } from '../../store/agendas';
+import { createAgenda, editAgenda, saveAgenda, getLiveAgenda, fetchLiveAgenda, fetchAgendas } from '../../store/agendas';
 import altlogo from '../../assets/altlogo.jpg';
 import { Link } from 'react-router-dom';
 import { BsPlusSquareDotted } from 'react-icons/bs';
 import { useEffect } from 'react';
 
 
-const Itinerary = ({closeItinerary}) => {
+const Itinerary = ({closeItinerary, itineraryOpen}) => {
     const events = useSelector((state) => state.events);
     const [itinerary, setItinerary] = useState([]);
     const [toggle, setToggle] = useState(false)
@@ -28,10 +28,17 @@ const Itinerary = ({closeItinerary}) => {
     const agenda = useSelector(getLiveAgenda)
 
     useEffect(()=> {
-        dispatch(fetchLiveAgenda(user?._id))
-        console.log(agenda)
-        // setScratchAgenda(agenda?.events)
-    }, [dispatch, toggle])
+        if (user) {
+            dispatch(fetchAgendas(user?._id))
+        }
+    }, [dispatch, user])
+
+    useEffect(()=> {
+        if (agenda) {
+            const eventIds = agenda.events.map(event => event._id)
+            setItinerary(eventIds)
+        }
+    }, [agenda])
 
     // const handleDrop =(event) => {
     //     event.preventDefault();

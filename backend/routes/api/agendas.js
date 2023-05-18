@@ -10,12 +10,12 @@ const User = mongoose.model('User');
 router.get('/', async (req, res) => {
     try {
         const { user } = req.query
-        const agendas = await Agenda.find({ user: user});
-
-        // const agendaObj = {}
-        // agendas.forEach(agenda => agendaObj[agenda._id] = agenda)
-
-        return res.json(agendas);
+        const agendas = await Agenda.find({ user: user });
+        const populatedAgendas = await Promise.all(agendas.map(async (agenda) => {
+            await agenda.populate('events')
+            return agenda;
+        }));
+        return res.json(populatedAgendas);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -25,10 +25,13 @@ router.get('/', async (req, res) => {
 router.get('/unsaved', async (req, res) => {
     try {
         const { user } = req.query
-        const agenda = await Agenda.find({user: user, saved: false}).populate('events');
+        const agenda = await Agenda.find({user: user, saved: false})
+        console.log(agenda, "fetch agenda")
         if(!agenda) {
             return res.status(404).json({ error: 'No Agenda Found'})
         };
+        const populatedAgenda = await agenda.populate('events');
+       
         return res.json(agenda);
     } catch (error) {
         console.error(error);
