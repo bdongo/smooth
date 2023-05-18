@@ -1,0 +1,96 @@
+.footer-container {
+    width: 100vw;
+    height: fit-content;
+    background: white;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    scroll-snap-align: center;
+    flex-direction: column;
+}
+
+#footer-header {
+    font-size: 2em;
+    padding-top: 1em;
+    text-align: center;
+}
+
+.footer-container h2 {
+    text-align: center;
+    font-size: 1.2em;
+    font-family: 'NHaas65';
+    padding-top: 0em;
+    width: 100%;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    align-items: center;
+    margin-top: 2em;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5em;
+
+    /* display: grid;
+    justify-content: center;
+    /* align-items: baseline; */
+    /* grid-template-columns: repeat(5, 1fr);
+    width: 90%;
+    column-gap: 2vw;
+    row-gap: 15vh;
+    padding: 0 5%;
+    margin: 6vh 0; */ 
+}
+
+.dev {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Nhaas55 !important;
+    color: rgb(31, 31, 31);
+    font-size: 1.1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dev a {
+    text-decoration: none;
+    color: rgb(31, 31, 31);
+    margin-bottom: 0.5em;
+    transition: color 0.3s ease-in-out;
+    margin-bottom: 1em;
+}
+
+.dev i {
+    font-size: 1em;
+}
+
+.dev h2 {
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+@media all and (max-width: 1120px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media all and (max-width: 700px) {
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dev {
+        align-items: center;
+        margin-bottom: 1.5em;
+        font-size: 1em;
+    }
+
+    .dev h2 {
+        text-align: center;
+    }
+}

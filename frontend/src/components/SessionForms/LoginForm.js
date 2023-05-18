@@ -18,6 +18,10 @@ function LoginForm() {
         };
     }, [dispatch]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     const update = (field) => {
         const setState = field === 'email' ? setEmail : setPassword;
         return e => setState(e.currentTarget.value);

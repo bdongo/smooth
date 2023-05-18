@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import SearchBar from './components/Search/SearchBar';
 import SearchResults from './components/Search/SearchResults';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,7 @@ function App() {
       <Route exact path="/event/:id" component={EventShow} />
 
     </Switch>
+    <Footer />  
     </>
   );
 }
