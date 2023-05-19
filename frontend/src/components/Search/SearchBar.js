@@ -107,21 +107,21 @@ const Search = () => {
         <form id='advanced-search-inputs' onSubmit={handleSubmit}>
                 <input
                   id='search-price-bar'
-                  placeholder='Price'
+                  placeholder='Budget (Up to $100)'
                   type="number"
                   value={avgPrice}
                   onChange={(event) => setAvgPrice(event.target.value)}
                 />
                 <input
                   id='search-rating-bar'
-                  placeholder='Rating'
+                  placeholder='Rating (Out of 5)'
                   type="number"
                   value={avgRating}
                   onChange={(event) => setAvgRating(event.target.value)}
                 />
                 <input
                   id='search-time-bar'
-                  placeholder='Time'
+                  placeholder='Time (Up to 4 hrs)'
                   type="number"
                   value={avgTime}
                   onChange={(event) => setAvgTime(event.target.value)}

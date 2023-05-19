@@ -227,11 +227,11 @@
     position: relative;
     margin-right: 1em;
     width: 40em;
-    margin-top: 2em;
+    margin-top: 0em;
 }
 
 #fake-expenses, #fake-time {
-    z-index: 2;
+    z-index: 1;
     background: white;
     width: 14em;
     border-radius: 2em;

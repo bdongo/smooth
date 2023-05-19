@@ -58,7 +58,8 @@
 #itinerary-button:hover,
 #logout-button:hover,
 .burger-buttons:hover,
-#please-log-in-button:hover {
+#please-log-in-button:hover,
+.dev a:hover {
     color: #FF5F1F;
     cursor: pointer;
 }
@@ -67,7 +68,8 @@
 #itinerary-button, 
 #logout-button,
 .burger-buttons,
-#please-log-in-button {
+#please-log-in-button,
+.dev a {
     position: relative;
 }
 
@@ -75,7 +77,8 @@
 #itinerary-button:after, 
 #logout-button:after,
 .burger-buttons:after,
-#please-log-in-button:after {
+#please-log-in-button:after,
+.dev a:after {
     position: absolute;
     bottom: -40%;
     left: 0;
@@ -93,7 +96,8 @@
 #itinerary-button:hover:after, 
 #logout-button:hover:after,
 .burger-buttons:hover:after,
-#please-log-in-button:hover:after {
+#please-log-in-button:hover:after,
+.dev a:hover:after {
     width: 100%;
 }
 
@@ -126,7 +130,7 @@
     right: 0;
     width: 35%;
     height: 100vh;
-    z-index: 1;
+    z-index: 3;
     translate: 100% 0;
     transition: all 0.4s ease-in-out;
     overflow: scroll;
