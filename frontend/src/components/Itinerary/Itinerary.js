@@ -3,70 +3,149 @@ import './Itinerary.css';
 import { IoCloseSharp } from 'react-icons/io5';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createAgenda } from '../../store/agendas';
+import { createAgenda, editAgenda, saveAgenda, reviseAgenda, getLiveAgenda, fetchLiveAgenda, fetchAgendas } from '../../store/agendas';
 import altlogo from '../../assets/altlogo.jpg';
 import { Link } from 'react-router-dom';
 import { BsPlusSquareDotted } from 'react-icons/bs';
+import { useEffect } from 'react';
 
 
-const Itinerary = ({closeItinerary}) => {
+const Itinerary = ({closeItinerary, itineraryOpen}) => {
     const events = useSelector((state) => state.events);
     const [itinerary, setItinerary] = useState([]);
+    const [toggle, setToggle] = useState(true) //true = populate, false = delete
     
-    const totalHours = itinerary.length > 0 ? itinerary.reduce((acc, eventID) => acc + events[eventID].avgTime, 0) : 0;
-    const totalPrice = itinerary.length > 0 ? itinerary.reduce((acc, eventID) => acc + events[eventID].avgPrice, 0) : 0;
+    const totalHours = itinerary.length > 0 ? itinerary.reduce((acc, event) => acc + event.avgTime, 0) : 0;
+    const totalPrice = itinerary.length > 0 ? itinerary.reduce((acc, event) => acc + event.avgPrice, 0) : 0;
     const totalEvents = itinerary.length;
-   
 
     const dispatch = useDispatch();
     const [hoursAvailable, setHoursAvailable] = useState(8);
     const [cost, setCost] = useState(100);
 
-    const user = useSelector((state) => state.session.user);
+    const user = useSelector((state) => state?.session?.user);
 
-    const handleDrop =(event) => {
-        event.preventDefault();
+    const agenda = useSelector(getLiveAgenda)
 
-        const eventID = event.dataTransfer.getData("text");
-        const updatedItinerary = [...itinerary, eventID];
-        if (eventID){
-            const updatedTotalHours = updatedItinerary.reduce(
-            (acc, eventID) => acc + events[eventID].avgTime, 0);
-            const updatedTotalPrice = updatedItinerary.reduce(
-            (acc, eventID) => acc + events[eventID].avgPrice,0);
+    useEffect(()=> {
+        if (user) {
+            dispatch(fetchAgendas(user?._id))
+        }
+    }, [dispatch, user])
+
+    useEffect(()=> {
+        if (agenda && Object.keys(events).length !== 0) {
+            const events = agenda?.events
+            setItinerary(events)
+            setHoursAvailable(agenda.time)
+            setCost(agenda.budget)
+            console.log(events, 'hitting useEffect')
+        }
+    }, [agenda, events])
+
+    useEffect(()=> {
+
+    }, [itinerary])
+
+    useEffect(()=> {
+        if (hoursAvailable !== agenda?.time || cost !== agenda?.budget){
+            // dispatch(editAgenda)
+            dispatch(reviseAgenda(agenda, hoursAvailable, cost))
+        };
+    }, [hoursAvailable, cost]);
+
+    // const handleDrop =(event) => {
+    //     event.preventDefault();
+
+    //     const eventID = event.dataTransfer.getData("text");
+    //     const updatedItinerary = [...itinerary, eventID];
+    //     if (eventID){
+    //         const updatedTotalHours = updatedItinerary.reduce(
+    //         (acc, eventID) => acc + events[eventID].avgTime, 0);
+    //         const updatedTotalPrice = updatedItinerary.reduce(
+    //         (acc, eventID) => acc + events[eventID].avgPrice,0);
+    //         if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+    //             setItinerary(updatedItinerary);
+    //         } else {
+    //             alert("The event cannot be added to your itinerary.");
+    //         }
+    //     }
+    // }
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+
+        const eventId = e.dataTransfer.getData("text");
+        const event = events[eventId]
+        const newAgenda = [...itinerary, event]
+        if (event){
+            const updatedTotalHours = newAgenda.reduce(
+            (acc, event) => acc + event.avgTime, 0);
+            const updatedTotalPrice = newAgenda.reduce(
+            (acc, event) => acc + event.avgPrice, 0);
             if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
-                setItinerary(updatedItinerary);
+                setItinerary(newAgenda)
+                dispatch(editAgenda(agenda, newAgenda))
             } else {
                 alert("The event cannot be added to your itinerary.");
-            }
-        }
+            };
+        };
+
+        // const newAgenda = [...itinerary, event]
+        // setItinerary(newAgenda)
+        // // console.log(newAgenda)
+        // dispatch(editAgenda(agenda, newAgenda))
+        // setToggle(!toggle)
+        // console.log(toggle, 'toggle')
     }
 
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (user && itinerary.length > 0){
+    //        const agenda = {
+    //             user: user,
+    //             events: itinerary
+    //         } 
+    //         dispatch(createAgenda(agenda));
+    //         alert("Your itinerary has been saved!")
+    //     }
+    //     else {
+    //         alert("No itinerary to save!");
+    //     }
+        
+    // }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (user && itinerary.length > 0){
-           const agenda = {
-                user: user,
-                events: itinerary
-            } 
-            dispatch(createAgenda(agenda));
-            alert("Your itinerary has been saved!")
-        }
-        else {
-            alert("No itinerary to save!");
-        }
-        
-    }
+        if(user) {
+            dispatch(saveAgenda(agenda))
+            setTimeout(()=> {
+                dispatch(createAgenda(user?._id))
+                // setToggle(!toggle)
+            }, 1000)
+        };
+    };
 
 
     const removeEvent = (idx) => {
         const updatedItinerary = [...itinerary];
-        updatedItinerary.splice(idx, 1);
-        setItinerary(updatedItinerary);
+        // setToggle(false)
+        // console.log(toggle)
+        if(updatedItinerary.length === 1) {
+            setItinerary([])
+            console.log('hitting')
+            dispatch(editAgenda(agenda, []));
+        } else {
+            updatedItinerary.splice(idx, 1);
+            setItinerary(updatedItinerary);
+            dispatch(editAgenda(agenda, updatedItinerary));
+        };
+        console.log(updatedItinerary.length, 'len inside')
+        console.log(itinerary, 'itin inside')
     };
 
     return (
@@ -116,17 +195,17 @@ const Itinerary = ({closeItinerary}) => {
                 )} 
                 </div>
                 
-                    {itinerary.map((eventID, idx) => (
+                    {itinerary.map((event, idx) => (
 
                         <div key={idx} className='itinerary-event'>
                             <div className="image-container">
-                                <img src={events[eventID].imageUrls[0] } className="image" />
+                                <img src={event?.imageUrls[0] } className="image" />
                             </div>
                             <span className="details"> 
                                 
-                                <span className="title">{events[eventID].title}  </span>
-                                <span>  ${events[eventID].avgPrice.toFixed(2)}  </span>
-                                <span>  {events[eventID].avgTime.toFixed(2)} hrs</span>
+                                <span className="title">{event.title}  </span>
+                                <span>  ${event.avgPrice.toFixed(2)}  </span>
+                                <span>  {event.avgTime.toFixed(2)} hrs</span>
                             </span>
                             <IoCloseSharp className='remove-icon' onClick={() => removeEvent(idx)} />
                         </div>

@@ -10,7 +10,7 @@ const User = mongoose.model('User');
 router.get('/', async (req, res) => {
     try {
         const { user } = req.query
-        const agendas = await Agenda.find({ user: user});
+        const agendas = await Agenda.find({ user: user });
         const populatedAgendas = await Promise.all(agendas.map(async (agenda) => {
             await agenda.populate('events')
             return agenda;
@@ -24,11 +24,14 @@ router.get('/', async (req, res) => {
 
 router.get('/unsaved', async (req, res) => {
     try {
-        const { userId } = req.query
-        const agenda = await Agenda.find({user: userId, saved: false}).populate('events');
+        const { user } = req.query
+        const agenda = await Agenda.find({user: user, saved: false})
+        console.log(agenda, "fetch agenda")
         if(!agenda) {
             return res.status(404).json({ error: 'No Agenda Found'})
         };
+        const populatedAgenda = await agenda.populate('events');
+       
         return res.json(agenda);
     } catch (error) {
         console.error(error);
@@ -48,14 +51,25 @@ router.get('/:agendaId', async(req, res) => {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error'});
     }
-})
+});
+
+
+// router.get('/user/:userId/agendas', async (req, res) => {
+//     const { userId } = req.params;
+  
+//     try {
+//       const agenda = await Agenda.find({ user: userId, saved: false });
+  
+//       return res.json(agenda);
+//     } catch (error) {
+//       console.error(error);
+//       return res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
 
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
         const { user } = req.body;
-        
-        // const existingAgenda = Agenda.find({ user: user, saved: false})
-        // if(existingAgenda) return res.status(404).json({ error: 'Pending itinerary already exists'})
 
         const newAgenda = new Agenda({
             user,
@@ -102,12 +116,19 @@ router.put('/:agendaId', async (req, res) => {
         if(!agenda) {
             return res.status(404).json({ error: 'Agenda not found'})
         }
-        const { events, saved } = req.body;
+        const { events, saved, time, budget } = req.body;
         agenda.events = events || agenda.events
         agenda.saved = saved || false
-        await agenda.save();
-
-        return res.json(agenda);
+        agenda.time = time || agenda.time
+        agenda.budget = budget || agenda.budget
+        
+        // const populatedAgenda = await agenda.populate('events')
+        await agenda.save()
+        
+        const populatedAgenda = await Agenda.findById(agendaId).populate('events');
+        
+        return res.json(populatedAgenda)
+        // return res.json(agenda);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

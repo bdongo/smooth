@@ -10,7 +10,7 @@ const validateCreateAgenda = [
     check('user')
         .custom(async (user, { req }) => {
             const existingAgenda = await Agenda.find({ user, saved: false });
-            if (existingAgenda) {
+            if (existingAgenda.length) {
             throw new Error('Pending itinerary exists');
             }
         }),

@@ -9,13 +9,14 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Search from './SearchBar';
 import { AiFillStar } from 'react-icons/ai';
 import { MdLocationPin } from 'react-icons/md';
+import { getAgendas, fetchAgendas } from '../../store/agendas';
 
 
 const SearchResults = ({itineraryOpen, openItinerary}) => {
     const events = useSelector(getEvents);
     const dispatch = useDispatch();
     const location = useLocation();
-
+    
     const params = new URLSearchParams(location.search)
     const query = params.get('query');
     const price = params.get('price');
@@ -60,7 +61,7 @@ const SearchResults = ({itineraryOpen, openItinerary}) => {
             events.length === 0 ? <h2 id='no-results'>No results found</h2> :
             
             events.map((event,idx) => (
-                <Link to={`/event/${event._id}`} className='card-link'>
+                <Link key={idx} to={`/event/${event._id}`} className='card-link'>
                     <div className="card" draggable onDragStart={(e) => handleDragStart(e, event._id)}>
                     <img src={event.imageUrls[0]}/>
                         <div id='card-star'>{event.avgRating.toFixed(0)} <AiFillStar /> </div>

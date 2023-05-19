@@ -16,6 +16,14 @@ const agendaSchema = new Schema({
         type: Boolean,
         default: false
     },
+    time: {
+        type: Number,
+        default: 8
+    },
+    budget: {
+        type: Number,
+        default: 100
+    }
 }, {
     timestamps: true
 });
@@ -24,8 +32,3 @@ agendaSchema.set('toObject', { default: true }, { default: [] });
 agendaSchema.set('toJSON', { default: true }, { default: [] });
 
 module.exports = mongoose.model('Agenda', agendaSchema)
-
-testagenda = {
-    user: "645e55526ec97b3e427620f2",
-    events: [],
-}
