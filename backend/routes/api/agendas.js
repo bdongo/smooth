@@ -69,10 +69,12 @@ router.get('/:agendaId', async(req, res) => {
 
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
-        const { user } = req.body;
+        const { user, event } = req.body;
+        console.log(event , "event")
 
         const newAgenda = new Agenda({
             user,
+            events: event
         });
 
         await newAgenda.save();

@@ -40,8 +40,10 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
             setItinerary(events)
             setHoursAvailable(agenda.time)
             setCost(agenda.budget)
-            console.log(events, 'hitting useEffect')
-        }
+        } 
+        // else if ( !agenda && user) {
+        //     dispatch(createAgenda(user?._id))
+        // }
     }, [agenda, events])
 
     useEffect(()=> {
@@ -77,7 +79,10 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
             (acc, event) => acc + event.avgTime, 0);
             const updatedTotalPrice = newAgenda.reduce(
             (acc, event) => acc + event.avgPrice, 0);
-            if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+            if (!agenda && user) {
+                dispatch(createAgenda(user?._id), event)
+            }
+            else if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost ) {
                 setItinerary(newAgenda)
                 dispatch(editAgenda(agenda, newAgenda))
             } else {
@@ -95,9 +100,9 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         if (user && itinerary.length > 0) {
             dispatch(saveAgenda(agenda))
             setTimeout(()=> {
+                alert("Your itinerary has been saved!")
                 setItinerary([])
                 dispatch(createAgenda(user?._id))
-                alert("Your itinerary has been saved!")
             }, 1000)
         } else {
             alert("No itinerary to save!");

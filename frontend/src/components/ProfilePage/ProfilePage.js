@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./ProfilePage.css";
-import { getAgendas } from "../../store/agendas";
+import {getSavedAgendas } from "../../store/agendas";
 import { useEffect } from "react";
 import { fetchAgendas } from "../../store/agendas";
 import SavedItinerary from "../SavedItinerary/SavedItinerary";
 import LoginForm from "../SessionForms/LoginForm";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session?.user)
-    const agendas = useSelector(getAgendas);
+    const agendas = useSelector(getSavedAgendas);
 
     useEffect(() => {
         dispatch(fetchAgendas(currentUser?._id))
@@ -45,6 +46,12 @@ const ProfilePage = () => {
             <div className="itineraries-container">
                 {currentUser && 
                     <h1>{currentUser?.username}'s saved itineraries:</h1>
+                }
+                {agendas.length === 0 && 
+                <>
+                    <h1>Build your agenda!</h1>
+                    <Link to='/explore' />
+                </>
                 }
                 {agendas?.map((agenda, idx) => 
                     <div className="itinerary-display"> 
