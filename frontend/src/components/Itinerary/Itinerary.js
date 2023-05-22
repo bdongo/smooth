@@ -22,6 +22,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
     const dispatch = useDispatch();
     const [hoursAvailable, setHoursAvailable] = useState(8);
     const [cost, setCost] = useState(100);
+    const [instructions, setInstructions] = useState(false)
 
     const user = useSelector((state) => state?.session?.user);
 
@@ -46,6 +47,16 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
     useEffect(()=> {
 
     }, [itinerary])
+
+    useEffect(()=> {
+        if (itinerary?.length !== 0){
+            setInstructions(true)
+        } else {
+            setInstructions(false)
+        }
+    }, [itinerary])
+
+    console.log(instructions)
 
     useEffect(()=> {
         if (hoursAvailable !== agenda?.time || cost !== agenda?.budget){
@@ -124,6 +135,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         if(user) {
             dispatch(saveAgenda(agenda))
             setTimeout(()=> {
+                setItinerary([])
                 dispatch(createAgenda(user?._id))
                 // setToggle(!toggle)
             }, 1000)
@@ -176,7 +188,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
             </div>   
             <div className='time-frame' >
                 <div className="instruction-message">
-                   {itinerary?.length === 0 && (
+                   {!instructions && (
                     <>
                     <p>
                         1. Search for events to add to your itinerary 
