@@ -15,9 +15,9 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
     const [itinerary, setItinerary] = useState([]);
     const [toggle, setToggle] = useState(true) //true = populate, false = delete
     
-    const totalHours = itinerary.length > 0 ? itinerary.reduce((acc, event) => acc + event.avgTime, 0) : 0;
-    const totalPrice = itinerary.length > 0 ? itinerary.reduce((acc, event) => acc + event.avgPrice, 0) : 0;
-    const totalEvents = itinerary.length;
+    const totalHours = itinerary?.length > 0 ? itinerary?.reduce((acc, event) => acc + event.avgTime, 0) : 0;
+    const totalPrice = itinerary?.length > 0 ? itinerary?.reduce((acc, event) => acc + event.avgPrice, 0) : 0;
+    const totalEvents = itinerary?.length;
 
     const dispatch = useDispatch();
     const [hoursAvailable, setHoursAvailable] = useState(8);
@@ -176,7 +176,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
             </div>   
             <div className='time-frame' >
                 <div className="instruction-message">
-                   {itinerary.length === 0 && (
+                   {itinerary?.length === 0 && (
                     <>
                     <p>
                         1. Search for events to add to your itinerary 
@@ -195,7 +195,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
                 )} 
                 </div>
                 
-                    {itinerary.map((event, idx) => (
+                    {itinerary?.map((event, idx) => (
 
                         <div key={idx} className='itinerary-event'>
                             <div className="image-container">
