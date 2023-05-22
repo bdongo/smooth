@@ -1,16 +1,41 @@
 import './Footer.css';
 import { useEffect } from 'react';
+import  {useHistory} from 'react-router-dom';
 
 const Footer = () => {
-    useEffect(() => {
-        if (window.location.pathname.includes('event') || window.location.pathname.includes('search')) {
-            const footer = document.querySelector('.footer-container');
-            footer.style.scrollSnapAlign = 'none';
-        } else {
-            const footer = document.querySelector('.footer-container');
-            footer.style.scrollSnapAlign = 'start';
-        }
-    }, [window.location.pathname])
+    const history = useHistory();
+
+        useEffect(() => {
+            const handleLocationChange = (location) => {
+                const footer = document.querySelector('.footer-container');
+                if (
+                    location.pathname.includes('event') ||
+                    location.pathname.includes('search') ||
+                    location.pathname.includes('profile') || 
+                    location.pathname.includes('query=') || 
+                    location.pathname.includes('newReview') || 
+                    location.pathname.includes('updateReview')
+                ) {
+                    footer.style.scrollSnapAlign = 'none';
+                    localStorage.setItem('scrollSnapAlign', 'none');
+                } else {
+                    footer.style.scrollSnapAlign = 'start';
+                    localStorage.setItem('scrollSnapAlign', 'start');
+                }
+            };
+
+            const storedScrollSnapAlign = localStorage.getItem('scrollSnapAlign');
+            if (storedScrollSnapAlign) {
+                const footer = document.querySelector('.footer-container');
+                footer.style.scrollSnapAlign = storedScrollSnapAlign;
+            }
+
+            const unlisten = history.listen(handleLocationChange);
+
+            return () => {
+                unlisten();
+            };
+        }, [history]);
 
     return (
         <>

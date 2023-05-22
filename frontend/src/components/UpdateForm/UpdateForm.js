@@ -36,6 +36,10 @@ const UpdateForm = () => {
         dispatch(fetchEvent(id))
     }, [])
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     const starRating = () => {
         const hoverRating = activeRating || rating;
 

@@ -46,17 +46,6 @@ const EventShow = () => {
     useEffect(()=> {
          dispatch(fetchEvent(id))
     }, [deleteHelper])
-
-    // useEffect(() => {
-    //     if (currentUser){
-    //         event?.reviews?.forEach(review => {
-    //             if (review.author === currentUser._id ){
-    //                 setShowCreateReview(false);
-    //             }
-    //     })
-    //     }
-        
-    // }, [])
    
 
     useEffect(() => {
