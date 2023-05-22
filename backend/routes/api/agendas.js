@@ -96,13 +96,13 @@ router.post('/', validateCreateAgenda, async (req, res) => {
         // eventToUpdate.agendas.push(newAgenda._id);
         // await eventToUpdate.save();
         
-        const payload = {
-            agenda: newAgenda, 
-            user: userToUpdate, 
-           // event: eventToUpdate
-        };
+        // const payload = {
+        //     agenda: newAgenda, 
+        //     user: userToUpdate, 
+        //    // event: eventToUpdate
+        // };
 
-        return res.status(201).json(payload);
+        return res.status(201).json(newAgenda);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

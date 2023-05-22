@@ -60,28 +60,11 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
 
     useEffect(()=> {
         if (hoursAvailable !== agenda?.time || cost !== agenda?.budget){
-            // dispatch(editAgenda)
+            console.log(agenda)
             dispatch(reviseAgenda(agenda, hoursAvailable, cost))
         };
     }, [hoursAvailable, cost]);
 
-    // const handleDrop =(event) => {
-    //     event.preventDefault();
-
-    //     const eventID = event.dataTransfer.getData("text");
-    //     const updatedItinerary = [...itinerary, eventID];
-    //     if (eventID){
-    //         const updatedTotalHours = updatedItinerary.reduce(
-    //         (acc, eventID) => acc + events[eventID].avgTime, 0);
-    //         const updatedTotalPrice = updatedItinerary.reduce(
-    //         (acc, eventID) => acc + events[eventID].avgPrice,0);
-    //         if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
-    //             setItinerary(updatedItinerary);
-    //         } else {
-    //             alert("The event cannot be added to your itinerary.");
-    //         }
-    //     }
-    // }
 
     const handleDrop = (e) => {
         e.preventDefault();
@@ -101,52 +84,29 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
                 alert("The event cannot be added to your itinerary.");
             };
         };
-
-        // const newAgenda = [...itinerary, event]
-        // setItinerary(newAgenda)
-        // // console.log(newAgenda)
-        // dispatch(editAgenda(agenda, newAgenda))
-        // setToggle(!toggle)
-        // console.log(toggle, 'toggle')
     }
 
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (user && itinerary.length > 0){
-    //        const agenda = {
-    //             user: user,
-    //             events: itinerary
-    //         } 
-    //         dispatch(createAgenda(agenda));
-    //         alert("Your itinerary has been saved!")
-    //     }
-    //     else {
-    //         alert("No itinerary to save!");
-    //     }
-        
-    // }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(user) {
+        if (user && itinerary.length > 0) {
             dispatch(saveAgenda(agenda))
             setTimeout(()=> {
                 setItinerary([])
                 dispatch(createAgenda(user?._id))
-                // setToggle(!toggle)
+                alert("Your itinerary has been saved!")
             }, 1000)
+        } else {
+            alert("No itinerary to save!");
         };
     };
 
 
     const removeEvent = (idx) => {
         const updatedItinerary = [...itinerary];
-        // setToggle(false)
-        // console.log(toggle)
         if(updatedItinerary.length === 1) {
             setItinerary([])
             console.log('hitting')

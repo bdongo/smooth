@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import "./Form.css"; 
 import logo from "../../assets/logo.png";
 import { Link } from 'react-router-dom';
-
 import { login, clearSessionErrors } from '../../store/session';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function LoginForm() {
+    const history = useHistory()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const errors = useSelector(state => state.errors.session);
@@ -29,12 +30,24 @@ function LoginForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login({ email, password }));
+        dispatch(login({ email, password }))
+            .then(() => {
+                history.push('/explore');
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     const handleDemo = (e) => {
         e.preventDefault();
-        dispatch(login({ email: 'demo-user@appacademy.io',password: 'Password!'}));
+        dispatch(login({ email: 'demo-user@appacademy.io', password: 'Password!' }))
+            .then(() => {
+                history.push('/explore');
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
 
