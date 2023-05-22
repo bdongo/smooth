@@ -30,8 +30,25 @@ export const getAgendas = state => {
 };
 
 export const getLiveAgenda = state => {
-    const len = Object.values(state.agendas).length
-    return state?.agendas ? Object.values(state.agendas)[len - 1] : null;
+    // const len = Object.values(state.agendas).length
+    // return state?.agendas ? Object.values(state.agendas)[len - 1] : null;
+
+    if (state?.agendas) {
+        const agendaArr = Object.values(state.agendas)
+        const unsavedAgenda = agendaArr.find(obj => obj.saved === false);
+        return unsavedAgenda ? unsavedAgenda : null
+    }
+}
+
+export const getSavedAgendas = state => {
+    // const len = Object.values(state.agendas).length
+    // return state?.agendas ? Object.values(state.agendas)[len - 1] : null;
+
+    if (state?.agendas) {
+        const agendaArr = Object.values(state.agendas)
+        const savedAgendas = agendaArr.filter(obj => obj.saved === true);
+        return savedAgendas ? savedAgendas : null
+    }
 }
 
 export const getAgenda = agendaId => state => {
@@ -72,14 +89,15 @@ export const fetchLiveAgenda = userId => async(dispatch) => {
 };
 
 
-export const createAgenda = (user) => async(dispatch) => {
+export const createAgenda = (user, event = []) => async(dispatch) => {
     const res = await jwtFetch(`/api/agendas`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            user: user
+            user,
+            event
         })
     });
     if(res.ok){

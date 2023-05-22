@@ -31,7 +31,7 @@ router.get('/current', restoreUser, async (req, res) => {
     _id: req.user._id,
     username: req.user.username,
     email: req.user.email,
-    agendas: req.user.agendas
+    // agendas: req.user.agendas
   });
 })
 
