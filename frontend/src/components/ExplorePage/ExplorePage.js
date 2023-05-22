@@ -1,10 +1,5 @@
 import './ExplorePage.css';
 import { FaSearch } from 'react-icons/fa';
-import feature1 from '../../assets/feature1.jpg';
-import feature2 from '../../assets/feature2.jpg';
-import feature3 from '../../assets/feature3.jpg';
-import feature4 from '../../assets/feature4.jpg';
-import feature5 from '../../assets/feature5.jpg';
 import Search from '../Search/SearchBar';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,11 +7,11 @@ import { fetchSplashEvents, getEvents } from '../../store/event';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
+
 function ExplorePage() {
     const dispatch = useDispatch();
     const events = useSelector(getEvents)
    
-
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

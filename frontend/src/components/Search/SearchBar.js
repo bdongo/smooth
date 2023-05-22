@@ -74,7 +74,7 @@ const Search = () => {
     if (avgPrice) params.append('price', avgPrice);
     if (avgTime) params.append('time', avgTime);
     if (query) params.append('query', query);
-    window.location.href = `/search?${params}`
+    history.push(`/search?${params}`)
 
     const advancedSearch = document.querySelector('.advanced-search');
     advancedSearch.style.display = 'none';

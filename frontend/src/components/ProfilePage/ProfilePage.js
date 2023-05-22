@@ -15,6 +15,10 @@ const ProfilePage = () => {
         dispatch(fetchAgendas(currentUser?._id))
     }, [dispatch, currentUser])
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
 
     useEffect(() => {
         if (currentUser) {
