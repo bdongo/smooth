@@ -47,10 +47,10 @@ const ProfilePage = () => {
                 {currentUser && 
                     <h1>{currentUser?.username}'s saved itineraries:</h1>
                 }
-                {agendas.length === 0 && 
+                {!agendas && 
                 <>
                     <h1>Build your agenda!</h1>
-                    <Link to='/explore' />
+                    <Link id="update" to='/explore' />
                 </>
                 }
                 {agendas?.map((agenda, idx) => 
