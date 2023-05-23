@@ -1,7 +1,7 @@
 import "./Form.css"; 
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { signup, clearSessionErrors } from '../../store/session';
+import { signup, clearSessionErrors, receiveErrors } from '../../store/session';
 import logo from "../../assets/logo.png";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -50,6 +50,9 @@ function SignupForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
+        if (email === '' || password === '' || username === '') {
+            return dispatch(receiveErrors({ email: 'Please fill in all inputs' }))
+        }
         const user = {
             email,
             username,
@@ -58,7 +61,9 @@ function SignupForm() {
 
         dispatch(signup(user))
             .then(() => {
-                history.push('/explore');
+                if (Object.values(errors).length === 0) {
+                    history.push('/explore');
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -104,7 +109,7 @@ function SignupForm() {
                     <input
                         type="submit"
                         value="Sign Up"
-                        disabled={!email || !username || !password || password !== password2}
+                        disabled={password !== password2}
                         id='signup-button'
                     />
                     <Link to='/login' id='login-link'>Already have an account?</Link>

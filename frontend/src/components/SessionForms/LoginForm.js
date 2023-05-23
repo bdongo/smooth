@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import "./Form.css"; 
 import logo from "../../assets/logo.png";
 import { Link } from 'react-router-dom';
-import { login, clearSessionErrors } from '../../store/session';
+import { login, clearSessionErrors, receiveErrors } from '../../store/session';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function LoginForm() {
@@ -11,6 +11,7 @@ function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const errors = useSelector(state => state.errors.session);
+    const [blank, setBlank] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,14 +31,19 @@ function LoginForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (email === '' || password === '') {
+            return dispatch(receiveErrors({email : 'Please fill in all inputs'}))
+        }
         dispatch(login({ email, password }))
             .then(() => {
-                history.push('/explore');
+                if (Object.values(errors).length === 0 ) {
+                    history.push('/explore');
+                }
             })
             .catch((error) => {
                 console.error(error);
             });
-    }
+    };
 
     const handleDemo = (e) => {
         e.preventDefault();
@@ -70,7 +76,7 @@ function LoginForm() {
                     <input
                         type="submit"
                         value="Log In"
-                        disabled={!email || !password}
+                        // disabled={!email || !password}
                         id='login-button'
                     />
                     <button id='demo-login-button' onClick={handleDemo}>
@@ -78,6 +84,7 @@ function LoginForm() {
                     </button>
                 <Link to='/signup' id='signup-link'>Need to create an account?</Link>
                     <div className="errors">
+                        <ul>{blank}</ul>
                         <ul>{errors?.email} </ul>
                         <ul>{errors?.password}</ul>
                     </div>
