@@ -22,8 +22,6 @@ const PricingVisualizer = ({ score }) => {
         const leftOver = (score % 20) / 20;
         const width = leftOver * 60;
         if (wholeNum <= 0) {
-            // console.log(widthArr[wholeNum], "not a function")
-            // !widthArr[wholeNum] ? console.log(wholeNum) : null
             widthArr[0](`${width}px`);
         }
         for (let i = 0; i <= wholeNum; i++) {

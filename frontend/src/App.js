@@ -1,6 +1,6 @@
 import { Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from './store/session';
 import SplashPage from './components/SplashPage/SplashPage';
 import LoginForm from './components/SessionForms/LoginForm';
@@ -16,12 +16,15 @@ import SearchBar from './components/Search/SearchBar';
 import SearchResults from './components/Search/SearchResults';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import Footer from './components/Footer/Footer';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const [itineraryOpen, setItineraryOpen] = useState(false);
+  const currentUser = useSelector((state) => state?.session?.user);
+
 
   const openItinerary = () => {
     const itinerary = document.querySelector('.itinerary');
@@ -38,7 +41,7 @@ function App() {
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
   }, [dispatch]);
-
+  
   return loaded && (
     <>
       <NavBar itineraryOpen={itineraryOpen} setItineraryOpen={setItineraryOpen} openItinerary={openItinerary} closeItinerary={closeItinerary}/>
@@ -46,8 +49,12 @@ function App() {
       <Route exact path="/" component={SplashPage} />
         <Route path='/newReview' component={ReviewForm} />
         <Route path='/updateReview' component={UpdateForm} />
-      <AuthRoute exact path="/login" component={LoginForm} />
-      <AuthRoute exact path="/signup" component={SignupForm} />
+      <Route exact path="/login"> 
+        {currentUser ? <Redirect to='/explore'/> : <LoginForm/>}
+      </Route>
+      <Route exact path="/signup">
+          {currentUser ? <Redirect to='/explore' /> : <SignupForm/>}
+      </Route>
       <Route exact path="/profile" >
           <ProfilePage openItinerary={openItinerary}/>
       </Route>

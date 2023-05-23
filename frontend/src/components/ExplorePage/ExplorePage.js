@@ -37,8 +37,8 @@ function ExplorePage() {
                 <h2>Featured Experiences</h2>
                 <div className='featured-experiences-container'>
                     {   events?.map((event, idx) => (
-                        <Link  className="event-link" to={`/event/${event._id}`} >
-                            <img key={idx} src={event?.imageUrls[0]} alt='feature1' />
+                        <Link key={idx} className="event-link" to={`/event/${event._id}`} >
+                            <img  src={event?.imageUrls[0]} alt='feature1' />
                         </Link>
                     ))}
                 </div>
