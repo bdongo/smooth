@@ -61,7 +61,7 @@ function SignupForm() {
 
         dispatch(signup(user))
             .then(() => {
-                if (Object.values(errors).length === 0) {
+                if (!errors ) {
                     history.push('/explore');
                 }
             })
