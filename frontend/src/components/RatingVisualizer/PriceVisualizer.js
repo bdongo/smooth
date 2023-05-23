@@ -18,16 +18,20 @@ const PricingVisualizer = ({ score }) => {
 
 
     useEffect(() => {
-        const wholeNum = Math.floor(score / 20);
+        const wholeNum = Math.floor(score / 20) - 1;
         const leftOver = (score % 20) / 20;
         const width = leftOver * 60;
-        if (wholeNum >= 0) {
-
-            widthArr[wholeNum](`${width}px`);
+        if (wholeNum <= 0) {
+            // console.log(widthArr[wholeNum], "not a function")
+            // !widthArr[wholeNum] ? console.log(wholeNum) : null
+            widthArr[0](`${width}px`);
         }
-        for (let i = 0; i <= wholeNum - 1; i++) {
+        for (let i = 0; i <= wholeNum; i++) {
             let currentElement = widthArr[i];
             currentElement(`60px`);
+            if (i < 4 ) {
+                widthArr[i + 1](`${width}px`)
+            }
         }
     }, [score, widthArr]);
 

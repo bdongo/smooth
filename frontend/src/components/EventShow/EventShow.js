@@ -114,7 +114,7 @@ const EventShow = () => {
                 {event?.reviews?.map((review, idx) => (
                     <> 
                     { currentUser && (currentUser._id === review.author) && (
-                        <div className="buttons">
+                        <div key={idx} className="buttons">
                             <button className="remove-review" onClick={() => deleteReview(review._id)}>
                                 Remove Review
                             </button>
