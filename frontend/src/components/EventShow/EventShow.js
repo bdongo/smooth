@@ -131,11 +131,13 @@ const EventShow = ({openItinerary}) => {
                 
                 <p className="show-page-text about">{event?.description}</p>
             </div>
-            <div>
+            <div className="make-review-container">
                 <Link to={`/newReview?id=${id}`} id="link">
                     <span className="make-review"> Create Review </span>
                 </Link>
-                <button className="make-review"onClick={handleAdd} >Add to Itinerary</button>
+                <button className="add-itinerary" onClick={handleAdd} >
+                    <span>Add to Itinerary</span>
+                </button>
             </div>
             <div className="review-container">
                 {event?.reviews?.map((review, idx) => (
