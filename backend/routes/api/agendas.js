@@ -26,7 +26,6 @@ router.get('/unsaved', async (req, res) => {
     try {
         const { user } = req.query
         const agenda = await Agenda.find({user: user, saved: false})
-        console.log(agenda, "fetch agenda")
         if(!agenda) {
             return res.status(404).json({ error: 'No Agenda Found'})
         };
@@ -70,7 +69,6 @@ router.get('/:agendaId', async(req, res) => {
 router.post('/', validateCreateAgenda, async (req, res) => {
     try {
         const { user, event } = req.body;
-        console.log(event , "event")
 
         const newAgenda = new Agenda({
             user,

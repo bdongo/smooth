@@ -12,7 +12,6 @@ const ProfilePage = ({openItinerary}) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session?.user)
     const agendas = useSelector(getSavedAgendas);
-    console.log(agendas)
 
     useEffect(() => {
         dispatch(fetchAgendas(currentUser?._id))

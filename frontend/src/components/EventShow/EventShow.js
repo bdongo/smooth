@@ -23,9 +23,6 @@ const EventShow = () => {
     const [deleteHelper, setDeleteHelper] = useState(false);
     const reviews = event?.reviews;
 
-    // console.log(currentUser._id)
-    // console.log(event?.reviews)
-
     const reviewAuthors = event?.reviews.map(review => review.author)
 
     useEffect(()=> {

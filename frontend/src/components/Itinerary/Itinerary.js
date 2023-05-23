@@ -58,11 +58,8 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         }
     }, [itinerary])
 
-    console.log(instructions)
-
     useEffect(()=> {
         if (hoursAvailable !== agenda?.time || cost !== agenda?.budget){
-            console.log(agenda)
             dispatch(reviseAgenda(agenda, hoursAvailable, cost))
         };
     }, [hoursAvailable, cost]);
@@ -114,15 +111,12 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         const updatedItinerary = [...itinerary];
         if(updatedItinerary.length === 1) {
             setItinerary([])
-            console.log('hitting')
             dispatch(editAgenda(agenda, []));
         } else {
             updatedItinerary.splice(idx, 1);
             setItinerary(updatedItinerary);
             dispatch(editAgenda(agenda, updatedItinerary));
         };
-        console.log(updatedItinerary.length, 'len inside')
-        console.log(itinerary, 'itin inside')
     };
 
     return (
