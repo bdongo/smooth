@@ -59,10 +59,10 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         }
     }, [itinerary])
 
-    useEffect(()=> {
-        if (hoursAvailable !== agenda?.time || cost !== agenda?.budget){
-            dispatch(reviseAgenda(agenda, hoursAvailable, cost))
-        };
+    useEffect(() => {
+        if (cost !== '' && hoursAvailable !== '' && (hoursAvailable !== agenda?.time || cost !== agenda?.budget)) {
+            dispatch(reviseAgenda(agenda, hoursAvailable, cost));
+        }
     }, [hoursAvailable, cost]);
 
 
