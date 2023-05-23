@@ -59,7 +59,9 @@ function App() {
         <ExplorePage />
       </Route>
 
-      <Route exact path="/event/:id" component={EventShow} />
+      <Route exact path="/event/:id">
+        <EventShow openItinerary={openItinerary}/>
+      </Route> 
 
     </Switch>
     <Footer />  

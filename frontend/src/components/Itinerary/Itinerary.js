@@ -19,6 +19,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
     const totalPrice = itinerary?.length > 0 ? itinerary?.reduce((acc, event) => acc + event.avgPrice, 0) : 0;
     const totalEvents = itinerary?.length;
 
+
     const dispatch = useDispatch();
     const [hoursAvailable, setHoursAvailable] = useState(8);
     const [cost, setCost] = useState(100);
