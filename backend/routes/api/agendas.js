@@ -11,11 +11,13 @@ router.get('/', async (req, res) => {
     try {
         const { user } = req.query
         const agendas = await Agenda.find({ user: user });
+        const returnObj = {}
         const populatedAgendas = await Promise.all(agendas.map(async (agenda) => {
             await agenda.populate('events')
-            return agenda;
+            return returnObj[agenda._id] = agenda;
         }));
-        return res.json(populatedAgendas);
+
+        return res.json(returnObj);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });

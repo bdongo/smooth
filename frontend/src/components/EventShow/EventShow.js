@@ -11,9 +11,11 @@ import PricingVisualizer from "../RatingVisualizer/PriceVisualizer";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { removeReview } from "../../store/reviews";
 import { AiFillStar } from 'react-icons/ai';
+import { createAgenda, editAgenda, getLiveAgenda } from "../../store/agendas";
 
-const EventShow = () => {
+const EventShow = ({openItinerary}) => {
     const dispatch = useDispatch();
+    const agenda = useSelector(getLiveAgenda);
     const {id} = useParams();
     const event = useSelector(getEvent(id))
     const currentUser = useSelector((state) => state.session.user)
@@ -34,7 +36,6 @@ const EventShow = () => {
         }
     }, [event, currentUser])
 
-    // const [showCreateReview, setShowCreateReview] = useState(true)
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -59,8 +60,32 @@ const EventShow = () => {
         setDeleteHelper(!deleteHelper)
     }
 
-    const updateReview = (reviewID) => {
-
+    const handleAdd = () => {
+ 
+        if (!currentUser) {
+            return history.push('/login');
+        }
+        const newAgenda = [...agenda?.events, event]
+        const updatedTotalHours = newAgenda.reduce(
+            (acc, event) => acc + event.avgTime, 0);
+        const updatedTotalPrice = newAgenda.reduce(
+            (acc, event) => acc + event.avgPrice, 0);
+        const hoursAvailable = agenda?.time;
+        const cost = agenda?.budget;
+       if (currentUser && updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+        
+            dispatch(editAgenda(agenda, newAgenda))
+                .then(()=> {
+                    return openItinerary();
+                })
+        }
+        // else if (updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+        //     setItinerary(newAgenda)
+            
+        // }
+        else {
+            alert("The event cannot be added to your itinerary.");
+        };
     }
 
     return (
@@ -106,10 +131,14 @@ const EventShow = () => {
                 
                 <p className="show-page-text about">{event?.description}</p>
             </div>
-                
-            <Link to={`/newReview?id=${id}`} id="link">
-                <span className="make-review"> Create Review </span>
-            </Link>
+            <div className="make-review-container">
+                <Link to={`/newReview?id=${id}`} id="link">
+                    <span className="make-review"> Create Review </span>
+                </Link>
+                <button className="add-itinerary" onClick={handleAdd} >
+                    <span>Add to Itinerary</span>
+                </button>
+            </div>
             <div className="review-container">
                 {event?.reviews?.map((review, idx) => (
                     <> 

@@ -168,13 +168,18 @@
     margin-top: 3em;
     margin-bottom: 3em;
 }
+.make-review-container {
+    display: flex;
+    flex-direction: column-reverse;
+    width:  18vw;
+    margin-top: 1em;
+}
 .make-review{
 font-family: Nhaas65;
     background-color: black;
     border: none;
     color: white;
     transition: 0.5s;
-    max-height: 3em;
     text-align: center;
     letter-spacing: 0.03em;
     border-radius: 5vw;
@@ -190,6 +195,31 @@ font-family: Nhaas65;
 
     text-decoration: none;
         
+}
+.add-itinerary {
+    font-family: Nhaas65;
+    background-color: black;
+    border: none;
+    color: white;
+    transition: 0.5s;
+    text-align: center;
+    letter-spacing: 0.03em;
+    border-radius: 5vw;
+    font-size: 1em;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-right: 8px;
+    padding-left: 8px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #FF5F1F;
+        color: var(--off-black);
+        color: white
+    }
+
+    text-decoration: none;
+
 }
 
 #update, .remove-review{
