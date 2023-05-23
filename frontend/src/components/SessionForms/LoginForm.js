@@ -35,25 +35,11 @@ function LoginForm() {
             return dispatch(receiveErrors({email : 'Please fill in all inputs'}))
         }
         dispatch(login({ email, password }))
-            .then(() => {
-                if (Object.values(errors).length === 0 ) {
-                    history.push('/explore');
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
     };
 
     const handleDemo = (e) => {
         e.preventDefault();
         dispatch(login({ email: 'demo-user@appacademy.io', password: 'Password!' }))
-            .then(() => {
-                history.push('/explore');
-            })
-            .catch((error) => {
-                console.error(error);
-            });
     }
 
 

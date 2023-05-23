@@ -60,14 +60,6 @@ function SignupForm() {
         };
 
         dispatch(signup(user))
-            .then(() => {
-                if (!errors ) {
-                    history.push('/explore');
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
     }
 
     return (
