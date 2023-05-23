@@ -64,3 +64,18 @@
     color: white;
 }
 
+.go-button {
+    font-family: Nhaas65;
+    font-size: 20px;
+    background-color: white;
+    border: 3px solid black;
+    height: 3em;
+    color: black;
+    transition: 0.5s;
+    text-align: center;
+    letter-spacing: 0.03em;
+    border-radius: 5vw;
+    padding: 1vh 2vw;
+    cursor: pointer;
+}
+

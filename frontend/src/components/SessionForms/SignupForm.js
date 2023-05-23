@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
 import logo from "../../assets/logo.png";
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignupForm() {
+    const history = useHistory();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -54,7 +56,13 @@ function SignupForm() {
             password
         };
 
-        dispatch(signup(user));
+        dispatch(signup(user))
+            .then(() => {
+                history.push('/explore');
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     return (

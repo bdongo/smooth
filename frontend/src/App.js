@@ -48,7 +48,9 @@ function App() {
         <Route path='/updateReview' component={UpdateForm} />
       <AuthRoute exact path="/login" component={LoginForm} />
       <AuthRoute exact path="/signup" component={SignupForm} />
-      <Route exact path="/profile" component={ProfilePage} />
+      <Route exact path="/profile" >
+          <ProfilePage openItinerary={openItinerary}/>
+      </Route>
       <Route path="/search">
         {/* <SearchBar></SearchBar> */}
           <SearchResults itineraryOpen={itineraryOpen} openItinerary={openItinerary} />

@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import { fetchAgendas } from "../../store/agendas";
 import SavedItinerary from "../SavedItinerary/SavedItinerary";
 import LoginForm from "../SessionForms/LoginForm";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const ProfilePage = () => {
+const ProfilePage = ({openItinerary}) => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session?.user)
     const agendas = useSelector(getSavedAgendas);
+    console.log(agendas)
 
     useEffect(() => {
         dispatch(fetchAgendas(currentUser?._id))
@@ -35,6 +37,12 @@ const ProfilePage = () => {
         )
     }
 
+    const handleGo = (e) => {
+        e.preventDefault();
+        history.push('/explore');
+        openItinerary();
+    }
+
     const totalEvents = (itinerary) => ( itinerary?.events.length);
     const totalHours = (itinerary) =>  (itinerary?.events.reduce((acc, event) => (
         acc + event.avgTime
@@ -48,13 +56,13 @@ const ProfilePage = () => {
         <div className="profile-container">
             
             <div className="itineraries-container">
-                {currentUser && 
+                {currentUser && agendas != 0 && 
                     <h1>{currentUser?.username}'s saved itineraries:</h1>
                 }
-                {!agendas && 
+                {agendas.length === 0  && currentUser && 
                 <>
-                    <h1>Build your agenda!</h1>
-                    <Link id="update" to='/explore' />
+                    <h1>Hi {currentUser?.username}! You have no itineraries saved, build and save yours now!</h1>
+                    <button className='go-button' onClick={handleGo}>Go</button>
                 </>
                 }
                 {agendas?.map((agenda, idx) => 
