@@ -118,7 +118,7 @@ export const editAgenda = (agenda, newAgenda) => async (dispatch) => {
     });
     if(res.ok){
         const newAgenda = await res.json();
-        dispatch(updateAgenda(newAgenda))
+        dispatch(receiveAgenda(newAgenda))
     };
 };
 
@@ -134,7 +134,7 @@ export const saveAgenda = (agenda) => async (dispatch) => {
     });
     if(res.ok){
         const newAgenda = await res.json();
-        dispatch(receiveAgenda(newAgenda))
+        dispatch(updateAgenda(newAgenda))
     };
 };
 
@@ -170,7 +170,7 @@ const agendasReducer = (state = {}, action) => {
         case RECEIVE_AGENDAS:
             return { ...action.agendas };
         case UPDATE_AGENDA:
-            return { ...state, events: action.payload}
+            return { ...state, [action.payload._id]: action.payload}
         case RECEIVE_AGENDA:
             return { ...state, [action.agenda._id]: action.agenda }
         case REMOVE_AGENDA:

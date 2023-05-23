@@ -61,6 +61,10 @@ const EventShow = ({openItinerary}) => {
     }
 
     const handleAdd = () => {
+ 
+        if (!currentUser) {
+            return history.push('/login');
+        }
         const newAgenda = [...agenda?.events, event]
         const updatedTotalHours = newAgenda.reduce(
             (acc, event) => acc + event.avgTime, 0);
@@ -68,7 +72,8 @@ const EventShow = ({openItinerary}) => {
             (acc, event) => acc + event.avgPrice, 0);
         const hoursAvailable = agenda?.time;
         const cost = agenda?.budget;
-        if (currentUser && updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+       if (currentUser && updatedTotalHours <= hoursAvailable && updatedTotalPrice <= cost) {
+        
             dispatch(editAgenda(agenda, newAgenda))
                 .then(()=> {
                     return openItinerary();
