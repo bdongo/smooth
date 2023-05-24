@@ -98,7 +98,7 @@ const Itinerary = ({closeItinerary, itineraryOpen}) => {
         if (user && itinerary.length > 0) {
             dispatch(saveAgenda(agenda))
             setTimeout(()=> {
-                alert("Your itinerary has been saved!")
+                alert("Your itinerary has been saved! View your saved itineraries in your profile!")
                 setItinerary([])
                 dispatch(createAgenda(user?._id))
             }, 1000)
