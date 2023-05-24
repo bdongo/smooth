@@ -1,5 +1,7 @@
 #  <img width=30px src=https://github.com/bdongo/smooth/assets/121202044/cd9ba4af-9069-45ba-a238-647bb409a014/> Smooth
 
+[Live Site](https://smooth.onrender.com/)
+
 ### About
 
 Smooth is an app created to visualize your perfect day, according to you, ideated and executed by, Bilal, Brandon, Christian, Deric, and Vamshi. Using crowd sourced activities, users can narrow down choices by location to find the one that fit their time and spending criteria. Smooth is built with MERN stack in a collaborative one week sprint.
