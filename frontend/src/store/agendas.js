@@ -175,7 +175,7 @@ const agendasReducer = (state = {}, action) => {
             return { ...state, [action.agenda._id]: action.agenda }
         case REMOVE_AGENDA:
             const newState = { ...state }
-            delete newState[action.agendasId];
+            delete newState[action.agendaId];
             return newState
         default:
             return state;
