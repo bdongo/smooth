@@ -6,6 +6,7 @@ import { fetchAgendas } from "../../store/agendas";
 import SavedItinerary from "../SavedItinerary/SavedItinerary";
 import LoginForm from "../SessionForms/LoginForm";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { IoCloseSharp } from 'react-icons/io5';
 
 const ProfilePage = ({openItinerary}) => {
     const history = useHistory();
@@ -69,6 +70,7 @@ const ProfilePage = ({openItinerary}) => {
                         <h2>{idx+1}.</h2>
                         <SavedItinerary key={idx} itinerary={agenda}/>
                         <div className='itinerary-calc'>
+                            <IoCloseSharp className='delete-itin' />
                             <div>
                                 <p>Total Events: {totalEvents(agenda)}</p>
                             </div>
