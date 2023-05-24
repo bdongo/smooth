@@ -6,6 +6,7 @@ const { requireUser } = require('../../config/passport');
 const validateCreateAgenda = require('../../validation/agenda');
 const Review = require("../../models/Review");
 const User = mongoose.model('User');
+const { ObjectId } = mongoose.Types;
 
 router.get('/', async (req, res) => {
     try {
@@ -155,11 +156,13 @@ router.put('/:agendaId', async (req, res) => {
 // });
 
 router.delete('/:agendaId', async (req, res) => {
-    const { agendaId } = req.params;
+    // const { agendaId } = req.params;
+    const agendaId = req.params.agendaId.trim();
     try {
         // Find the agenda by ID and remove it
         const agenda = await Agenda.findById(agendaId);
-        if (!agenda) {
+        // if (!agenda) {
+        if (!ObjectId.isValid(agendaId)) {
             return res.status(404).json({ error: 'Agenda not found' });
         }
 
@@ -177,7 +180,7 @@ router.delete('/:agendaId', async (req, res) => {
 
         await userToUpdate.save()
 
-        return res.json({ message: 'Agenda removed successfully' });
+        return res.status(204).json({ message: 'Agenda removed successfully' });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
