@@ -32,7 +32,7 @@ function LoginForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (email === '' || password === '') {
-            return dispatch(receiveErrors({email : 'Please fill in all inputs'}))
+            return dispatch(receiveErrors({email : 'Please fill in all fields'}))
         }
         dispatch(login({ email, password }))
     };

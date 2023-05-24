@@ -51,7 +51,7 @@ function SignupForm() {
     const handleSubmit = e => {
         e.preventDefault();
         if (email === '' || password === '' || username === '') {
-            return dispatch(receiveErrors({ email: 'Please fill in all inputs' }))
+            return dispatch(receiveErrors({ email: 'Please fill in all fields' }))
         }
         const user = {
             email,
@@ -73,21 +73,18 @@ function SignupForm() {
                             value={email}
                             onChange={update('email')}
                             placeholder="Email"
-                            required
                         />
                     {/* <div className="errors">{errors?.username}</div> */}
                         <input type="text"
                             value={username}
                             onChange={update('username')}
                             placeholder="Username"
-                            required
                         />
                     {/* <div className="errors">{errors?.password}</div>         */}
                         <input type="password"
                             value={password}
                             onChange={update('password')}
                             placeholder="Password"
-                            required
                         />
                     {/* <div className="errors" id='error-messages'>
                         {password !== password2 && 'Confirm password field must match'}
@@ -96,7 +93,6 @@ function SignupForm() {
                             value={password2}
                             onChange={update('password2')}
                             placeholder="Confirm Password"
-                            required
                         />
                     <input
                         type="submit"

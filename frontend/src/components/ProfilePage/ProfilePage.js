@@ -16,10 +16,16 @@ const ProfilePage = ({openItinerary}) => {
     const agendas = useSelector(getSavedAgendas);
     const [deleteHelper, setDeleteHelper] = useState(false)
 
+    // useEffect(() => {
+    //     dispatch(fetchAgendas(currentUser?._id))
+    //     console.log('fetch')
+    // }, [dispatch, currentUser, deleteHelper])
+
     useEffect(() => {
-        dispatch(fetchAgendas(currentUser?._id))
-        console.log('fetch')
-    }, [dispatch, currentUser, deleteHelper])
+        if (currentUser) {
+            dispatch(fetchAgendas(currentUser?._id))
+        }
+    }, [dispatch, currentUser])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -47,7 +53,6 @@ const ProfilePage = ({openItinerary}) => {
 
     const handleDelete = (agendaId) => {
         dispatch(deleteAgenda(agendaId))
-        alert("Your itinerary has been deleted!")
         setDeleteHelper(!deleteHelper)
     }
 

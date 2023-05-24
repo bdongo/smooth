@@ -70,7 +70,7 @@ const ReviewForm = () => {
         e.preventDefault();
         if (currentUser) {
             if (!rating || !text || !time || !price) {
-                setTextError('Please fill in all the fields');
+                setTextError('Please fill in all fields');
                 return;
             } else {
                 setTextError('');
